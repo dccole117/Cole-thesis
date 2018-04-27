@@ -4,6 +4,7 @@
 %\usepackage[section]{placeins} % keep floats in the same section. 
 \usepackage{lipsum}            % for filler text in latin
 \usepackage{color}             % for color.
+\usepackage{amsmath}
 
 \newif\ifprinted
 \printedtrue
@@ -248,14 +249,14 @@ The work in this thesis would not have been possible...
 % this is the amateur bibliography. Use biblatex above
 %\bibliographystyle{amsplain}
 \pagenumbering{roman}
-%\include{Abbreviations}
+\include{Abbreviations}
 %\include{Outline}
 \pagenumbering{arabic}
 \include{Introduction} %Introduction
 %\include{Experiment}
 %\include{ATI} 
-\include{EOMCombs}
-%\include{PulsePicking}
+%\include{EOMCombs}
+\include{PulsePicking}
 %\include{Conclusion} 
 \appendix
 %\include{AppendixATI}
