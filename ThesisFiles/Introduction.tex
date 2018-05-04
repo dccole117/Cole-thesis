@@ -1,10 +1,75 @@
  \chapter{Introduction}
 \label{ch:intro}
 
-\section{Motivation}
-\label{sec:introMotivation}
-\subsection{Seeing the invisible}
-\lipsum[3] \cite{Turing1952} \lipsum[1-3]
+The invention of the optical frequency comb two decades ago provided a revolution in precision measurement by dramatically improving the resolution with which we can measure time. This revolution came about through the development of a simple scheme (that required markedly \textit{less} simple advancements in capabilities in nonlinear optics) by which the terahertz-scale optical frequencies of a mode-locked laser could be effectively measured by electronics operating much more slowly, with bandwidth limitations on the gigahertz scale. The new frequency comb technology immediately permitted measurement of fundamental properties of matter, for example the electronic transition frequency in hydrogen, with unprecedented levels of precision. Since those first demonstrations, optical frequency combs have played an integral part in myriad contexts, including record-setting optical clocks, systems for ultra-low-noise microwave synthesis, broadband spectroscopy applications, and stable long-term calibration of astronomical spectrographs for exoplanet detection. Further development of the technology beyond the first stabilization of the Ti:sapphire laser that heralded the frequency comb's arrival enabled these applications and others, and combs are now versatile tools for measurement in many contexts across many wavelength bands. The technology is reaching maturity, and frequency combs have been commercially available for some time.
+
+In the last decade, methods for generating optical frequency combs that go beyond the mode-locked laser have suggested the possibility of bringing their capabilities to a wide set of applications outside the controlled environment of the research laboratory. These new frequency combs come with higher repetition rates and lower size, weight, and power (SWAP) requirements, making them particularly appropriate for applications like arbitrary microwave and optical waveform generation, telecommunications, and broadband, fast-acquisition-time spectroscopy. Moreover, low-SWAP combs bring the features that make mode-locked laser-based combs attractive to the field, enabling e.g. direct optical frequency synthesis on a chip \cite{Spencer2018}.
+
+This thesis focuses on this second generation of optical frequency combs. The bulk of the thesis covers microresonator-based frequency combs, and especially the nonlinear dynamics involved in the parametric generation of these frequency combs based on the Kerr nonlinearity. The penultimate chapter presents a second method for generating a high-repetition-rate frequency comb without modelocking that is based on active modulation of a seed c.w. laser and subsequent nonlinear spectral broadening. In the final chapter, I present experimental and theoretical investigations of a technique for repetition-rate reduction of frequency combs, which may prove useful for adapting low-SWAP combs and their intrinsically high repetition rates to some applications as the technology continues to develop.
+
+In the remainder of this chapter, I discuss the basics of optical frequency comb technology.
+
+\section{Optical frequency combs}
+
+An optical frequency comb is obtained by fully stabilizing the spectrum of an optical pulse train. The first frequency combs came about through full frequency-stabilization of modelocked lasers; this thesis is focused on frequency combs with pulse trains generated through other means.
+
+In the time domain, a frequency comb consists of at train of uniformly spaced optical pulses arriving at the pulse train's repetition rate $f_r$, which are typically very short compared to their repetition period $T=1/f_r$. The spectrum of the frequency comb consists of a set of uniformly spaced optical modes at frequencies $\nu_n=nf_r+f_0$, multiplied by an overall spectral envelope centered at the optical carrier frequency and corresponding to the temporal intensity envelope of the pulses. The optical frequencies $\nu_n$ are spaced by $f_r$. The carrier-envelope offset frequency $f_0$ represents the offset of the zero\textsuperscript{th} comb mode from zero frequency, and therefore the offset of each mode $\nu_n$ from the closest harmonic of the repetition rate. This offset arises from the pulse-to-pulse evolution of the carrier wave under the pulse train's intensity envelope. Fig. \ref{fig:CombBasics} depicts the relationship between a frequency comb in the time domain and the frequency domain.
+
+It is useful to consider a mathematical treatment of an optical pulse train to understand the relationships presented above. In the time domain, the electric field $E(t)$ of the pulse train consists of periodically-recurring optical pulses with baseband (centered at zero frequency) field envelope $A(t)$ multiplying the carrier wave of angular frequency $\omega_c$:
+\begin{equation}
+E(t)=\sum_{m=-\infty}^{\infty} A(t-mT)e^{i\omega_c t}. \label{eq:pulsetrain}
+\end{equation}
+Here, $T$ is the repetition period of the pulse train. Eq. \ref{eq:pulsetrain} can be viewed as describing a laser of angular frequency $\omega_c$ with a time-varying amplitude. This temporal modulation leads to a \color{red}broad \color{black} spectrum for $E$, which we can immediately calculate:
+\begin{align}
+\mathcal{F}\left\{E\right\}&\sim\left(\sum_{m=-\infty}^{\infty}\mathcal{F}\left\{A(t-mT)\right\}\right)*\delta(\omega-\omega_c) \\
+&\sim\left(\mathcal{F}\left\{A\right\}\times\sum_{m=-\infty}^{\infty}e^{-i\omega mT}\right)*\delta(\omega-\omega_c) \\
+&\sim\left(\mathcal{F}\left\{A\right\}\times\sum_{n=-\infty}^{\infty}\delta\left(\omega-\frac{2\pi n}{T}\right)\right)*\delta(\omega-\omega_c) \\
+&\sim\sum_{n=-\infty}^{\infty}\delta\left(\omega-\omega_c-n\omega_r\right)\mathcal{F}\left\{A\right\}(\omega-\omega_c), \label{eqn:combspectrum}
+\end{align}
+where we have neglected normalization prefactors. In the above, we have used the linearity and convolution properties of the Fourier transform, as well as the Fourier transform for the Dirac comb $\mathrm{III}_T(t)=\Sigma_n\delta(t-nT)$. Eq. \ref{eqn:combspectrum} represents the spectrum $|mathcal{F}\left\{E\right\}|^2$ modes at the set of frequencies $
+
+
+
+Equivalently, if the function $A(t)$ is localized to a small interval around zero relative to the period $T$, this equation be written to emphasize the phase-shift between the carrier wave and the intensity envelope:
+\begin{equation}
+E(t)=\sum_{n=-\infty}^{\infty} A(t-nT)e^{i\omega_c (t-nT)}e^{in\phi_{CE}}, 
+\end{equation}
+where here the field $A(t)e^{i\omega_c t}$ is repeated every period, and is multiplied by a phase increasing incrementally by $\phi_{CE}=\omega_c T$. Eq. 
+
+
+
+
+
+
+The first optical frequency combs came about through full frequency-stabilization of optical pulse trains generated in modelocked lasers. A laser cavity with broadband gain can support many oscillating frequency modes; this number is on the order of ten thousand for a typical telecommunications-band fiber laser, and can be hundreds of thousands for a Ti:sapphire laser cavity. Without a mechanism to enforce a fixed relationship between the modes, the modes oscillate independently and the laser output is uncontrolled. A modelocked laser is obtained through the introduction of a modelocking mechanism that provides for lower cavity losses in pulsed operation, in which the modes oscillate together and periodically constructively interfere, relative to unsynchronized multi-mode operation. Common modelocking mechanisms are saturable-absorber mirrors, Kerr-lens modelocking, and nonlinear polarization-rotation modelocking.
+
+The pulse train generated in a modelocked laser can be described equally well in either the time domain or the frequency domain. 
+
+
+The spectrum of the pulse train consists of a set of equidistant modes with optical frequencies described by $\nu_n=nf_r+f_0$. Here $\nu_n$ is the frequency of the $n$\textsuperscript{th} mode, referenced to zero frequency; $f_r$ is the pulse train's repetition rate, and is the separation between adjacent modes in the frequency domain, and $f_0$ is the 'carrier-envelope-offset frequency,' denoting 
+
+
+modelocked laser consists of many oscillating modes, supported by broadband laser gain, that have a fixed phase relationship imposed by a modelocking mechanism. In a typical 250 MHz repetition-rate optical pulse train in erbium-doped fiber, this number is on the order of ten thousand.  These pulse trains result from synchronization of many oscillating laser modes in a cavity with broadband gain through the introduction of a modelocking mechanism. A modelocked laser consists of a laser cavity having 1. broadband gain and 2. a modelocking mechanism. generate an optical pulse train when it has broadband gain in the presence of a modelocking mechanism. If a laser is made to oscillate under these conditions without a modelocking mechanism, these modes can 'lase' independently. This generates an output waveform that appears random, resulting from the superposition of these thousands of modes and their individual frequency fluctuations. If, on the other hand, modelocking is enforced so that the modes oscillate in a coherent fashion, their electric field frequency components periodically constructively interfere, yielding a train of pulses. This is depicted schematically in Fig. \cite{fig:MLnoMLpulsetrains}. To induce modelocking, a mechanism that favors higher peak-intensity pulsed operation is introduced into the cavity. Two common modelocking mechanisms are Kerr-lens based modelocking, in which the spatial Kerr effect focuses a  beam through a small aperture in the laser cavity more effectively at higher power, and semiconductor saturable absorber mirrors that have higher reflectivity at higher incident intensities. Modelocking can be used to generate laser pulses that are on the order of hundreds of femtoseconds long, or even shorter.
+
+
+
+
+
+%This first-generation frequency comb technology is reaching maturity, and mode-locked laser-based frequency combs can now be purchased commercially from several providers. 
+%
+%\color{red} Need to motivate microcombs, EOMC, pulse picking. HRR combs in general from standpoint of new applications, also comes with low SWAP (but perhaps this is weak because for example spiral resonators can make low RR combs in small packages).
+%
+%HRR combs naturally give octave span, don't require external broadening 
+%
+%Applications for HRR combs: telecom, optical arbitrary waveform generation, spectroscopy, astrocombs \cite{Kippenberg2011}.
+%
+%Applications for compact combs: ranging \cite{Suh2018,Trocha2018}, field spectroscopy measurements
+%\color{black}
+
+%\section{Motivation}
+%\label{sec:introMotivation}
+%\subsection{Seeing the invisible}
+%\lipsum[3] \cite{Turing1952} \lipsum[1-3]
 
 % % % % % % Bullet through Apple
 %\begin{figure}[htpb]
@@ -18,8 +83,8 @@
 
 %\marginpar{\hangindent=0.2cm \underline{Speed of light}\\300 Mm/s\\300 km/ms\\300 m/$\mu$s\\300 mm/ns\\300 $\mu$m/ps\\\textbf{300 nm/fs}\\300 pm/as}
 
-\subsection{Femtosecond lasers}
-\lipsum[66]
+%\subsection{Femtosecond lasers}
+%\lipsum[66]
 
 
 
