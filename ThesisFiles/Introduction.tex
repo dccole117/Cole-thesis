@@ -48,40 +48,54 @@ and performing the convolution leads to the replacement of $\omega$ with $\omega
 This expression indicates that the spectrum of the comb has frequency content at modes $\nu_\mu=\nu_c+\mu f_r$, and that their amplitudes are determined by the spectrum of the baseband field envelope, shifted up to the optical carrier frequency $\nu_c$. This is the natural formulation in the case of a comb derived from a c.w. laser, but it hides the carrier-envelope offset frequency in the difference between $\nu_c$ and the nearest multiple of the repetition rate, so that $f_0$ is the remainder of $\nu_c\div f_r$. In practice, if $f_r$ is known, then a measurement of $f_0$ is equivalent to a measurement of the frequency of the input c.w. laser.
 
 
-\subsection{Frequency measurements with an optical pulse train}
+\subsection{Frequency stabilization of optical pulse trains}
 
-The scientific need for a method to measure optical frequencies motivated the development of optical frequency combs. While the measurement bandwidth of electronic frequency counters has improved since 1999, it remains limited to frequencies roughly one \textit{million} times lower than the frequency of, e.g., visible red light. Frequency combs present a method for measurement of the unknown frequency $f_{opt}$ of an optical signal through heterodyne with a frequency comb - if $f_{opt}$ falls within the bandwidth of the frequency comb, then the frequency of the heterodyne between the comb and the signal is guaranteed to be less than $f_r/2$. Therefore, if the frequencies of the comb 
+The scientific need for a method to measure optical frequencies motivated the development of optical frequency combs. While the measurement bandwidth of electronic frequency counters has improved since 1999, it remains limited to frequencies roughly one \textit{million} times lower than the frequency of, e.g., visible red light. Frequency combs present a method for measurement of the unknown frequency $f_{opt}$ of an optical signal through heterodyne with a frequency comb --- if $f_{opt}$ falls within the bandwidth of the frequency comb, then the frequency of the heterodyne between the comb and the signal is guaranteed to be less than $f_r/2$, which is typically a frequency that can be measured electronically, at least for modelocked-laser-based combs. Therefore, if the frequencies of the comb are known, measurement of the heterodyne of the comb with the signal reveals the frequency of the signal, provided that the comb mode number $n$, as defined by Eq. \ref{eq:combfreqsold}, can be determined. This can be done via a wavelength measurement if sufficient precision is available, or by measuring the change $\partial f_b/\partial f_r=\pm n$, where $f_b$ is the measured frequency of the beat.
 
+The unique utility of the optical frequency comb lies in the fact that measurement of two microwave frequencies\todo{have I made clear that these are microwave frequencies}, $f_0$ and $f_0$, is sufficient to determine the optical frequencies of all of the modes of the comb, thereby enabling frequency measurement of optical signals. Measurement of the repetition rates of optical pulse trains was possible for many years before the realization of optical frequency comb technology, as this can be done by simply impinging the pulse train on a photodetector. It was the confluence of several technological developments around the turn of the twenty-first century that allowed detection and measurement of the carrier-envelope offset frequency \todo{cite}, thereby enabling creation of fully-stabilized modelocked-laser pulse trains: optical frequency combs.
 
+The carrier-envelope offset frequency of a pulse train is challenging to measure because it describes evolution of the optical carrier wave underneath the intensity envelope, and therefore cannot be measured through straightforward detection of the intensity of the pulse train. Presently, the most straightforward way to measure $f_0$ is $f-2f$ \textit{self-referencing}, which is illustrated in Fig.\ref{fig:f2fselfreferencing}\todo{make fig}. This can be performed only with a pulse train whose spectrum spans an octave --- a factor of two in frequency. Given such an octave-spanning supercontinuum spectrum, a group of modes near mode number $N$ is frequency-doubled in a medium with the $\chi^(2)$nonlinearity. This frequency-doubled light is heterodyned with the native light in the supercontinuum with mode number near $2N$. The frequency of the resulting beat is $f_0$:
+\begin{align}
+f_b&=f_{doubled}-f_{native}\\
+&=2(Nf_r+f_0)-(2Nf_r+f_0)\\
+&=f_0.
+\end{align}
 
+Generating the necessary octave-spanning supercontinuum spectrum typically requires nonlinear spectral broadening of the pulse train after its initial generation, except for in specific, carefully engineered cases\todo{cite Tara, others}. Achieving the required degree of spectral broadening while preserving the coherence properties of the pulse train is a significant challenge --- typically this requires launching a train of high energy ($\sim$1 nJ), temporally short ($\leq$ 100 fs) pulses into the spectral-broadening stage, and meeting these requirements is one of the important engineering considerations in designing optical frequency comb systems; this point is relevant to chapters \ref{ch:EOMCombs} and \ref{ch:PulsePicking}. 
 
-modes at the set of frequencies 
-
-
-
-Equivalently, if the function $A(t)$ is localized to a small interval around zero relative to the period $T$, this equation be written to emphasize the phase-shift between the carrier wave and the intensity envelope:
-\begin{equation}
-E(t)=\sum_{n=-\infty}^{\infty} A(t-nT)e^{i\omega_c (t-nT)}e^{in\phi_{CE}}, 
-\end{equation}
-where here the field $A(t)e^{i\omega_c t}$ is repeated every period, and is multiplied by a phase increasing incrementally by $\phi_{CE}=\omega_c T$. Eq. 
-
-
-
-\color{red}
-The spectrum of the frequency comb consists of a set of uniformly spaced optical modes at frequencies , multiplied by an overall spectral envelope centered at the optical carrier frequency and corresponding to the temporal intensity envelope of the pulses. The optical frequencies $\nu_n$ are spaced by $f_r$. The carrier-envelope offset frequency $f_0$ represents the offset of the zero\textsuperscript{th} comb mode from zero frequency, and therefore the offset of each mode $\nu_n$ from the closest harmonic of the repetition rate. This offset arises from the pulse-to-pulse evolution of the carrier wave under the pulse train's intensity envelope. 
-
-In the above, we have used the linearity and convolution properties of the Fourier transform, with convolution denoted by $*$. We have also used the Fourier transform for the Dirac comb . Eq. \ref{eq:combspectrum} directly reveals the connection between the spectrum  of the electric field of a pulse train and the baseband pulse envelope $A(t)$, the carrier frequency $f_c=\omega_c/2\pi$, and the repetition rate $f_r=1/T=\omega_r/2\pi$.
-
-The first optical frequency combs came about through full frequency-stabilization of optical pulse trains generated in modelocked lasers. A laser cavity with broadband gain can support many oscillating frequency modes; this number is on the order of ten thousand for a typical telecommunications-band fiber laser, and can be hundreds of thousands for a Ti:sapphire laser cavity. Without a mechanism to enforce a fixed relationship between the modes, the modes oscillate independently and the laser output is uncontrolled. A modelocked laser is obtained through the introduction of a modelocking mechanism that provides for lower cavity losses in pulsed operation, in which the modes oscillate together and periodically constructively interfere, relative to unsynchronized multi-mode operation. Common modelocking mechanisms are saturable-absorber mirrors, Kerr-lens modelocking, and nonlinear polarization-rotation modelocking.
-
-The pulse train generated in a modelocked laser can be described equally well in either the time domain or the frequency domain. 
-
-
-The spectrum of the pulse train consists of a set of equidistant modes with optical frequencies described by $\nu_n=nf_r+f_0$. Here $\nu_n$ is the frequency of the $n$\textsuperscript{th} mode, referenced to zero frequency; $f_r$ is the pulse train's repetition rate, and is the separation between adjacent modes in the frequency domain, and $f_0$ is the 'carrier-envelope-offset frequency,' denoting 
-
-
-modelocked laser consists of many oscillating modes, supported by broadband laser gain, that have a fixed phase relationship imposed by a modelocking mechanism. In a typical 250 MHz repetition-rate optical pulse train in erbium-doped fiber, this number is on the order of ten thousand.  These pulse trains result from synchronization of many oscillating laser modes in a cavity with broadband gain through the introduction of a modelocking mechanism. A modelocked laser consists of a laser cavity having 1. broadband gain and 2. a modelocking mechanism. generate an optical pulse train when it has broadband gain in the presence of a modelocking mechanism. If a laser is made to oscillate under these conditions without a modelocking mechanism, these modes can 'lase' independently. This generates an output waveform that appears random, resulting from the superposition of these thousands of modes and their individual frequency fluctuations. If, on the other hand, modelocking is enforced so that the modes oscillate in a coherent fashion, their electric field frequency components periodically constructively interfere, yielding a train of pulses. This is depicted schematically in Fig. \cite{fig:MLnoMLpulsetrains}. To induce modelocking, a mechanism that favors higher peak-intensity pulsed operation is introduced into the cavity. Two common modelocking mechanisms are Kerr-lens based modelocking, in which the spatial Kerr effect focuses a  beam through a small aperture in the laser cavity more effectively at higher power, and semiconductor saturable absorber mirrors that have higher reflectivity at higher incident intensities. Modelocking can be used to generate laser pulses that are on the order of hundreds of femtoseconds long, or even shorter.
-\color{black}
+%------------------------------------------------------
+%
+%modes at the set of frequencies 
+%
+%
+%
+%Equivalently, if the function $A(t)$ is localized to a small interval around zero relative to the period $T$, this equation be written to emphasize the phase-shift between the carrier wave and the intensity envelope:
+%\begin{equation}
+%E(t)=\sum_{n=-\infty}^{\infty} A(t-nT)e^{i\omega_c (t-nT)}e^{in\phi_{CE}}, 
+%\end{equation}
+%where here the field $A(t)e^{i\omega_c t}$ is repeated every period, and is multiplied by a phase increasing incrementally by $\phi_{CE}=\omega_c T$. Eq. 
+%
+%
+%
+%\color{red}
+%The spectrum of the frequency comb consists of a set of uniformly spaced optical modes at frequencies , multiplied by an overall spectral envelope centered at the optical carrier frequency and corresponding to the temporal intensity envelope of the pulses. The optical frequencies $\nu_n$ are spaced by $f_r$. The carrier-envelope offset frequency $f_0$ represents the offset of the zero\textsuperscript{th} comb mode from zero frequency, and therefore the offset of each mode $\nu_n$ from the closest harmonic of the repetition rate. This offset arises from the pulse-to-pulse evolution of the carrier wave under the pulse train's intensity envelope. 
+%
+%
+%A significant challenge in using $f-2f$ self-referencing to measure the offset frequency of a pulse train is to generate the required octave-spanning supercontinuum spectrum with noise properties that permit detection of the beat between the $f_{doubled}$ and $f_{native}$ signals. In general, this requires nonlinear spectral broadening of the pulse train after its initial generation\todo{except Tara, and others??}, and 
+%
+%
+%In the above, we have used the linearity and convolution properties of the Fourier transform, with convolution denoted by $*$. We have also used the Fourier transform for the Dirac comb . Eq. \ref{eq:combspectrum} directly reveals the connection between the spectrum  of the electric field of a pulse train and the baseband pulse envelope $A(t)$, the carrier frequency $f_c=\omega_c/2\pi$, and the repetition rate $f_r=1/T=\omega_r/2\pi$.
+%
+%The first optical frequency combs came about through full frequency-stabilization of optical pulse trains generated in modelocked lasers. A laser cavity with broadband gain can support many oscillating frequency modes; this number is on the order of ten thousand for a typical telecommunications-band fiber laser, and can be hundreds of thousands for a Ti:sapphire laser cavity. Without a mechanism to enforce a fixed relationship between the modes, the modes oscillate independently and the laser output is uncontrolled. A modelocked laser is obtained through the introduction of a modelocking mechanism that provides for lower cavity losses in pulsed operation, in which the modes oscillate together and periodically constructively interfere, relative to unsynchronized multi-mode operation. Common modelocking mechanisms are saturable-absorber mirrors, Kerr-lens modelocking, and nonlinear polarization-rotation modelocking.
+%
+%The pulse train generated in a modelocked laser can be described equally well in either the time domain or the frequency domain. 
+%
+%
+%The spectrum of the pulse train consists of a set of equidistant modes with optical frequencies described by $\nu_n=nf_r+f_0$. Here $\nu_n$ is the frequency of the $n$\textsuperscript{th} mode, referenced to zero frequency; $f_r$ is the pulse train's repetition rate, and is the separation between adjacent modes in the frequency domain, and $f_0$ is the 'carrier-envelope-offset frequency,' denoting 
+%
+%
+%modelocked laser consists of many oscillating modes, supported by broadband laser gain, that have a fixed phase relationship imposed by a modelocking mechanism. In a typical 250 MHz repetition-rate optical pulse train in erbium-doped fiber, this number is on the order of ten thousand.  These pulse trains result from synchronization of many oscillating laser modes in a cavity with broadband gain through the introduction of a modelocking mechanism. A modelocked laser consists of a laser cavity having 1. broadband gain and 2. a modelocking mechanism. generate an optical pulse train when it has broadband gain in the presence of a modelocking mechanism. If a laser is made to oscillate under these conditions without a modelocking mechanism, these modes can 'lase' independently. This generates an output waveform that appears random, resulting from the superposition of these thousands of modes and their individual frequency fluctuations. If, on the other hand, modelocking is enforced so that the modes oscillate in a coherent fashion, their electric field frequency components periodically constructively interfere, yielding a train of pulses. This is depicted schematically in Fig. \cite{fig:MLnoMLpulsetrains}. To induce modelocking, a mechanism that favors higher peak-intensity pulsed operation is introduced into the cavity. Two common modelocking mechanisms are Kerr-lens based modelocking, in which the spatial Kerr effect focuses a  beam through a small aperture in the laser cavity more effectively at higher power, and semiconductor saturable absorber mirrors that have higher reflectivity at higher incident intensities. Modelocking can be used to generate laser pulses that are on the order of hundreds of femtoseconds long, or even shorter.
+%\color{black}
 
 
 
@@ -97,66 +111,6 @@ modelocked laser consists of many oscillating modes, supported by broadband lase
 %
 %Applications for compact combs: ranging \cite{Suh2018,Trocha2018}, field spectroscopy measurements
 %\color{black}
-
-%\section{Motivation}
-%\label{sec:introMotivation}
-%\subsection{Seeing the invisible}
-%\lipsum[3] \cite{Turing1952} \lipsum[1-3]
-
-% % % % % % Bullet through Apple
-%\begin{figure}[htpb]
-%	\begin{center}
-%		\includegraphics[width=110mm]{\FigPath/Figures/Introduction/Edgerton.jpg}
-%	\end{center}
-%	\caption[Edgerton's ``Bullet Through Apple'']{\textbf{Edgerton's iconic 1964 photograph ``Bullet Through Apple'' \cite{Edgerton1964}.} Using a carefully timed xenon flashlamp in a completely dark room, Harold Edgerton was able to photograph a rifle bullet passing through and apple with microsecond time resolution. \copyright2010 MIT. Courtesy of MIT Museum }
-%	\label{fig:introEdgerton}
-%\end{figure} 
-
-
-%\marginpar{\hangindent=0.2cm \underline{Speed of light}\\300 Mm/s\\300 km/ms\\300 m/$\mu$s\\300 mm/ns\\300 $\mu$m/ps\\\textbf{300 nm/fs}\\300 pm/as}
-
-%\subsection{Femtosecond lasers}
-%\lipsum[66]
-
-
-
-
-
-% % % % % % Quantum dots
-%\begin{figure}[htpb]
-%	\centering
-%	\begin{subfigure}[b]{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{\FigPath/Figures/Introduction/qds.jpg}
-%	\end{subfigure}%
-%	~
-%	\begin{subfigure}[b]{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{\FigPath/Figures/Introduction/QD3d.png}
-%	\end{subfigure}%
-%	\caption[Various sizes of CdSe quantum dots]
-%	{\textbf{Cadmium selenide quantum dots (CdSe QDs).} (left) Each vial contains the same chemical composition (CdSe QDs and toluene), but the different sizes cause the nanocrystals to fluoresce different colors. The bandgap increases with decreasing particle size, so the vials on the left contain the smallest QDs (largest bandgap) and the vials on the right contain the largest QDs (smallest bandgap). Image courtesy of NN-Labs Inc. (right) An illustration of CdSe quantum dots shows the individual atoms clustered into faceted nanocrystals.}
-%		\label{fig:introQDs}
-%\end{figure}
-
-% % % % % % Three-step model
-%\begin{figure}[htpb]
-%	\begin{center}
-%		\includegraphics[width=150mm]{\FigPath/Figures/Introduction/three-step.pdf}
-%	\end{center}
-%	\caption[The three-step model of high harmonic generation (HHG)]
-%	{\textbf{The semi-classical three-step model of high harmonic generation (HHG).} The blue line shows the combined energy of the laser and Coulomb potential, which is changing as a function of time. The green line shows the total energy of the electron (kinetic energy plus potential energy of the laser field) plotted as a function of the distance from the ion. (a) In the presence of a strong laser field (in this case $1\times10^{14} \wcmsq$), the Coulomb potential of an atom (or molecule) is strongly deformed. Under these conditions, a valence electron can tunnel through the barrier and emerge into the continuum (Step 1). (b) In Step 2, the free electron is now driven by the laser field, first away from the ion and then (depending on the phase of the field when the electron tunnels) driven back towards the ion. (c) In Step 3, the electron recombines with the ion emitting a high-energy photon. In the case of strong-field ionization (SFI), the electron does not recombine, but can scatter from the ion.}
-%	\label{fig:introThreestep}
-%\end{figure} 
-
-
-
-
-
-
-
-
-
-
-
 
 
 
