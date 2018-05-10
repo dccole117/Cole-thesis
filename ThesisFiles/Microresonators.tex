@@ -1,2 +1,39 @@
- \chapter{Microresonators}
+\chapter{Microresonators}
  \label{ch:microresonators}
+ 
+ This chapter introduces the basic physics of Kerr-nonlinear optical ring resonators, and the two \todo{correct?} subsequent chapters describe results obtained in these systems.
+ 
+An optical ring resonator, shown schematically in Fig. \ref{fig:RingResonator}, guides light around a closed path in a dielectric medium by total internal reflection, similar to the mechanism that guides light in an optical fiber. A ring resonator supports propagating guided optical \textit{modes} of electromagnetic radiation that occur at (vacuum) wavelengths that evenly divide the optical round-trip path length: $\lambda_m=n_{eff}(\lambda_m)L/m$, with associated resonance frequencies $\nu_m=c/\lambda_m=mc/n_{eff}(\nu_m)L$, leading to constructive interference from round-trip to round-trip. Here $L$ is the physical round-trip length of the resonator, $m$ is the azimuthal mode number, and $n_{eff}(\lambda_m)$ is an effective index of refraction that depends on the resonator geometry and the mode's transverse mode profile (see e.g. \cite{REFHERE} for more information). The free-spectral range $f_{FSR}$ of a resonator is the \textit{local} frequency spacing between modes, calculated via:
+\begin{align}
+	f_{FSR}&\approx \nu_{m+1}-\nu_{m}\approx \nu_{m}-\nu_{m-1},\\
+	&=\frac{\partial\nu_m}{\partial m},\\
+	&=\frac{c}{n_{eff}(\nu)L}-\frac{mc}{n_{eff}^2(\nu)L}\frac{\partial n}{\partial \nu}\frac{\partial \nu}{\partial m},\\
+	\Rightarrow f_{FSR}&=\frac{c/L}{\left(n+\frac{\nu}{n}\frac{\partial n}{\partial \nu}\right)}=\frac{c}{n_g L}=1/T_{RT},
+\end{align}
+	where $n_g=n+\frac{\nu}{n}\frac{\partial n}{\partial \nu}$ is the group velocity of the mode and $T_{RT}$ is the mode's round-trip time.
+	
+	 Unless special efforts are made, ring resonators are typically multi-mode, meaning that many different transverse mode profiles are supported --- this is important to the results discussed in chapter \ref{ch:SolitonCrystals}. To calculate the frequency-dependent effective index $n_{eff}(\nu)$, thereby enabling calculation of the resonance frequencies and wavelengths, one must solve Maxwell's equations for the resonator geometry. Except in special cases of high symmetry, this is typically done numerically using finite-element modeling tools like COMSOL. The modes of an optical resonator, both within a mode family defined by a transverse mode profile and between mode families, must be orthogonal. 
+
+An important parameter describing an optical resonator is the timescale over which circulating photons are dissipated --- the basic relation for the number of circulating photons $N(t)=N_oe^{-t/\tau_\gamma}$ in the presence of solely linear loss defines the photon lifetime $\tau_\gamma$. Two commonly used practical quantities are linked to the photon lifetime: the resonator finesse $\mathcal{F}=2\pi\tau_\gamma/T_{RT}$, which for a ring resonator can be interpreted literally as the azimuthal resonator angle traced out by a typical photon over its lifetime; and the resonator quality factor $Q=\omega_c \tau_\gamma$, the phase over which the optical field evolves during the photon lifetime. The lifetime of a photon at a particular frequency is related to the cavity's full-width at half-maximum (FWHM) linewidth as we can calculate through a Fourier transform of the field $E(t)\propto\sqrt{N(t)}$ with angular carrier frequency $\omega_c$:
+
+\begin{equation}
+\mathcal{F}\{E\}(\omega)\propto\int_0^\infty dt\, e^{-\left(\frac{1}{2\tau_\gamma}+i(\omega_c-\omega)\right)t},
+\end{equation}
+which immediately yields the Lorentzian lineshape
+\begin{equation}
+|\mathcal{F}\{E\}|^2\propto\frac{1}{(\omega-\omega_c)^2+\frac{1}{4\tau_\gamma^2}},
+\end{equation}
+with FWHM linewidth $\Delta\omega=1/\tau_\gamma$. With this relationship, the finesse and quality factor can be rewritten as simple ratios of the relevant frequencies: $\mathcal{F}=f_{FSR}/\Delta\nu$; $Q=\nu_c/\Delta\nu$, where $\Delta\nu=\Delta\omega/2\pi$.
+
+
+
+
+
+\section{Nonlinear optics in microresonators}
+
+The resonator quality factor is an important figure of merit for the use of optical resonators as platforms for nonlinear optics. This is discussed extensively below; typically the threshold power for nonlinear optics scales as $Q^{-2}$, meaning that in the design of practical platforms targeting high $Q$ is an important consideration. Fabrication of ultrahigh-Q resonators has been achieved with a variety of designs and materials, including ... 
+
+
+ These resonators can be constructed with extremely high quality factors, upwards of $10^8$, which facilitates high circulating intensity. 
+ 
+ Combs using optical ring resonators leverage this confinement and the resulting long photon lifetimes in high-quality factor resonators 
