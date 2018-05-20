@@ -3,14 +3,16 @@
  
  This chapter introduces the basic physics of Kerr-nonlinear optical ring resonators, and the two \todo{correct?} subsequent chapters describe results obtained in these systems.
  
-An optical ring resonator, shown schematically in Fig. \ref{fig:RingResonator}, guides light around a closed path in a dielectric medium by total internal reflection, similar to the mechanism that guides light in an optical fiber. A ring resonator supports propagating guided optical \textit{modes} of electromagnetic radiation that occur at (vacuum) wavelengths that evenly divide the optical round-trip path length: $\lambda_m=n_{eff}(\lambda_m)L/m$, with associated resonance frequencies $\nu_m=c/\lambda_m=mc/n_{eff}(\nu_m)L$, leading to constructive interference from round-trip to round-trip. Here $L$ is the physical round-trip length of the resonator, $m$ is the azimuthal mode number, and $n_{eff}(\lambda_m)$ is an effective index of refraction that depends on the resonator geometry and the mode's transverse mode profile (see e.g. \cite{REFHERE} for more information). The free-spectral range $f_{FSR}$ of a resonator is the \textit{local} frequency spacing between modes, calculated via:
+An optical ring resonator, shown schematically in Fig. \ref{fig:RingResonator}, guides light around a closed path in a dielectric medium by total internal reflection, similar to the mechanism that guides light in an optical fiber. The utility of these resonators lies in the fact that light can circulate for many roundtrips before it is coupled out or dissipated, which means that very high circulating intensities can be achieved.
+
+A ring resonator supports propagating guided optical \textit{modes} of electromagnetic radiation that occur at (vacuum) wavelengths that evenly divide the optical round-trip path length: $\lambda_m=n_{eff}(\lambda_m)L/m$, with associated resonance frequencies $\nu_m=c/\lambda_m=mc/n_{eff}(\nu_m)L$, leading to constructive interference from round-trip to round-trip. Here $L$ is the physical round-trip length of the resonator, $m$ is the azimuthal mode number, and $n_{eff}(\lambda_m)$ is an effective index of refraction that depends on the resonator geometry and the mode's transverse mode profile (see e.g. \cite{REFHERE} for more information). The free-spectral range $f_{FSR}$ of a resonator is the \textit{local} frequency spacing between modes, calculated via:
 \begin{align}
 	f_{FSR}&\approx \nu_{m+1}-\nu_{m}\approx \nu_{m}-\nu_{m-1},\\
 	&=\frac{\partial\nu_m}{\partial m},\\
-	&=\frac{c}{n_{eff}(\nu)L}-\frac{mc}{n_{eff}^2(\nu)L}\frac{\partial n}{\partial \nu}\frac{\partial \nu}{\partial m},\\
-	\Rightarrow f_{FSR}&=\frac{c/L}{\left(n+\frac{\nu}{n}\frac{\partial n}{\partial \nu}\right)}=\frac{c}{n_g L}=1/T_{RT},
+	&=\frac{c}{n_{eff}(\nu)L}-\frac{mc}{n_{eff}^2(\nu)L}\frac{\partial n_{eff}}{\partial \nu}\frac{\partial \nu}{\partial m},\\
+	\Rightarrow f_{FSR}&=\frac{c/L}{\left(n_{eff}+\frac{\nu}{n_{eff}}\frac{\partial n_{eff}}{\partial \nu}\right)}=\frac{c}{n_g L}=1/T_{RT},
 \end{align}
-	where $n_g=n+\frac{\nu}{n}\frac{\partial n}{\partial \nu}$ is the group velocity of the mode and $T_{RT}$ is the mode's round-trip time.
+	where $n_g=n_{eff}+\frac{\nu}{n_{eff}}\frac{\partial n_{eff}}{\partial \nu}$ is the group velocity of the mode and $T_{RT}$ is the mode's round-trip time. Importantly, both intrinsic material dispersion and geometric dispersion resulting from, e.g., different sampling of core versus cladding material properties for different transverse mode profiles, lead to a frequency dependence for each of the parameters $n_{eff}$, $n_g$, and $f_{FSR}$, and a resulting non-uniform spacing in the cavity modes in frequency despite the linearity of $\nu_m$ in $m$. 
 	
 	 Unless special efforts are made, ring resonators are typically multi-mode, meaning that many different transverse mode profiles are supported. To calculate the frequency-dependent effective index $n_{eff}(\nu)$, thereby enabling calculation of the resonance frequencies and wavelengths, one must solve Maxwell's equations for the resonator geometry. Except in special cases of high symmetry \cite{microsphereresonators}, this is typically done numerically using finite-element modeling tools like COMSOL. The modes of an optical resonator, both within a mode family defined by a transverse mode profile and between mode families, must be orthogonal\todo{is there a good citation here?}. 
 
@@ -25,23 +27,41 @@ which immediately yields the Lorentzian lineshape
 \end{equation}
 with FWHM linewidth $\Delta\omega=1/\tau_\gamma$. With this relationship, the finesse and quality factor can be rewritten as simple ratios of the relevant frequencies: $\mathcal{F}=f_{FSR}/\Delta\nu$; $Q=\nu_c/\Delta\nu$, where $\Delta\nu=\Delta\omega/2\pi$.
 
+\section{Basic experiments}
+
+In a typical microresonator frequency-comb experiment, a frequency-tunable pump laser is coupled evanescently into and out of the resonator using a tapered optical fiber (for e.g. free-standing silica disc resonators) or a bus waveguide (for chip-integrated resonators). The frequencies of the cavity modes can be identified by recording the transmission of the pump laser past the resonator as the pump frequency is varied, provided that sufficient overlap between the fiber field and the resonator field is achieved. In order to couple light into the microresonator so that substantial build-up of the intracavity field occurs, the pump laser must be held at a frequency near a cavity resonance. However, the thermal response of the microresonator introduces complexities into this process; in particular, in materials with positive thermo-optic coefficient $\partial n/ \partial T$ the cavity resonance wavelength increases with increased circulating intensity, as intrinsic material absorption leads to heating of the resonator. This basic fact leads to so-called thermal `bi-stability' behavior \cite{Carmon2004} --- it is possible to maintain `blue' laser detuning $\nu_{laser}-\nu_{resonance}>0$ indefinitely due to naturally occurring thermal self-locking, while `red' laser detuning $\nu_{laser}-\nu_{resonance}<0$ is thermally unstable. A second effect of the thermal shift of the resonance frequencies is that, when any substantial pump-laser power is coupled into the resonator, the observed cavity lineshape is no longer Lorentzian, and the symmetry between increasing- and decreasing-pump-frequency scans is broken, as shown in Fig. \ref{fig:ThermalEffects}. 
 
 
 
 
-\section{Nonlinear optics in microresonators}
-
-Resonators with long photon lifetimes can support very high circulating optical intensities, and this fact finds immediate application in the use of microresonators for nonlinear optics. The experiments described in this thesis are conducted in silica microresonators. Silica falls into a broader class of materials that exhibit both centro-symmetry, which dictates that the second-order nonlinear susceptibility $\chi^{(2)}$ must vanish, and a significant third-order susceptibility $\chi^{(3)}$. The $n$\textsuperscript{th}-order susceptibility is a term in the Taylor expansion describing the response of the medium's polarization to an external electric field: $P=P_0+\epsilon_0 \chi^{(1)} E + \epsilon_0 \chi^{(2)} E^2 + \epsilon_0 \chi^{(3)} E^3+...$. The effect of $\chi^{(3)}$ can be described in a straightforward way as a dependence of the refractive index on the local intensity, $n=n_0+n_2 I$\cite{somethingelse}, where $n_2=\frac{3\chi^{(3)}}{4n_0^2\epsilon^0 c}$\cite{CosoAndSolis,alsoLLbook?}. The intensity-dependence of the refractive index is referred to as the optical Kerr effect.
-
-The combination of the Kerr effect and the high circulating intensities that are accessible in high-finesse cavities provides a powerful platform for nonlinear optics. Specifically, the Kerr effect (or third-order susceptibility $\chi^{(3)}$) enables self-phase modulation, \todo{others}, and four-wave mixing. 
-
-that exhibit the  nonlinearity, which can be the dominant source of nonlinearity in centro-symmetric materials in which the second-order nonlinearity $\chi{(2)}$ must vanish. The $\chi^{(3)}$ nonlinearity, or Kerr nonlinearity, arises from the term in the Taylor expansion for the polarization response of the medium that scales with the optical intensity: $P_{NL}=...+\epsilon_0 \chi^{(3)} E^3+...$. \cite{something}. This can equivalently and usefully be described as a dependence of the refractive index on the intensity via .
-
-The third-order 
-
-The resonator quality factor is an important figure of merit for the use of optical resonators as platforms for nonlinear optics. This is discussed extensively below; typically the threshold power for nonlinear optics scales as $Q^{-2}$, meaning that in the design of practical platforms targeting high $Q$ is an important consideration. Fabrication of ultrahigh-Q resonators has been achieved with a variety of designs and materials, including ... 
 
 
- These resonators can be constructed with extremely high quality factors, upwards of $10^8$, which facilitates high circulating intensity. 
- 
- Combs using optical ring resonators leverage this confinement and the resulting long photon lifetimes in high-quality factor resonators 
+
+\section{Microring resonator Kerr frequency combs}
+
+The high circulating optical intensities accessible in resonators with long photon lifetimes find immediate application in the use of microresonators for nonlinear optics. The experiments described in this thesis are conducted in silica microresonators. Silica falls into a broader class of materials that exhibit both centro-symmetry, which dictates that the second-order nonlinear susceptibility $\chi^{(2)}$ must vanish, and a significant third-order susceptibility $\chi^{(3)}$. The $n$\textsuperscript{th}-order susceptibility is a term in the Taylor expansion describing the response of the medium's polarization to an external electric field: $P=P_0+\epsilon_0 \chi^{(1)} E + \epsilon_0 \chi^{(2)} E^2 + \epsilon_0 \chi^{(3)} E^3+...$. The effect of $\chi^{(3)}$ can be described in a straightforward way as a dependence of the refractive index on the local intensity, $n=n_0+n_2 I$\cite{somethingelse}, where $n_2=\frac{3\chi^{(3)}}{4n_0^2\epsilon^0 c}$\cite{CosoAndSolis,alsoLLbook?}. The intensity-dependence of the refractive index is referred to as the optical Kerr effect.
+
+The combination of the Kerr effect and the high circulating intensities that are accessible in high-finesse cavities provides a powerful platform for nonlinear optics. Specifically, the Kerr effect (or third-order susceptibility $\chi^{(3)}$) enables self-phase modulation, cross-phase modulation, and four-wave mixing, the last of which is depicted schematically in Fig. \ref{fig:FWM}. 
+
+In 2007, a remarkable result heralded the beginning of a new era for frequency comb research. Del'Haye et al reported \textit{cascaded four-wave mixing} in toroidal silica microcavities on silicon chips, the result of which was a series of many co-circulating optical fields that were uniformly spaced by $f_{rep}$ ranging from 375 GHz to $\sim$750 GHz (depending on the platform)\cite{DelHaye2007}. Measurements indicated that the frequency spacing was uniform to a precision of $7.3 \times 10^{-18}$, thereby establishing that the output of the system was a frequency comb. This result built on previous demonstrations of few-mode parametric oscillations in microresonators \cite{Kippenberg2004, Savchenkov2004,Agha2007}\todo{from initial kerr comb paper}, and showed that the non-uniform distribution of cavity resonance frequencies could be overcome to generate an output with equidistant frequency modes. 
+
+
+
+
+
+%
+%
+%
+%
+%
+%
+%that exhibit the  nonlinearity, which can be the dominant source of nonlinearity in centro-symmetric materials in which the second-order nonlinearity $\chi{(2)}$ must vanish. The $\chi^{(3)}$ nonlinearity, or Kerr nonlinearity, arises from the term in the Taylor expansion for the polarization response of the medium that scales with the optical intensity: $P_{NL}=...+\epsilon_0 \chi^{(3)} E^3+...$. \cite{something}. This can equivalently and usefully be described as a dependence of the refractive index on the intensity via .
+%
+%The third-order 
+%
+%The resonator quality factor is an important figure of merit for the use of optical resonators as platforms for nonlinear optics. This is discussed extensively below; typically the threshold power for nonlinear optics scales as $Q^{-2}$, meaning that in the design of practical platforms targeting high $Q$ is an important consideration. Fabrication of ultrahigh-Q resonators has been achieved with a variety of designs and materials, including ... 
+%
+%
+% These resonators can be constructed with extremely high quality factors, upwards of $10^8$, which facilitates high circulating intensity. 
+% 
+% Combs using optical ring resonators leverage this confinement and the resulting long photon lifetimes in high-quality factor resonators 
