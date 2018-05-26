@@ -126,11 +126,13 @@ where $n_2=\frac{3\chi^{(3)}}{4n_0^2\epsilon^0 c}$\cite{CosoAndSolis,alsoLLbook?
 
 The combination of the Kerr effect and the high circulating intensities that are accessible in high-finesse cavities provides a powerful platform for nonlinear optics. Specifically, the Kerr effect (or third-order susceptibility $\chi^{(3)}$) enables self-phase modulation, cross-phase modulation, and four-wave mixing, the last of which is depicted schematically in Fig. \ref{fig:FWM}. 
 
-In 2007, a remarkable result heralded the beginning of a new era for frequency comb research. Del'Haye et al reported \textit{cascaded four-wave mixing} in toroidal silica microcavities on silicon chips, the result of which was a series of many co-circulating optical fields that were uniformly spaced by $f_{rep}$ ranging from 375 GHz to $\sim$750 GHz (depending on the platform)\cite{DelHaye2007}. Measurements indicated that the frequency spacing was uniform to a precision of $7.3 \times 10^{-18}$, thereby establishing that the output of the system was a frequency comb. This result built on previous demonstrations of few-mode parametric oscillations in microresonators \cite{Kippenberg2004, Savchenkov2004,Agha2007}\todo{from initial kerr comb paper}, and showed that the non-uniform distribution of cavity resonance frequencies could be overcome to generate an output with equidistant frequency modes. Demonstrations of frequency-comb generation in other platforms followed shortly, with realizations in ... A second important development occurred in 2012, when Herr et al reported the generation of frequency combs corresponding in the time domain to single circulating optical `soliton' pulses. In fact, it is now recognized that passive fiber ring resonators are formally equivalent to Kerr microrings, and solitons were generated in these systems in 2010\cite{Leo2010}. 
+In 2007, a remarkable result heralded the beginning of a new era for frequency comb research. Del'Haye et al reported \textit{cascaded four-wave mixing} in toroidal silica microcavities on silicon chips, the result of which was a series of many co-circulating optical fields that were uniformly spaced by $f_{rep}$ ranging from 375 GHz to $\sim$750 GHz (depending on the platform)\cite{DelHaye2007}. Measurements indicated that the frequency spacing was uniform to a precision of $7.3 \times 10^{-18}$, thereby establishing that the output of the system was a frequency comb. This result built on previous demonstrations of few-mode parametric oscillations in microresonators \cite{Kippenberg2004, Savchenkov2004,Agha2007}\todo{from initial kerr comb paper}, and showed that the non-uniform distribution of cavity resonance frequencies due to dispersion could be overcome to generate an output with equidistant frequency modes. Demonstrations of frequency-comb generation in other platforms followed shortly, with realizations in ... A second important development occurred in 2012, when Herr et al reported the generation of frequency combs corresponding in the time domain to single circulating optical `soliton' pulses with duration less than the cavity round-trip time. This observation followed the observation of solitons in formally-equivalent passive fiber-ring resonators in 2010\cite{Leo2010}. Due to their unique properties, as discussed in Sec. \ref{subsec:LLEsolitons}, the generation and manipulation of soliton combs has become a significant priority in microcomb research. 
 
-Kerr-comb generation can be motivated and partially understood through the CFWM picture, but the phase and amplitude degrees of freedom for each comb line mean that CFWM gives rise to rich space of comb phenomena, as evidenced by the various behaviors reported in Kerr microresonators. A useful model for understanding this rich space is the Lugiato-Lefever equation (LLE), which was shown to describe microcomb dynamics by Chembo and Menyuk \cite{Chembo2013} through Fourier-transformation of a set of coupled-mode equations describing CFWM and by Coen et al \cite{Coen2013} through time-averaging of an Ikeda map for a low-loss resonator (as first performed by Haelterman, Trillo, and Wabnitz \cite{Haelterman1992}).  The LLE is a nonlinear partial-differential equation that describes evolution of the normalized cavity field $\psi$ over a slow time $\tau=t/2\tau_\gamma$ in a frame parametrized by the ring's azimuthal angle $\theta$ (running from $-\pi$ to $\pi$) co-moving at the group velocity at the frequency of the pump laser. The equation as formulated by Chembo and Menyuk, as it will be used throughout this thesis, reads:
+\section{A model for Kerr-comb nonlinear optics: The Lugiato-Lefever equation}
+
+Kerr-comb generation can be motivated and partially understood through the CFWM picture, but the phase and amplitude degrees of freedom for each comb line mean that CFWM gives rise to a rich space of comb phenomena --- it is now known that Kerr combs can exhibit a variety of fundamentally distinct outputs.  A useful model for understanding this rich space is the Lugiato-Lefever equation (LLE), which was shown to describe microcomb dynamics by Chembo and Menyuk \cite{Chembo2013} through Fourier-transformation of a set of coupled-mode equations describing CFWM and by Coen et al \cite{Coen2013} through time-averaging of an Ikeda map for a low-loss resonator (as first performed by Haelterman, Trillo, and Wabnitz \cite{Haelterman1992}).  The LLE is a nonlinear partial-differential equation that describes evolution of the normalized cavity field envelope $\psi$ over a slow time $\tau=t/2\tau_\gamma$ in a frame parametrized by the ring's azimuthal angle $\theta$ (running from $-\pi$ to $\pi$) co-moving at the group velocity at the frequency of the pump laser. The equation as formulated by Chembo and Menyuk, as it will be used throughout this thesis, reads:
 \begin{equation}
-\frac{\partial \psi}{\partial \tau}=-(1+i \alpha) \psi + i|\psi|^2 \psi -i \frac{\beta}{2} \frac{\partial^2 \psi}{\partial \theta^2} +F.
+\frac{\partial \psi}{\partial \tau}=-(1+i \alpha) \psi + i|\psi|^2 \psi -i \frac{\beta}{2} \frac{\partial^2 \psi}{\partial \theta^2} +F. \label{eq:LLE}
 \end{equation}
 
 This equation describes $\psi$ over the domain $-\pi\leq\theta\leq+\pi$ with periodic boundary conditions $\psi(-\pi,\tau)=\psi(\pi,\tau)$. Here $F$ is the normalized strength of the pump laser, with $F$ and $\psi$ both normalized so that they  take the value 1 at the absolute threshold for cascaded four-wave mixing: $F=\sqrt{\frac{8 g_0\Delta\omega_{ext}}{\Delta\omega_{tot}^3}\frac{P_{in}}{\hbar \Omega_0}}$, $|\psi|^2=\frac{2g_0T_{RT}}{\hbar\omega\Delta\omega_{tot}}P_{circ}(\theta,\tau)=\frac{2g_0Ln_g}{c\hbar\omega\Delta\omega_{tot}}P_{circ}(\theta,\tau)$, so that $|\psi(\theta,\tau)|^2$ is the instantaneous normalized power at the co-moving azimuthal angle $\theta$. Here $g_0=n_2 c \hbar \Omega_0^2/(n_g^2 V_0)$ is a parameter describing the four-wave mixing gain, $\Delta\omega_{ext}$ is the rate of coupling at the input/output port, $\Delta\omega_{tot}=1/\tau_\gamma$ is the FWHM resonance linewidth, $P_{in}$ is the pump-laser power, $P_{circ}$ is the circulating power in the cavity, $\hbar$ is Planck's constant, and $\Omega_0$ is the pump-laser frequency. The parameters $n_2$, $n_g$, and $V_0$ describe the nonlinear (Kerr) index (see Eqn. \ref{eq:KerrIndex}), the group index of the mode, and the effective nonlinear mode volume at the pump frequency; $L$ is the physical round-trip length of the ring cavity. 
@@ -141,10 +143,89 @@ The formulation of the LLE in terms of dimensionless normalized parameters helps
 
 The LLE is, of course, a simplified description of the dynamics occurring in the microresonator. It abstracts the nonlinear dynamics and generally successfully describes the various outputs that can be generated in a microresonator frequency comb experiment. The LLE is a good description of these nonlinear dynamics when the resonator photon lifetime, mode-field overlap, and nonlinear index $n_2$ are roughly constant over the bandwidth of the generated comb, and when the dominant contribution to nonlinear dynamics is simply the self-phase modulation term $i|\psi|^2\psi$ arising from the Kerr nonlinearity. The LLE neglects polarization effects, thermal effects, and the Raman scattering and self-steepening nonlinearities, although in principle each of these can be included. It is also worth emphasizing that the LLE can be derived from a more formally accurate Ikeda map (as is done by Coen et al), in which the effect of localized input- and output-coupling is included in the model. This is achieved by `delocalizing' the pump field and the output-coupling over the round trip, including only their averaged effects. This is an approximation that is valid in the limit of high finesse due to the fact that the cavity field cannot change on the timescale of a single round trip, but as a result the LLE necessarily neglects all dynamics that might have some periodicity at the round-trip time; the fundamental timescale of LLE dynamics is the photon lifetime. 
 
-\section{Outputs of nonlinear optics in microresonator frequency combs}
+The LLE provides a useful framework for the prediction of comb properties and the exploration of avenues for new research, but also has proven to be an important tool in the interpretation of Kerr-comb experimental results. A primary reason for this is the difficulty of directly characterizing the time-domain output of a microresonator ---  typically, available tools enable measurement of time-averaged optical spectra and measurement of the comb's output power within the bandwidth ($\leq 50$\todo{leq approx} GHz, typically lower) of the photodetectors and amplifiers used for the measurement. Since the former does not record phase information and the latter lacks response on the timescale of, e.g., temporal pulses with duration less than a resonator's round-trip time, these measurements are insufficient to determine the time-domain output of the microresonator. By providing a mathematical formalism that restricts the possible behaviors of the intracavity field $\psi$, the LLE enables inference of the temporal intensity profile $|\psi(\theta,\tau)|^2$ from the spectrum $|\psi_\mu(\tau)|^2$, which is readily measured in experiment.  
 
-The LLE 
 
+Basically, the LLE predicts the existence of two fundametntally distinct types of Kerr-combs: extended temporal patterns and localized soliton pulses. These predictions are born out by experiments, the interpretation of which is facilitated by insight gained from the LLE. In the remainder of this chapter I briefly present some simple analytical results that can be obtained from the LLE, and then discuss these two types of comb outputs. This discussion provides context for the results presented in the next two chapters. Fig. \ref{fig:paramspace} summarizes the results that will be presented in the remainder of this chapter.
+%
+%In the following subsections I introduce two fundamentally-distinct types of Kerr-combs. This provides important context for the results presented in the next two chapters. 
+
+\section{LLE analytical curves}
+Some insight into comb dynamics via analytical investigations of the LLE, Eq. \ref{eq:LLE}. This section largely follows the analysis of Ref. \cite{Godey2014}, with similar analysis having been performed in Refs. \cite{others}. Flat solutions $\psi_s$ may be calculated by setting all derivatives to zero --- when these solutions can be realized physically (discussed below), they predict the dependence of the circulating CW power in the resonator, the `CW background,' on the pump power and detuning. Upon setting the derivatives to zero, one finds:
+\begin{equation}
+F=(1+i\alpha)\psi_s-i|\psi_s|^2\psi_s. \label{eq:LLEstat}
+\end{equation}
+The circulating intensity $\rho=|\psi_s|^2$ is obtained by taking the modulus-square of Eq. \ref{eq:LLEstat} and solving the resulting equation $F^2=\left(1+(\alpha-\rho)^2\right)$ for $\rho$. With $\alpha$ held constant, the function $F^2_\alpha(\rho)$ defined by this equation uniquely determines $F^2$ for a given value of $\rho$. By noting that $F^2(\rho=0)=0$ and $\left.\partial F^2/\partial \rho\right|_{\rho=0}>0$, one can conclude that three real solutions for the inverted function $\rho_\alpha(F^2)$ exist between the values of $\rho$ that extremize $F^2_\alpha(\rho)$:
+\begin{equation}
+\rho_\pm=\frac{2\alpha\pm\sqrt{\alpha^2-3}}{3},
+\end{equation}
+while outside of this interval there is only one real solution $\rho_\alpha(F^2)$ exists.
+
+Physically, the coexistence of multiple flat solutions $\rho$ at a given point $(\alpha,F^2)$ corresponds to a `tilting' of the Lorentzian transmission profile of the cavity (excluding thermal effects). This is illustrated in Fig. \ref{some figure}. Generally speaking, extended patterns exist on the upper branch of this curve, highlighted in blue, and solitons exist on the lower branch, highlighted in red.
+
+Once the circulating intensity $\rho$ is known, the corresponding flat solution $\psi_s$ can be determined from Eq. \ref{eq:LLEstat} by inserting the known value of $\rho$ and solving for $\psi_s$, with the result:
+\begin{equation}
+\psi_s=\frac{F}{1+i(\alpha-\rho)}.
+\end{equation}
+\todo{check}
+
+By introducing a perturbation $\delta\psi$ to the flat solution $\psi_s$ and solving for the time evolution of the perturbation, the stability of the flat solution can be investigated --- a flat solution $\psi_s$ to the LLE only corresponds to a physically-realizable CW resonator background if it is stable to perturbations. We don't reproduce this analysis in detail here, but state the result:
+\begin{itemize}
+	\item In the region of multi-stability, if the flat solutions are ordered with increasing magnitude as $\rho_1$, $\rho_2$, and $\rho_3$, the middle solution $\rho_2$ is always unstable. 
+	\item A flat solution $\rho$ that is not the middle solution is stable if $\rho<1$; otherwise it is unstable. At threshold ($\rho=1$), the mode that experiences the greatest four-wave mixing gain is $\mu_{threshold}=\sqrt{\frac{2}{\beta}(\alpha-2)}$.
+\end{itemize}
+
+The pump-laser threshold curve can be determined by setting $\rho=1$ in Eq. \ref{eq:LLEstat}: 
+\begin{align}
+F^2_{thresh}=1+(\alpha-1)^2, \\
+\alpha_{thresh}=\sqrt{F^2-1}-1,
+\end{align} 
+for an experiment in which the pump power or detuning is tuned while the other is held fixed. 
+
+
+\section{Kerr comb outputs: extended modulation-instability patterns}
+
+Extended temporal patterns arise spontaneously as a result of the instability of the flat solution to the LLE when the pump laser is tuned above the threshold curve. These patterns can be stationary, in which case they are typically referred to as `Turing patterns' or `primary comb,' or can evolve in time, in which case they are typically referred to as `modulation instability comb' or `spatiotemporal chaos.' In general, the former occurs for lower values of the detuning $\alpha$ and smaller pump strengths $F^2$; although some studies of the transition from Turing patterns to chaos have been conducted \cite{Coillet2015,others}, a well-defined boundary between stable (Turing patterns) comb and unstable (chaotic) comb has not been established. 
+
+In the spatial domain parametrized by $\theta$, a Turing pattern consists of a periodically modulated waveform with multiple minima and maxima in $\psi^2$. Corresponding to the $n$-fold decreased period (relative to the round-trip time) of an $n$-roll Turing pattern's modulated waveform in the time domain, the optical spectrum of a Turing pattern consists of modes spaced by $n$ resonator FSR --- it is this widely-spaced spectrum that is referred to as `primary comb.' Spatiotemporal chaos can be understood as a Turing pattern whose rolls oscillate in height, with adjacent rolls oscillating out of phase. From such an oscillating Turing pattern, if $\alpha$ and/or $F^2$ is increased, one moves deeper into the chaotic regime and pulses begin to exhibit lateral motion and collisions; the number of rolls present in the cavity is no longer constant in time.
+
+Relative to generation of solitons, experimental generation of an extended pattern is straightforward. As shown in Fig. \ref{fig:paramspace}, these patterns are generated with blue pump-laser detuning $\alpha<0$, where thermal locking occurs. Because they arise spontaneously from noise, their generation is straightforward: simply decrease the pump-laser frequency until the optical spectrum analyzer or comb-power trace indicate nonlinear conversion of light to new frequencies. Unfortunately, operation of a Kerr-comb in the extended pattern regime is disadvantageous for applications: primary comb consists of light in optical modes spaced by many resonator FSR, which presents a challenge for measurement of the repetition rate of the frequency comb; MI comb/spatiotemporal chaos evolves aperiodically in time and therefore does not present the stable set of optical reference frequencies that are desired from a frequency comb. 
+
+An important property of extended patterns is that they fill the resonator --- while the characteristic size of temporal features scales roughly as $1/\sqrt{-\beta}$, these features are distributed densely and uniformly throughout the resonator. This means that the total circulating power of an extended pattern $\int d\theta\, |\psi|^2$ is large, and therefore that extended powers comb with a comparatively large thermal shift of the resonance. 
+
+
+
+\section{Kerr comb outputs: solitons}
+
+The term `soliton' generally refers to a localized excitation in a nonlinear medium that can propagate without changing its shape due to a delicate balance between dispersion (or diffraction) and nonlinearity. Temporal Kerr solitons in optical fibers are well known \cite{Agrawal2007}, and are described by the nonlinear Schrodinger equation (NLSE):
+\begin{equation}
+\frac{\partial A}{\partial z}= i\gamma|A|^2 A -i \frac{\beta}{2} \frac{\partial^2 A}{\partial T^2}. \label{NLSE}
+\end{equation}
+This equation describes the evolution of the pulse envelope $A$ in the `fast-time' reference frame parametrized by $T$ as it propagates down the length of the fiber, parametrized by the distance variable $z$. Here $\gamma$ is the nonlinear coefficient of the fiber and $\beta$ is the GVD parameter\todo{reference to the above}. The LLE is an NLSE that with added loss and detuning terms $-(1+i\alpha)\psi$ and a driving term $F$.
+
+One solution to the NLSE is:
+\begin{equation}
+A=\sqrt{P_0}\, \mathrm{sech}\left(T/\tau\right)\,e^{i\gamma P_0 z/2+i\phi_0},
+\end{equation}
+where $P_0$ the peak power of the pulse and is related to the duration of the pulse $\tau$ via $\tau=\sqrt{-\beta/\gamma P_0}$, and $\phi_0$ is an arbitrary phase. Thus, this equation admits a \textit{family} of pulsed fundamental `soliton' solutions, with one existing for each value of the peak power. 
+
+The introduction of the loss, detuning, and driving terms into the NLSE to obtain the LLE has several important consequences for solitons. First, exact analytical expressions for the soliton solution to the LLE in terms of elementary functions are not known. However, the soliton solutions to Eq. \ref{eq:LLE} can be approximated quite well as:
+\begin{equation}
+\psi_{soliton}=\psi_{s,min}+e^{i\phi_0}\sqrt{2\alpha}\,\mathrm{sech}\sqrt{\frac{2\alpha}{-\beta}}\theta.
+\end{equation}
+
+Here $\psi_{s,min}$ is the flat solution to the LLE at the point where the soliton solution is desired; when multiple flat solutions exist, $\psi_{s,min}$ is the one corresponding to the smallest intensity $\rho_1$. The phase $\phi_0=\mathrm{cos}^{-1}(\sqrt{8\alpha}/\pi F)$ arises from the indensity-dependent phase shift in the cavity due to the Kerr effect, described by the term $i|\psi|^2\psi$. 
+
+This approximation for the soliton solution of the LLE illustrates a second important consequence of the differences between the NLSE and the LLE: while the NLSE admits a family of fundamental soliton solutions parametrized by their peak power $P_0$ and arbitrary phase $\phi_0$, the LLE supports only one shape for the envelope of a soliton at a point $(\alpha,F^2)$. Intuitively, this can be understood as arising from the need for a balance between dispersion and nonlinearity, as in the NLSE, \textit{and} between loss $\partial\psi/\partial\tau=-\psi+...$ and the driving term $\partial\psi/\partial\tau=...+F$ for stable evolution of an LLE soliton.
+
+Other noteworthy features for the LLE soliton are that the amplitude of the soliton depends only on the detuning $\alpha$, and the width of the soliton increases with larger detuning $\alpha$ and smaller dispersion $\beta$.
+
+Solitons exist as solutions to the LLE only for red pump-laser detuning $\alpha>0$. They exist up to a maximum detuning of approximately $\alpha=\pi^2 F^2/8$, and only where a stable flat solution exists that can provide the background for the flat solution. Therefore, solitons are bounded on the left in Fig. \ref{fig:paramspace} by the upper blue line, above and left of which no flat solution exists.
+
+Solitons are strongly localized: the deviation of the background intensity from $\rho_1$ near a soliton at $\theta_0$ is proportional to $e^{-(\theta-\theta_0)/\delta\theta}$, where $\delta\theta=\sqrt{-\beta/2\alpha}$. If $\delta\theta$ is sufficiently small, multiple solitons can be supported in the domain $-\pi\leq\theta\leq\pi$ with negligible interactions between solitons. Simulations reveal that if $(\theta-\theta_0)/\delta\theta$ is too small, solitons exhibit attractive interactions; the result of this attraction can be pair-wise annihilation or pair-wise merger, with the ultimate result being a stable soliton ensemble with fewer solitons.
+
+
+\todo{How does FROG fit into this discussion?}
 %\section{Frequency comb nonlinear dynamics in microresonators}
 %
 %The first report of frequency-comb generation in silica microcavities by Del'Haye et al initiated a serious research effort to understand how to make these combs useful for applications. The early years of this effort brought reports of comb generation in resonators made from amorphous \cite{stuff} and crystalline \cite{stuff} materials, with 
@@ -166,4 +247,4 @@ The LLE
 %
 % These resonators can be constructed with extremely high quality factors, upwards of $10^8$, which facilitates high circulating intensity. 
 % 
-% Combs using optical ring resonators leverage this confinement and the resulting long photon lifetimes in high-quality factor resonators 
+% Combs using optical ring resonators leverage this confinement and the resulting long photon lifetimes in high-quali oty factor resonators 
