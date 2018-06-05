@@ -14,7 +14,7 @@ An optical microring resonator, shown schematically in Fig. \ref{fig:RingResonat
 A microring resonator supports propagating guided optical modes of electromagnetic radiation with (vacuum) wavelengths that evenly divide the optical round-trip path length: $\lambda_m=n_{eff}(\lambda_m)L/m$, with associated resonance frequencies $\nu_m=c/\lambda_m=mc/n_{eff}(\nu_m)L$. This leads to constructive interference from round-trip to round-trip. Here $L$ is the physical circumference of the resonator, $m$ is the azimuthal mode number, and $n_{eff}(\lambda_m)$ is an effective index of refraction that depends on the resonator geometry and the transverse intensity profile of the mode (see e.g. \cite{REFHERE} for more information). The free-spectral range $f_{FSR}$ of a resonator is the \textit{local} frequency spacing between modes, calculated via:
 \begin{align}
 	f_{FSR}&\approx \nu_{m+1}-\nu_{m}\approx \nu_{m}-\nu_{m-1},\\
-	&={\frac}{\partial\nu_m}{\partial m},\\
+	&=\frac{\partial\nu_m}{\partial m},\\
 	&=\frac{c}{n_{eff}(\nu)L}-\frac{mc}{n_{eff}^2(\nu)L}\frac{\partial n_{eff}}{\partial \nu}\frac{\partial \nu}{\partial m},\\
 	\Rightarrow f_{FSR}&=\frac{c/L}{\left(n_{eff}+\nu\frac{\partial n_{eff}}{\partial \nu}\right)}=\frac{c}{n_g L}=1/T_{RT},
 \end{align}
