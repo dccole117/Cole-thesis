@@ -1,0 +1,155 @@
+\chapter{Numerical simulations of nonlinear optics}
+ \label{app:numericalsims}
+
+
+
+This appendix describes the algorithm used for numerical simulation of the nonlinear Schrodinger equation (NLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}.
+
+\section{RK4IP algorithm}
+
+The LLE (NLSE) describes the evolution of the field $\psi$ ($A$), a function of a fast variable $\theta$ ($T$), over a timescale parametrized by a slow variable $\tau$ ($z$). In what immediately follows we use the variable names corresponding to the LLE for simplicity. Each of these equations can be written as the sum of a nonlinear term $\hat{N}$ and a linear operator $\hat{L}$, so that the field $\psi$ evolves as:
+\begin{equation}
+\frac{\partial\psi}{\partial\tau}=(\hat{N}+\hat{L})\psi.
+\end{equation}
+
+The RK4IP algorithm specifies a recipe for advancing the field a single step $h$ in the slow variable $\tau$ to obtain $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$. The recipe is:
+\begin{align}
+\psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi(\theta,\tau) \\
+k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi(\theta,\tau))\right]\psi(\theta,\tau) \\
+k_2=&\delta\hat{N}(\psi_I+k_1/2)\left[\psi_I+k_1/2\right] \\
+k_3=&\delta\hat{N}(\psi_I+k_2/2)\left[\psi_I+k_2/2\right] \\
+k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\right) \\
+&\times\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\\
+\psi(\theta,\tau+\delta)=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.
+\end{align}
+
+Simulation according to the RK4IP method is carried out using a split-step Fourier approach, where $\hat{L}$ is applied in the frequency domain and $\hat{N}$ is applied in the time domain.
+
+\section{Adaptive step-size algorithm}
+
+An adaptive step-size algorithm is a strategy for adjusting the magnitude of the steps $\delta$ that are taken to optimize the simulation speed while maintaining a desired degree of accuracy. The RK4IP algorithm exhibits error that scales locally as $O(\delta^5)$. Since reducing the step size naturally requires more steps, increasing the number of small errors that accumulate, the resulting global accuracy of the algorithm is $O(\delta^4)$. The appropriate step-size adjustment algorithm for this scaling is described by Heidt \cite{Heidt2009}. For a given desired maximum error $e_G$ (goal error) from step to step, the algorithm goes as follows:
+\begin{itemize}
+	\item Calculate a field $\psi_{coarse}$ by advancing the field $\psi(\theta,\tau)$ according to RK4IP by a step of size $\delta$.
+	\item Calculate a field $\psi_{fine}$ by advancing the field $\psi(\theta,\tau)$ according to RK4IP by two steps of size $\delta/2$. 
+	\item Calculate the measured error $e=\sqrt{\sum_j |\psi_{coarse,j}-\psi_{fine,j}|^2/\sum_j|\psi_{fine,j}|^2}$, where $j$ indexes over the discrete points parametrizing the fast variable $\theta$. 
+	\begin{itemize}
+		\item If $e>2e_G$, discard the solution and repeat the process with coarse step size $\delta'=\delta/2$.
+		\item If $e\in(e_G,2e_G)$, the evolution continues and the step size is reduced to $\delta'=\delta/2^{1/5}\approx0.87\delta$. 
+		\item If $e\in(e_G/2,e_G)$, the evolution continues and the step size is not changed.
+		\item If $e<e_G/2$, the evolution continues and the step size is increased to $\delta'=2^{1/5}\delta\approx1.15\delta$.
+		\end{itemize}
+\end{itemize}
+
+When the simulation continues, the new field $\psi(\theta,\tau+\delta)$ is taken to be $\psi(\theta,\tau+\delta)=16\psi_{fine}/15-\psi_{coarse}/15$. In the calculations described in this thesis, the goal error $e_G$ is typically $10^{-6}$.
+
+\section{Pseudo-code for numerical simulation with the RK4IP algorithm and adaptive step size}
+
+
+The following block of pseudo-code shows how the RK4IP algorithm with adaptive step-size is implemented. The pseudo-code neglects the details of the RK4IP algorithm, in which the operator $\hat{L}$ is applied in the frequency domain and the operator $\hat{N}$ is applied in the time domain. 
+
+Several things to note:
+\begin{itemize}
+	\item $\psi$ is not overwritten until the new solution is acceptable. 
+	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step-size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current step.
+\end{itemize}
+
+
+	\begin{algorithmic}
+		
+
+		
+		
+		
+		\Procedure{Run the loop}{}
+		\While{$\tau<\tau_{end}$}
+		
+		\State $e=1$ initialize the error to a large value
+		\State $firsttry=TRUE$ for more efficiency on the first step, see below
+		\State $\delta=2\delta$ to account for halving on the first iteration
+		
+		\While{$e>2e_G$}
+		\If{$firsttry$} \State $\psi_{coarse}=\mathrm{RK4IP}(\psi,\delta)$
+		\Else \State $\,\psi_{coarse}=\psi_{fine,1}$
+		\EndIf
+		\State$\delta=\delta/2$
+		\State$\psi_{fine}=\psi$
+		\For{$j_{step}=1:2$}
+		\State $\psi_{fine}=\mathrm{RK4IP}(\psi_{fine},\delta)$
+			\If{$j_{step}=1$}
+		\State $\psi_{fine,1}=\psi_{fine}$
+		\EndIf
+		\EndFor
+		\State $e=\sqrt{\sum{|\psi_{coarse}-\psi_{fine}|^2}/\sum{|\psi_{fine}|^2}}$
+		\State $firsttry=FALSE$
+		\EndWhile
+		
+		\EndWhile\\
+		\State $\psi=16\psi_{fine}/15-\psi_{coarse}/15$
+		\If{$e>e_G$} \State{$\delta=\delta/2^{1/5}$}
+		\EndIf
+		\If{$e<e_G/2$} \State{$\delta=2^{1/5}\delta$}
+		\EndIf
+	\EndProcedure
+	\end{algorithmic}
+
+\subsection{Simulation of the LLE}
+For simulation of the LLE, the operators are: 
+\begin{align}
+\hat{N}&=i|\psi|^2+F/\psi,\\
+\hat{L}&=-(1+i\alpha_\mu),\\
+\alpha_\mu&=\alpha-\beta_2\mu^2/2,
+\end{align}
+where the subscript $\mu$ indicates the pump-referenced mode number upon which the operator acts. Note, in particular, that the pump term $F$ has been incorporated into the nonlinear operator, so that it is implemented in the time domain. The quantity $\hat{N}\psi$ then becomes $i|\psi|^2\psi+F$, as required for computation of $\partial\psi/\partial\tau$.
+
+\subsection{Simulation of the NLSE}
+
+
+
+
+
+%		\begin{align}
+%		\psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi\\
+%		k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi)\right]\psi \\
+%		k_2=&\delta\hat{N}(\psi_I+k_1/2)\left[\psi_I+k_1/2\right] \\
+%		k_3=&\delta\hat{N}(\psi_I+k_2/2)\left[\psi_I+k_2/2\right] \\
+%		k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\right) \\
+%		&\times\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\\
+%		\psi_{coarse}=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.
+%		\end{align}
+
+
+	
+%		\begin{align}
+%		\psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi_{step}\\
+%		k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi_{step})\right]\psi \\
+%		k_2=&\delta\hat{N}(\psi_I+k_1/2)\left[\psi_I+k_1/2\right] \\
+%		k_3=&\delta\hat{N}(\psi_I+k_2/2)\left[\psi_I+k_2/2\right] \\
+%		k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\right) \\
+%		&\times\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\\
+%		\psi_{fine}=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.\\
+%		\end{align}
+
+
+
+%		\Procedure{Initialize}{}\\
+%		$e=10^{-6}$\\
+%		$\delta=10^{-3}$\\
+%		\\
+%		$F^2=5$, $F=\sqrt{F^2}$\\
+%		$\alpha=0.95\times\pi^2F^2/8$\\
+%		$\beta_2=-0.02$\\
+%		\\
+%		$\tau=0$\\
+%		$\tau_{end}=2000$\\
+%		\\
+%		$N_{pnts}=2^{12}$\\
+%		$d\theta=2\pi/N_{pnts}$\\
+%		$\theta=[-\pi:d\theta:\pi-d\theta]$
+%		\\
+%		$k=[0, 1, ...,N_{pnts}/2-1, -N_{pnts}/2, -N_{pnts}/2+1, ..., -1]$\\
+%		$\alpha_k=\alpha-\beta_2 k^2/2$\\
+%		\\
+%		$\hat{L}=-(1+i\alpha_k)$\\
+%		$\hat{N}(\psi)\psi\equiv i|\psi|^2\psi+F$, defining a function for the nonlinear operator and incorporating the pump\\
+%		\\
+%		$\psi=\psi_{s,min}+\sqrt{2\alpha}e^{i\phi_0}\mathrm{sech}\left(\sqrt{\frac{2\alpha}{-\beta_2}}\theta\right)$, to initialize at an approximate soliton solution
