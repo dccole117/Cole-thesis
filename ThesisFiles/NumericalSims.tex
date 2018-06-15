@@ -3,16 +3,19 @@
 
 
 
-This appendix describes the algorithm used for numerical simulation of the nonlinear Schrodinger equation (NLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}.
+This appendix describes the algorithm used for numerical simulation of the generalized nonlinear Schrodinger equation (GNLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}. The RK4IP method is a particular algorithm in the broader class of split-step Fourier algorithms in which nonlinearity is implemented in the time domain and dispersion is implemented in the frequency domain. An illustrative example of the split-step Fourier approach is a far simpler algorithm carried out with a single line of Matlab code to simulate the LLE: \\
+{\fontfamily{pcr}\selectfont psi=ifft(exp(delta*L).*fft(exp(delta*(1i*abs(psi).\string^2+F./psi)).*psi));}\\
+where {\fontfamily{pcr}\selectfont delta} is the step size and  {\fontfamily{pcr}\selectfont L} is a linear frequency-domain dispersion operator ($\hat{L}$, see below) that has been defined in the preceding code. The RK4IP algorithm with adaptive step size is advantageous over this simple algorithm in calculation time and in the scaling of error with the step size.
 
 \section{RK4IP algorithm}
 
-The LLE (NLSE) describes the evolution of the field $\psi$ ($A$), a function of a fast variable $\theta$ ($T$), over a timescale parametrized by a slow variable $\tau$ ($z$). In what immediately follows we use the variable names corresponding to the LLE for simplicity. Each of these equations can be written as the sum of a nonlinear term $\hat{N}$ and a linear operator $\hat{L}$, so that the field $\psi$ evolves as:
+The LLE (NLSE) describes the evolution of the field $\psi$ ($A$), a function of a fast variable $\theta$ ($T$), over a timescale parametrized by a slow variable $\tau$ ($z$). In what immediately follows we use the variable names corresponding to the LLE for simplicity. Each of these equations can be written as the sum of a nonlinear operator $\hat{N}$ and a linear operator $\hat{L}$ acting on $\psi$, so that the field $\psi$ evolves as
 \begin{equation}
-\frac{\partial\psi}{\partial\tau}=(\hat{N}+\hat{L})\psi.
+\frac{\partial\psi}{\partial\tau}=(\hat{N}+\hat{L})\psi,
 \end{equation}
+which can be implemented with the split-step Fourier approach.
 
-The RK4IP algorithm specifies a recipe for advancing the field a single step $h$ in the slow variable $\tau$ to obtain $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$. The recipe is:
+The RK4IP algorithm specifies a recipe for advancing the field a single step $\delta$ in the slow variable $\tau$ to obtain $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$. This specific algorithm has the attractive feature that it reduces the number of Fourier transformations that must be performed to achieve a given calculation accuracy relative to other common algorithms. The RK4IP algorithm is\cite{Hult2007}:
 \begin{align}
 \psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi(\theta,\tau) \\
 k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi(\theta,\tau))\right]\psi(\theta,\tau) \\
@@ -23,86 +26,117 @@ k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\rig
 \psi(\theta,\tau+\delta)=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.
 \end{align}
 
-Simulation according to the RK4IP method is carried out using a split-step Fourier approach, where $\hat{L}$ is applied in the frequency domain and $\hat{N}$ is applied in the time domain.
+In the above it is understood that $\hat{L}$ is applied in the frequency domain and $\hat{N}$ is applied in the time domain. Calculation of $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$ therefore requires eight Fourier transformations.
 
 \section{Adaptive step-size algorithm}
 
-An adaptive step-size algorithm is a strategy for adjusting the magnitude of the steps $\delta$ that are taken to optimize the simulation speed while maintaining a desired degree of accuracy. The RK4IP algorithm exhibits error that scales locally as $O(\delta^5)$. Since reducing the step size naturally requires more steps, increasing the number of small errors that accumulate, the resulting global accuracy of the algorithm is $O(\delta^4)$. The appropriate step-size adjustment algorithm for this scaling is described by Heidt \cite{Heidt2009}. For a given desired maximum error $e_G$ (goal error) from step to step, the algorithm goes as follows:
+An adaptive step-size algorithm is a strategy for adjusting the magnitude of the steps $\delta$ that are taken to optimize the simulation speed while maintaining a desired degree of accuracy. The RK4IP algorithm exhibits error that scales locally as $O(\delta^5)$. Since reducing the step size naturally requires more steps and therefore increases the number of small errors that accumulate, the resulting global accuracy of the algorithm is $O(\delta^4)$. One appropriate step-size adjustment algorithm for this scaling is described by Heidt \cite{Heidt2009}. For a given goal error $e_G$, the algorithm goes as follows:
 \begin{itemize}
 	\item Calculate a field $\psi_{coarse}$ by advancing the field $\psi(\theta,\tau)$ according to RK4IP by a step of size $\delta$.
 	\item Calculate a field $\psi_{fine}$ by advancing the field $\psi(\theta,\tau)$ according to RK4IP by two steps of size $\delta/2$. 
 	\item Calculate the measured error $e=\sqrt{\sum_j |\psi_{coarse,j}-\psi_{fine,j}|^2/\sum_j|\psi_{fine,j}|^2}$, where $j$ indexes over the discrete points parametrizing the fast variable $\theta$. 
 	\begin{itemize}
 		\item If $e>2e_G$, discard the solution and repeat the process with coarse step size $\delta'=\delta/2$.
-		\item If $e\in(e_G,2e_G)$, the evolution continues and the step size is reduced to $\delta'=\delta/2^{1/5}\approx0.87\delta$. 
-		\item If $e\in(e_G/2,e_G)$, the evolution continues and the step size is not changed.
+		\item If $e_G<e<2e_G$, the evolution continues and the step size is reduced to $\delta'=\delta/2^{1/5}\approx0.87\delta$. 
+		\item If $e_G/2<e<e_G$, the evolution continues and the step size is not changed.
 		\item If $e<e_G/2$, the evolution continues and the step size is increased to $\delta'=2^{1/5}\delta\approx1.15\delta$.
 		\end{itemize}
 \end{itemize}
 
 When the simulation continues, the new field $\psi(\theta,\tau+\delta)$ is taken to be $\psi(\theta,\tau+\delta)=16\psi_{fine}/15-\psi_{coarse}/15$. In the calculations described in this thesis, the goal error $e_G$ is typically $10^{-6}$.
 
-\section{Pseudo-code for numerical simulation with the RK4IP algorithm and adaptive step size}
+\section{Pseudocode for numerical simulation with the RK4IP algorithm and adaptive step size}
 
 
-The following block of pseudo-code shows how the RK4IP algorithm with adaptive step-size is implemented. The pseudo-code neglects the details of the RK4IP algorithm, in which the operator $\hat{L}$ is applied in the frequency domain and the operator $\hat{N}$ is applied in the time domain. 
+The pseudocode shown in Algorithm \ref{alg:LLEsim} shows how the RK4IP algorithm with adaptive step size is implemented. This pseudocode neglects the specific details of the RK4IP algorithm. 
 
-Several things to note:
+Two notes:
 \begin{itemize}
-	\item $\psi$ is not overwritten until the new solution is acceptable. 
-	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step-size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current step.
+	\item The current field $\psi(\theta,\tau)$ is stored until the approximation to the new field $\psi(\theta,\tau+\delta)$ is found to be acceptable. 
+	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current attempt.
 \end{itemize}
 
+{\fontfamily{pcr}\selectfont 
 
+\begin{algorithm}[h!]\caption{Pseudocode showing the implementation of RK4IP with adaptive step size.} \label{alg:LLEsim}
+	\footnotesize{
 	\begin{algorithmic}
 		
 
 		
 		
 		
-		\Procedure{Run the loop}{}
+		\Procedure{}{}
 		\While{$\tau<\tau_{end}$}
 		
-		\State $e=1$ initialize the error to a large value
-		\State $firsttry=TRUE$ for more efficiency on the first step, see below
-		\State $\delta=2\delta$ to account for halving on the first iteration
+		\State $e=1$ \Comment{Initialize the error to a large value}
+		\State $firsttry=TRUE$ \Comment{For more efficiency if this is not the first attempt (see below)}
+		\State $\delta=2\delta$ \Comment{To account for halving on the first iteration}\\
 		
 		\While{$e>2e_G$}
 		\If{$firsttry$} \State $\psi_{coarse}=\mathrm{RK4IP}(\psi,\delta)$
-		\Else \State $\,\psi_{coarse}=\psi_{fine,1}$
-		\EndIf
+		\Else \State $\,\psi_{coarse}=\psi_{fine,1}$ \Comment{We get to re-use the first step of the previous attempt's fine solution}
+		\EndIf\\
 		\State$\delta=\delta/2$
-		\State$\psi_{fine}=\psi$
+		\State$\psi_{fine}=\psi$\\
 		\For{$j_{step}=1:2$}
 		\State $\psi_{fine}=\mathrm{RK4IP}(\psi_{fine},\delta)$
 			\If{$j_{step}=1$}
 		\State $\psi_{fine,1}=\psi_{fine}$
 		\EndIf
-		\EndFor
+		\EndFor\\
 		\State $e=\sqrt{\sum{|\psi_{coarse}-\psi_{fine}|^2}/\sum{|\psi_{fine}|^2}}$
 		\State $firsttry=FALSE$
-		\EndWhile
-		
 		\EndWhile\\
+		
+		
 		\State $\psi=16\psi_{fine}/15-\psi_{coarse}/15$
+		\State $\tau=\tau+2\delta$ \Comment{We took two fine steps of size $\delta$} \\
 		\If{$e>e_G$} \State{$\delta=\delta/2^{1/5}$}
 		\EndIf
 		\If{$e<e_G/2$} \State{$\delta=2^{1/5}\delta$}
 		\EndIf
+		\EndWhile
 	\EndProcedure
 	\end{algorithmic}
+}
+\end{algorithm}
+}
 
 \subsection{Simulation of the LLE}
 For simulation of the LLE, the operators are: 
 \begin{align}
 \hat{N}&=i|\psi|^2+F/\psi,\\
-\hat{L}&=-(1+i\alpha_\mu),\\
-\alpha_\mu&=\alpha-\beta_2\mu^2/2,
+\hat{L}&=-(1+i\alpha_\mu), \text{where}\\
+%\alpha_\mu&=\alpha-\beta_2\mu^2/2,
+\alpha_\mu&=\alpha-\sum_{n=1}^N\beta_n\mu^n/n!.
 \end{align}
-where the subscript $\mu$ indicates the pump-referenced mode number upon which the operator acts. Note, in particular, that the pump term $F$ has been incorporated into the nonlinear operator, so that it is implemented in the time domain. The quantity $\hat{N}\psi$ then becomes $i|\psi|^2\psi+F$, as required for computation of $\partial\psi/\partial\tau$.
+The subscript $\mu$ indicates the pump-referenced mode number upon which the operator acts. Note, in particular, that the pump term $F$ has been incorporated into the nonlinear operator, so that it is implemented in the time domain. The quantity $\hat{N}\psi$ then becomes $i|\psi|^2\psi+F$, as required for computation of $\partial\psi/\partial\tau$.
 
-\subsection{Simulation of the NLSE}
+\subsection{Simulation of the GNLSE}
 
+The GNLSE used in the simulations conducted for Chapter \ref{chap:pulsepicking} contains nonlinear terms that describe the medium's Raman response and self-steepening. The equation employed can be written as \cite{Hult2007,Agrawal2007}:
+\begin{align}
+\frac{\partial A}{\partial z}=-\left(\sum_n \beta_n \frac{i^{n-1}}{n!} \frac{\partial^n}{\partial T^n}\right)A&+i\gamma\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right) \nonumber \\
+&\times\left((1-f_R)A|A|^2+f_R A\int_0^\infty h_R(\tau)|A(z,T-\tau)|^2 d\tau\right).
+\end{align}
+For Chapter \ref{chap:pulsepicking}, second- and third-order dispersion is used with $\beta_2=$-7.7 ps\textsuperscript{2}/km and $\beta_3=$0.055 ps\textsuperscript{3}/km, where $\beta_n$ is the $n^{th}$ frequency-derivative of the propagation constant. The nonlinear coefficient $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ used is 11 W/km \cite{Hirano2009}, coming from an effective mode-field diameter of $\sim$3.5 $\mu$m for the HNLF used in the experiment and the nonlinear index $n_2=2.7\times10^{-16}$ cm\textsuperscript{2}/W of silica. The quantity $\omega_0=2\pi c/\lambda_0$ is the (angular) carrier frequency of the pulse, and the parameter $f_R=0.18$ and function
+\begin{equation}
+h_R(\tau>0)=(\tau_1^2+\tau_2^2)/(\tau_1 \tau_2^2)\times e^{-\tau/\tau_2}\sin{\tau/\tau_1}
+\end{equation} 
+describe the medium's Raman response, with $\tau_1=12.2$ fs and $\tau_2=32$ fs used here \cite{Agrawal2007,Hult2007,Blow1989}.
+
+The linear frequency-domain operator applied in the RK4IP algorithm is
+\begin{equation}
+\hat{L}=i\frac{\beta_2}{2}(\omega_\mu-\omega_0)^2-\frac{\beta_3}{6}(\omega_\mu-\omega_0)^3
+\end{equation}
+Here $\omega_\mu$ is defined by the discretization of the frequency domain due to Fourier-transformation of a finite temporal window of length $T_{comp}$ via $\omega_\mu=\omega_0+2\pi\mu/T_{comp}$; where $T_{comp}$ is the size of the domain for the fast time variable $T$.
+
+The nonlinear operator $\hat{N}$ for the GNLSE implements the convolution as a product in the frequency domain. That is, 
+\begin{equation}
+\hat{N}=i\gamma\frac{1}{A}\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right)\times\left[\vphantom{\frac{\partial}{\partial T}}(1-f_R)A|A|^2+f_R A\, \mathcal{F}^{-1}\left\{\chi_R\cdot\mathcal{F}(|A|^2)\right\}\right],
+\end{equation}
+where $\chi_R=\mathcal{F}\{h_R(\tau)\}$ and $\mathcal{F}$ denotes Fourier transformation. Procedurally, the quantity in the square brackets is calculated first, and then the fast-time derivative is implemented and the sum in the curved brackets is calculated.
 
 
 

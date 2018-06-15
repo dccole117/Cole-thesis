@@ -255,10 +255,13 @@ The work in this thesis would not have been possible...
 \newcommand{\wpl}{\omega_{p}}
 
 
+%\DeclareTextFontCommand{\textcourier}{}
+
+
 % % % % % % % % % % % % % % % % % % % % % % % % %
 % this is the amateur bibliography. Use biblatex above
 %\bibliographystyle{amsplain}
-\begin{singlespace}
+\begin{spacing}{1}
 \pagenumbering{roman}
 %\include{Abbreviations}
 %\include{Outline}
@@ -273,10 +276,12 @@ The work in this thesis would not have been possible...
 
 \appendix
 \include{NumericalSims}
-\end{singlespace}
+%\end{spacing}
 
-\begin{spacing}{1.3}
-\printbibliography[heading=bibintoc,title={References}]
+
+
+	\printbibliography[heading=bibintoc,title={References}]
+	
 \end{spacing}
 
 \end{document}
