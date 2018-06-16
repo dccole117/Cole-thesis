@@ -1,6 +1,6 @@
  \chapter{PM Pumping} \label{ch:PMPumping}
 
-This chapter discusses the direct generation and control of single solitons in optical microring resonators using a pump-laser phase modulated at a frequency near the resonator's free spectral range. Based on a proposal by Taheri, Eftekhar, and Adibi in 2015 \cite{Taheri2015}, these experimental results present a promising new method for simple and deterministic generation of single solitons. 
+This chapter discusses the direct generation and control of single solitons in optical microring resonators using a pump laser phase modulated at a frequency near the resonator's free spectral range. Based on a proposal by Taheri, Eftekhar, and Adibi in 2015 \cite{Taheri2015}, these results present a promising new method for simple and deterministic generation of single solitons. 
 
 To illustrate the utility of using a phase-modulated pump laser, we first present theoretical investigations into the effect of this phase modulation (PM), and then we present experimental results on the generation and control of single solitons.
 
@@ -9,21 +9,21 @@ To illustrate the utility of using a phase-modulated pump laser, we first presen
 	\begin{center}
 		\includegraphics{\FigPath/Figures/PMPumping/energylevelspm_v2.png}
 	\end{center}
-	\caption[Energy-level diagram with a phase-modulated pump laser]{\textbf{Energy-level diagram with a phase-modulated pump laser.} An energy-level diagram with a phase-modulated pump laser (blue levels), overlaid on top of the diagram for a CW laser from Fig. \ref{fig:MRenergylevels}. Phase modulation eliminates the degeneracy between the $N=1$ level and all other levels over a range of detunings near the minimum detuning for solitons, and also precludes the existence of stable multi-soliton ensembles over the entire range where solitons are supported. Although the interval over which $N$ is restricted to 1 is fairly narrow, we find that it is readily accessible in experiment. We also observe non-stationary solutions that are degenerate with the $N=2$ level for $\alpha\leq2.7$; this region is highlighted with the red shading. The level-diagram is created using an LLE simulation with $F^2=$, $\beta_2=-0.0187$, and $\delta_{PM}=\pi$.} 
+	\caption[Energy-level diagram with a phase-modulated pump laser]{\textbf{Energy-level diagram with a phase-modulated pump laser.} An energy-level diagram with a phase-modulated pump laser (blue levels), on top of the diagram for a CW laser from Fig. \ref{fig:MRenergylevels}. Phase modulation eliminates the degeneracy between the $N=1$ level and all other levels over a range of detunings near the minimum detuning for solitons, and also precludes the existence of stable multi-soliton ensembles over the majority of the range where solitons are supported. Although the interval over which $N$ is restricted to 1 is fairly narrow, we find that it is readily accessible in experiment. Simulations indicate that non-stationary solutions are degenerate with the $N=2$ level for $\alpha\leq2.7$; this region is highlighted with the red shading. The level-diagram is created using an LLE simulation with $F^2=4$, $\beta_2=-0.0187$, and $\delta_{PM}=\pi$.} 
 	\label{fig:PMenergylevels}
 \end{figure} 
 
-To theoretically explore the physics of soliton generation with PM pumping\footnote{I gratefully acknowledge the contributions of Miro Erkintalo to this section, who originated the approximation of the derivatives of $\phi$ as zero and suggested the mechanism of locally-vanishing bistability for soliton generation.}, we use the LLE with a modified driving term that incorporates the effect of phase modulation \cite{Taheri2015}:
+To theoretically explore the physics of soliton generation with PM pumping\footnote{I gratefully acknowledge the contributions of Miro Erkintalo, who originated the approximation of the derivatives of $\phi$ as zero and suggested the mechanism of locally-vanishing bistability for soliton generation.}, we use the LLE with a modified driving term that incorporates the effect of phase modulation \cite{Taheri2015}:
 \begin{equation}
 \frac{\partial \psi}{\partial \tau}=-(1+i \alpha) \psi + i|\psi|^2 \psi -i \frac{\beta}{2} \frac{\partial^2 \psi}{\partial \theta^2} +Fe^{i\delta_{PM}\cos{\theta}}. \label{eq:PMLLE}
 \end{equation}
-Here $\delta_{PM}$ represents the phase-modulation index, where the resonator is driven by a field $E_{PM}=E_0 e^{i\delta_{PM}\cos(2\pi f_{PM}t)}$; $f_{PM}\sim f_{FSR}$ is the frequency of the applied phase modulation.
+Here $\delta_{PM}$ represents the phase-modulation index, which describes the phase-modulated input field according to $E_{PM}=E_0 e^{i\delta_{PM}\cos(2\pi f_{PM}t)}$; $f_{PM}\sim f_{FSR}$ is the frequency of the applied phase modulation.
 
 
 
-Simulations of Eq. \ref{eq:PMLLE} reveal that PM transforms the resonator excitation spectrum from a series of $N=0, 1, 2,...$ up to $N_{max}$ solitons to a single level $N=1$ near threshold, eliminating degeneracy between these states as shown in Fig. \ref{fig:PMenergylevels}. This occurs due spatial variations of effective loss and detuning parameters that result from the phase modulation. We can obtain an approximation for these parameters by inserting the ansatz $\psi(\theta,\tau)=\phi(\theta,\tau)e^{i\delta_{PM}\cos(\theta)}$ into the stationary ($\partial \psi/\partial \tau=0$) version of Eq. \ref{eq:PMLLE} \cite{Jang2015a}.  By expanding the second-derivative term and setting derivatives of $\phi$ to zero we arrive at an equation for the quasi-CW background in the PM-pumped resonator:
+Simulations of Eq. \ref{eq:PMLLE} reveal that PM transforms the resonator excitation spectrum from a series of $N=0, 1, 2,...$ up to $N_{max}$ solitons to a single level $N=1$ near threshold, eliminating degeneracy between these states as shown in Fig. \ref{fig:PMenergylevels}. This occurs due to spatial variations of effective loss and detuning parameters that result from the phase modulation. We can obtain an approximation for these parameters by inserting the ansatz $\psi(\theta,\tau)=\phi(\theta,\tau)e^{i\delta_{PM}\cos(\theta)}$ into the stationary ($\partial \psi/\partial \tau=0$) version of Eq. \ref{eq:PMLLE} \cite{Jang2015a}.  By expanding the second-derivative term and setting derivatives of $\phi$ to zero we arrive at an equation for the quasi-CW background in the PM-pumped resonator:
 \begin{equation}
-F=\left(\gamma(\theta)-i\eta(\theta)\right)\phi+i|\phi|^2\phi, \label{eq:PMLLEstat}
+F=\left(\gamma(\theta)+i\eta(\theta)\right)\phi-i|\phi|^2\phi, \label{eq:PMLLEstat}
 \end{equation}
 where effective local loss and detuning terms have been defined as:
 \begin{align}
@@ -32,7 +32,7 @@ where effective local loss and detuning terms have been defined as:
 \end{align}
 This equation immediately yields an approximation for the stationary solution $\psi_s$:
 \begin{equation}
-\psi_s=\frac{Fe^{i\delta_{PM}\cos{\theta}}}{\gamma(\theta)+i\left(\eta(\theta)-\rho(\theta)\right)},\label{eq:PMLLEstatpsi}
+\psi_s(\theta)=\frac{Fe^{i\delta_{PM}\cos{\theta}}}{\gamma(\theta)+i\left(\eta(\theta)-\rho(\theta)\right)},\label{eq:PMLLEstatpsi}
 \end{equation}
 where $\rho(\theta)=|\phi(\theta)|^2$ is the (smallest real) solution to the cubic polynomial that results from taking the modulus-square of Eq. \ref{eq:PMLLEstat}:
 \begin{equation}
@@ -48,17 +48,17 @@ In neglecting spatial derivatives of $\phi$ but retaining the derivatives of the
 	\label{fig:PMbackground}
 \end{figure} 
 
-Fig. \ref{fig:PMbackground} shows the predictions of simulations of Eq. \ref{eq:PMLLE} (color) and the analytical model Eq. \ref{eq:PMLLEstat2} (black). The two agree quantitatively for weak modulation ($\delta_{PM}=\pi/2$, blue) and qualitatively with larger depth ($\delta_{PM}=4\pi$, green); both indicate that the field $\psi$ exhibits amplitude variations due to spatially-varying effective loss and detuning. These spatially-varying parameters suggest an explanation for the spontaneous formation of a single soliton as the detuning is decreased in terms of the local disappearance of the Kerr bistability.
+Fig. \ref{fig:PMbackground} shows the predictions of simulations of Eq. \ref{eq:PMLLE} (color) and the analytical model Eq. \ref{eq:PMLLEstat2} (black). The two agree quantitatively for weak modulation ($\delta_{PM}=\pi/2$, blue) and qualitatively with larger depth ($\delta_{PM}=4\pi$, green); both indicate that the field $\psi$ exhibits amplitude variations due to spatially-varying effective loss and detuning. These spatially-varying parameters suggest an explanation for the spontaneous formation of a single soliton as the detuning $\alpha$ is decreased in terms of the local disappearance of the Kerr bistability.
 
-As discussed in Sec. \ref{sec:MRanalyticalcurves}, for the LLE with a CW pump the background field $\psi_s$ can take one of two stable values over a range of the parameters $\alpha$ and $F^2$. This leads to the emergence of the `Kerr-tilted' resonance shown in Fig. \ref{fig:PMalphacrit}a, with an effectively red-detuned branch lying at higher values of $\alpha$, an effectively blue-detuned branch lying at lower values of $\alpha$, and an interval in $\alpha$ over which they both exist and the system is bistable. With spatially-varying effective loss and detuning terms, the field $\psi_s(\theta)$ described by Eq. \ref{eq:PMLLEstatpsi} now takes a value at each point in the cavity that is determined by the local parameters $\gamma(\theta)$ and $\eta(\theta)$, and it can be independently determined for each point in the cavity whether $\rho(\theta)$ exhibits bistability. Applying the analysis presented in Sec. \ref{sec:MRanalyticalcurves} to Eq. \ref{eq:PMLLEstat}, we identify the value of $\rho$ associated with the disappearance of the bistability as the smaller value $\rho_-$ at which $\partial F^2/\partial\rho=0$:
+As discussed in Sec. \ref{sec:MRanalyticalcurves}, for the LLE with a CW pump the background field $\psi_s$ can take one of two stable values over a range of the parameters $\alpha$ and $F^2$. This leads to the emergence of the `Kerr-tilted' resonance like the one shown in Fig. \ref{fig:PMalphacrit}a, with an effectively red-detuned branch lying at higher values of $\alpha$, an effectively blue-detuned branch lying at lower values of $\alpha$, and an interval in $\alpha$ over which they both exist and the system is bistable (recall that the middle branch is unstable). With spatially-varying effective loss and detuning terms, the field $\psi_s(\theta)$ described by Eq. \ref{eq:PMLLEstatpsi} now takes a value at each point in the cavity that is determined by the local parameters $\gamma(\theta)$ and $\eta(\theta)$, and it can be independently determined for each point in the cavity whether $\psi_s(\theta)$ exhibits bistability. Applying the analysis presented in Sec. \ref{sec:MRanalyticalcurves} to Eq. \ref{eq:PMLLEstat2}, we identify the value of $\rho$ associated with the disappearance of the bistability in a decreasing-$\alpha$ scan as the smaller value $\rho_-$ at which $\partial F^2/\partial\rho=0$:
 \begin{equation}
 \rho_-=\left(2\eta-\sqrt{\eta^2-3\gamma^2}\right)/3,
 \end{equation}
 For fixed $F^2$ the function $\alpha_{crit}(\theta)$ describing the spatially-dependent disappearance of the bistability is obtained by inserting $\rho_-$ into Eq. \ref{eq:PMLLEstat}:
 \begin{equation}
-F^2=\left[\gamma^2(\theta)+\left(\eta(\theta)-\rho_-(\theta)\right)^2\right]\rho_-(\theta).
+F^2=\left[\gamma^2(\theta)+\left(\eta(\theta)-\rho_-(\theta)\right)^2\right]\rho_-(\theta),
 \end{equation}
-Fig. \ref{fig:PMalphacrit}b shows a calculation of $\alpha_{crit}(\theta)$ for $F^2=$ and $\beta=-0.0187$. This calculation predicts disappearance of the bistability at $\theta=0$, and subsequent soliton generation, at $\alpha=2.741$, which is a difference of 0.4 \% from the value observed in the simulation presented in Fig. \ref{fig:PMenergylevels} of $\alpha=2.729$. The same calculation predicts disappearance of the bistability at $\theta=\pi$ at $\alpha=2.705$, also in close agreement with the simulation.
+where $\alpha_{crit}(\theta)$ is implicitly included via $\eta(\theta)=\alpha_{crit}(\theta)-\frac{\beta_2}{2}\delta_{PM}^2\sin^2{\theta}$. Fig. \ref{fig:PMalphacrit}b shows a calculation of $\alpha_{crit}(\theta)$ for $F^2=4$ and $\beta=-0.0187$. For $\theta=0$ this calculation predicts disappearance of the bistability, and subsequent soliton generation, at $\alpha=2.741$, which is a difference of 0.4 \% from the value $\alpha=2.729$ observed in the simulation presented in Fig. \ref{fig:PMenergylevels} . The same calculation predicts disappearance of the bistability at $\theta=\pi$ at $\alpha=2.705$, also in close agreement with the simulation.
 
 
 
@@ -70,11 +70,19 @@ Fig. \ref{fig:PMalphacrit}b shows a calculation of $\alpha_{crit}(\theta)$ for $
 %	\label{fig:PMalphacrit}
 %\end{figure} 
 
+%\begin{figure}[htpb]
+%	\begin{center}
+%		\includegraphics{\FigPath/Figures/PMPumping/PMalphacritWres.png}
+%	\end{center}
+%	\caption[Mechanism for soliton generation with a PM pump]{\textbf{Mechanism for soliton generation with a PM pump.} (a) Plot of a Kerr-shifted resonance, here with $F^2$=12. The CW background field $\psi$ follows the black curve in an increasing-frequency scan of the pump laser. For the case of a phase-modulated pump, the field $\psi_s(\theta)$ lies at a point on a qualitatively similar resonance that is defined locally by $\gamma(\theta)$ and $\eta(\theta$) for each point $\theta$ in the co-moving frame. (b) A plot of the value $\alpha_{crit}(\theta)$ at which the Kerr bistability locally vanishes and the field $\psi_s(\theta)$ must jump to the effectively blue-detuned branch, associated with the vertical transition in (a). This plot is generated with $F^2=4$, $\beta=-0.0187$. The value $\alpha_{crit}(\theta=0)$ can be used to approximate the detuning at which a soliton is generated in an increasing-frequency scan of the pump laser.}
+%	\label{fig:PMalphacrit}
+%\end{figure} 
+
 \begin{figure}[htpb]
 	\begin{center}
-		\includegraphics{\FigPath/Figures/PMPumping/PMalphacritWres.png}
+		\includegraphics{\FigPath/Figures/PMPumping/PMalphacritWresWmanifold.png}
 	\end{center}
-	\caption[Mechanism for soliton generation with a PM pump]{\textbf{Mechanism for soliton generation with a PM pump.} (a) Plot of a Kerr-shifted resonance, here with $F^2$=12. The CW background field $\psi$ follows the black curve in an increasing-frequency scan of the pump laser. For the case of a phase-modulated pump, the field $\psi_s(\theta)$ lies at a point on a resonance locally defined by $\gamma(\theta)$ and $\eta(\theta$) for each point $\theta$ in the co-moving frame. (b) A plot of the value $\alpha_{crit}(\theta)$ at which the Kerr bistability vanishes \textit{locally} and the field $\psi_s(\theta)$ must jump to the effectively blue-detuned branch, associated with the vertical transition in (a). This plot is generated with $F^2=4$, $\beta=-0.0187$. The value $\alpha_{crit}(\theta=0)$ can be used to approximate the detuning at which a soliton is generated in an increasing-frequency scan of the pump laser.}
+	\caption[Mechanism for soliton generation with a PM pump]{\textbf{Mechanism for soliton generation with a PM pump.} (a) Plot of a Kerr-shifted resonance, here with $F^2$=12. The CW background field $\psi$ follows the black curve in an increasing-frequency scan of the pump laser. (b) For the case of a phase-modulated pump, the field $\psi_s(\theta)$ lies at a point on a qualitatively similar resonance that is defined locally by $\gamma(\theta)$ and $\eta(\theta$) for each point $\theta$ in the co-moving frame. This plot depicts the resonance surface for $F^2=4$, $\beta=-0.0187$, and with $d_{PM}=4\pi$ chosen to accentuate the $\theta$-dependent variations in the resonance curve. The curve $\alpha_{crit}(\theta)$ is shown in black. (c) A plot of the value $\alpha_{crit}(\theta)$ at which the Kerr bistability locally vanishes and the field $\psi_s(\theta)$ must jump to the effectively blue-detuned branch, associated with the vertical transition in (a), for $F^2=4$, $\beta=-0.0187$, and $\delta_{PM}=\pi$. The value $\alpha_{crit}(\theta=0)$ can be used to approximate the detuning at which a soliton is generated in an increasing-frequency scan of the pump laser, and the parameters here match the level diagram in Fig. \ref{fig:PMenergylevels}.}
 	\label{fig:PMalphacrit}
 \end{figure} 
 
