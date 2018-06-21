@@ -3,7 +3,7 @@
 
 
 
-This appendix describes the algorithm used for numerical simulation of the generalized nonlinear Schrodinger equation (GNLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}. The RK4IP method is a particular algorithm in the broader class of split-step Fourier algorithms in which nonlinearity is implemented in the time domain and dispersion is implemented in the frequency domain. An illustrative example of the split-step Fourier approach is a far simpler algorithm carried out with a single line of Matlab code to simulate the LLE: \\
+This appendix describes the algorithm used for numerical simulation of the generalized nonlinear Schrodinger equation (GNLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}. The RK4IP method is a particular algorithm in the broader class of split-step Fourier algorithms, in which nonlinearity is implemented in the time domain and dispersion is implemented in the frequency domain. An illustrative example of this split-step Fourier approach is a far simpler algorithm carried out with a single line of Matlab code to simulate the LLE: \\
 {\fontfamily{pcr}\selectfont psi=ifft(exp(delta*L).*fft(exp(delta*(1i*abs(psi).\string^2+F./psi)).*psi));}\\
 where {\fontfamily{pcr}\selectfont delta} is the step size and  {\fontfamily{pcr}\selectfont L} is a linear frequency-domain dispersion operator ($\hat{L}$, see below) that has been defined in the preceding code. The RK4IP algorithm with adaptive step size is advantageous over this simple algorithm in calculation time and in the scaling of error with the step size.
 
@@ -115,7 +115,7 @@ The subscript $\mu$ indicates the pump-referenced mode number upon which the ope
 
 \subsection{Simulation of the GNLSE}
 
-The GNLSE used in the simulations conducted for Chapter \ref{chap:PulsePicking} contains nonlinear terms that describe the medium's Raman response and self-steepening. The equation employed can be written as \cite{Hult2007,Agrawal2007}:
+In addition to self-phase modulation, the GNLSE used in the simulations conducted for Chapter \ref{chap:PulsePicking} contains nonlinear terms that describe the medium's Raman response and self-steepening. The equation employed can be written as \cite{Hult2007,Agrawal2007}:
 \begin{align}
 \frac{\partial A}{\partial z}=-\left(\sum_n \beta_n \frac{i^{n-1}}{n!} \frac{\partial^n}{\partial T^n}\right)A&+i\gamma\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right) \nonumber \\
 &\times\left((1-f_R)A|A|^2+f_R A\int_0^\infty h_R(\tau)|A(z,T-\tau)|^2 d\tau\right).
