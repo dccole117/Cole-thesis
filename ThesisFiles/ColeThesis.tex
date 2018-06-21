@@ -202,21 +202,31 @@ M.S., University of Colorado, 2015}
 %\readerFive{David Jonas}
 
 \abstract{  \OnePageChapter	% because it is very short
-Optical frequency combs based on modelocked lasers have revolutionized precision metrology by enabling measurements of optical frequencies, with implications both for fundamental scientific questions and for applications such as fast, broadband spectroscopy. In this thesis, I describe advances in the generation of frequency combs without modelocking in platforms with smaller footprints and higher repetition rates, with the ultimate goal of bringing frequency combs to new applications in a chip-integrated package. I discuss two approaches for comb generation: parametric frequency conversion in Kerr microresonators and active electro-optic modulation of a continuous-wave laser. After introducing microresonator-based frequency combs (microcombs), I discuss two specific developments in microcomb technology: First, I describe a new, extremely reliable method for generation of soliton pulses through the use of a phase-modulated pump laser. This technique removes the dependence on initial conditions that was formerly a universal feature of these experiments, presenting a solution to a significant technical barrier to the practical application of microcombs. Second, I present observations of ‘soliton crystal’ states with highly structured ‘fingerprint’ optical spectra that correspond to ordered pulse trains exhibiting crystallographic defects. These pulse trains arise through interaction of solitons with avoided mode-crossings in the resonator spectrum. I also discuss generation of Kerr soliton combs in the Fabry-Perot (FP) geometry, with a focus on the differences between the FP geometry and the ring geometry that has been the choice of most experimenters to date. Next, I present results on combs based on electro-optic modulation. I discuss the operational principle, and then describe the first self-referencing of a frequency comb based on active modulation and a proof-of-principle metrology experiment.  Finally, I discuss a technique for reducing the repetition rate of a high-repetition-rate frequency comb, which will be a necessary post-processing step for some applications. I conclude with a discussion of avenues for future research.
+Optical frequency combs based on modelocked lasers have revolutionized precision metrology by enabling measurements of optical frequencies, with implications both for fundamental scientific questions and for applications such as fast, broadband spectroscopy. In this thesis, I describe advances in the generation of frequency combs without modelocking in platforms with smaller footprints and higher repetition rates, with the ultimate goal of bringing frequency combs to new applications in a chip-integrated package. I discuss two approaches for comb generation: parametric frequency conversion in Kerr microresonators and active electro-optic modulation of a continuous-wave laser. After introducing microresonator-based frequency combs (microcombs), I discuss two specific developments in microcomb technology: First, I describe a new, extremely reliable method for generation of soliton pulses through the use of a phase-modulated pump laser. This technique removes the dependence on initial conditions that was formerly a universal feature of these experiments, presenting a solution to a significant technical barrier to the practical application of microcombs. Second, I present observations of ‘soliton crystal’ states with highly structured ‘fingerprint’ optical spectra that correspond to ordered pulse trains exhibiting crystallographic defects. These pulse trains arise through interaction of solitons with avoided mode-crossings in the resonator spectrum. I also discuss generation of Kerr soliton combs in the Fabry-Perot (FP) geometry, with a focus on the differences between the FP geometry and the ring geometry that has been the choice of most experimenters to date. Next, I present results on combs based on electro-optic modulation. I discuss the operational principle, and then describe the first self-referencing of a frequency comb of this kind and a proof-of-principle metrology experiment.  Finally, I discuss a technique for reducing the repetition rate of a high-repetition-rate frequency comb, which will be a necessary post-processing step for some applications. I conclude with a discussion of avenues for future research.
 	}
 
 %including the chip-integration of Fabry-Perot Kerr resonators and the use of band-engineered photonic crystal cavities to further simplify soliton generation.
 
 
-%\dedication[Dedication]{.......}
+\dedication[Dedication]{This thesis is dedicated to my parents, who fostered my drive for learning, and my siblings, who were right there with me.\todo{revise}}
 
 
 \acknowledgements{ %\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
-The work in this thesis would not have been possible... 
+There are many people who have contributed to the success of the research described herein:
 \begin{itemize}[leftmargin=*]
-\item Acknowledgement line 1
+\item First, I owe a debt of gratitude to my research advisors Scott Diddams and Scott Papp. They are both fervent advocates for their students, and have consistently gone above and beyond in providing resources and encouraging me to pursue opportunities. Moreover, they have been very capable mentors---I feel that for me they struck the right balance between granting autonomy and giving direction. Most importantly, without their scientific guidance, the work described in this thesis would simply not be half the quality it is.
 
-\item Acknowledgement line 2
+\item My undergraduate research advisors at Washington University in St. Louis, Professors Zohar Nussinov and Li Yang, helped me begin to learn about scientific research, and along with my academic advisor Dr. Jason Woods encouraged me to pursue a PhD in physics.
+
+\item I have worked with a great number of talented scientists at NIST, some of whom have been excellent research partners, and some of whom have been more like mentors. A necessarily incomplete list of the people I've collaborated with and learned from includes, in no particular order, Katja Beha, Pascal Del'Haye, Aurelien Coillet, William Loh, Erin Lamb, Jordan Stone, Travis Briles, David Carlson, Wei Zhang, Liron Stern, and Dan Hickstein.
+
+\item Professor Luigi Lugiato of the University of Insubria had the patience to conduct an entire manuscript's worth of theoretical research with me over email, and I'm grateful for how much I learned through these discussions.
+
+\todo{complete}
+
+% made sure I was aware of opportunities to learn, present my research, and pursue outside funding awards.
+
+
 
 
 \end{itemize}
@@ -241,22 +251,22 @@ The work in this thesis would not have been possible...
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % New Commands
 %shortcut for non-italic units in math with a space in front:
-\newcommand{\units}[1]{\ \mathrm{{#1}}} 
+%\newcommand{\units}[1]{\ \mathrm{{#1}}} 
 
-\newcommand{\wcmsq}{\units{W/cm^2}}     %shorcut for watts/cm^2
-\newcommand{\ish}[1]{$\mathtt{\sim} {#1}$} %tilde for approximate value
-\newcommand{\fixthis}{\marginpar{\textbf{\Large !!!}}}
+%\newcommand{\wcmsq}{\units{W/cm^2}}     %shorcut for watts/cm^2
+%\newcommand{\ish}[1]{$\mathtt{\sim} {#1}$} %tilde for approximate value
+%\newcommand{\fixthis}{\marginpar{\textbf{\Large !!!}}}
 
-%Shortcut for the copyright year for APS and ACS:
-\newcommand{\ACS}[1]{\copyright {#1} American Chemical Society}
-\newcommand{\APS}[1]{\copyright {#1} American Physical Society}
+%%Shortcut for the copyright year for APS and ACS:
+%\newcommand{\ACS}[1]{\copyright {#1} American Chemical Society}
+%\newcommand{\APS}[1]{\copyright {#1} American Physical Society}
 
-%Sometimes the parallel symbol looks weird, then use this one:
-\newcommand{\myparallel}{{\mkern1mu\vphantom{\perp}\vrule depth 0pt\mkern2mu\vrule depth 0pt\mkern3mu}}
+%%Sometimes the parallel symbol looks weird, then use this one:
+%\newcommand{\myparallel}{{\mkern1mu\vphantom{\perp}\vrule depth 0pt\mkern2mu\vrule depth 0pt\mkern3mu}}
 
-\newcommand{\micron}{$\mathrm{\mu m}$ }
-\newcommand{\tio}{$\mathrm{TiO_2}$ } % just a shortcut for TiO2
-\newcommand{\chem}[1]{$\mathrm{#1}$} % shortcut for chemical symbols
+%\newcommand{\micron}{$\mathrm{\mu m}$ }
+%\newcommand{\tio}{$\mathrm{TiO_2}$ } % just a shortcut for TiO2
+%\newcommand{\chem}[1]{$\mathrm{#1}$} % shortcut for chemical symbols
 \newcommand{\wpl}{\omega_{p}}
 
 
@@ -271,8 +281,8 @@ The work in this thesis would not have been possible...
 %\include{Abbreviations}
 %\include{Outline}
 \pagenumbering{arabic}
-%\include{Introduction} 
-\include{Microresonators}
+\include{Introduction} 
+%\include{Microresonators}
 %\include{PMPumping}
 %\include{SolitonCrystals}
 %\include{FPLLE}
@@ -281,7 +291,7 @@ The work in this thesis would not have been possible...
 %\include{Conclusion} 
 
 \appendix
-%\include{NumericalSims}
+\include{NumericalSims}
 %\end{spacing}
 
 %\begin{spacing}{1.3}
