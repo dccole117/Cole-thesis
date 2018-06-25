@@ -21,7 +21,7 @@ An optical microring resonator guides light for many round trips around a closed
 \end{figure} 
 
 
-A microring resonator supports propagating guided modes of electromagnetic radiation with (vacuum) wavelengths that evenly divide the optical round-trip path length: $\lambda_m=n_{eff}(\lambda_m)L/m$, with associated resonance frequencies $\nu_m=c/\lambda_m=mc/n_{eff}(\nu_m)L$. This leads to constructive interference from round trip to round trip. Here $m$ is the azimuthal mode number and the quantity $Ln_{eff}(\lambda_m)$ is the optical round-trip path length of the mode, where $n_{eff}(\lambda_m)$ defines an effective index of refraction related to the mode's propagation constant $\beta_{prop}(\omega)$ via $\beta_{prop}(\omega)=n_{eff}(\omega)\omega/c$ (see e.g. Refs. \cite{Agrawal2007,Calvo2007}; we use the subscript $prop$ to remove ambiguities arising from the standard use of the symbol $\beta$ for multiple quantities). The free-spectral range $f_{FSR}$ of a resonator is the \textit{local} frequency spacing between modes, calculated via:
+A microring resonator supports propagating guided modes of electromagnetic radiation with (vacuum) wavelengths that evenly divide the optical round-trip path length: $\lambda_m=n_{eff}(\lambda_m)L/m$, with associated resonance frequencies $\nu_m=c/\lambda_m=mc/n_{eff}(\nu_m)L$. This leads to constructive interference from round trip to round trip. Here $m$ is the azimuthal mode number and the quantity $Ln_{eff}(\lambda_m)$ is the optical round-trip path length of the mode, where $n_{eff}(\lambda_m)$ defines an effective index of refraction related to the mode's propagation constant $k(\omega)$ via $k(\omega)=n_{eff}(\omega)\omega/c$ (see e.g. Refs. \cite{Agrawal2007,Calvo2007}; we use the symbol $k$ here and reserve the standard symbol $\beta$ for another quantity). The free-spectral range $f_{FSR}$ of a resonator is the \textit{local} frequency spacing between modes, calculated via:
 \begin{align}
 	f_{FSR}&\approx \frac{\nu_{m+1}-\nu_{m-1}}{2}\\
 	&=\frac{\partial\nu_m}{\partial m}\\
@@ -57,68 +57,15 @@ The coupling strength $\kappa$ into the waveguide and the out-coupling rate $1/\
 %   \end{equation}
 %   By comparing the relationships between $S_{out}$ and $N$ for the forward-evolving system and $S$ and $N$ for the backward-evolving system, we arrive at the relationship $|\kappa|^2=1/\tau_{ext}$. We can return to the case including dissipation and insert this expression for $\kappa$ into Eq. \ref{eq:coupledsoln}, which can then be squared to obtain:
    \begin{equation}
-   N=\frac{\Delta\omega_{ext}S}{\Delta\omega_{tot}^2/4+(\wpl-\omega_0)^2}, \label{eq:resenhancement}
+   N=\frac{\Delta\omega_{ext}S}{\Delta\omega^2/4+(\wpl-\omega_0)^2}, \label{eq:resenhancement}
    \end{equation}
-   where we have defined the rates $\Delta\omega_{ext}=1/\tau_{ext}$, $\Delta\omega_{int}=1/\tau_{int}$, and $\Delta\omega_{tot}=\Delta\omega_{ext}+\Delta\omega_{int}$. Two important observations can be drawn from Eq. \ref{eq:resenhancement}: First, the cavity response is Lorentzian with a full-width at half-maximum (FWHM) linewidth that is related to the photon lifetime via $\tau_{ph}=1/\Delta\omega_{tot}$, and second, on resonance the number of circulating photons is related to the input rate by the factor $\Delta\omega_{ext}/\Delta\omega_{tot}^2\ll1$. This factor is not yet the resonant enhancement, which we now calculate by considering the circulating power $P=N\hbar\omega_p/T_{RT}$ on resonance (when $\omega_p=\omega_0$):
+   where we have defined the rates $\Delta\omega_{ext}=1/\tau_{ext}$, $\Delta\omega_{int}=1/\tau_{int}$, and $\Delta\omega=\Delta\omega_{ext}+\Delta\omega_{int}$. Two important observations can be drawn from Eq. \ref{eq:resenhancement}: First, the cavity response is Lorentzian with a full-width at half-maximum (FWHM) linewidth that is related to the photon lifetime via $\tau_{ph}=1/\Delta\omega$, and second, on resonance the number of circulating photons is related to the input rate by the factor $\Delta\omega_{ext}/\Delta\omega^2\ll1$. This factor is not yet the resonant enhancement, which we now calculate by considering the circulating power $P=N\hbar\omega_p/T_{RT}$ on resonance (when $\omega_p=\omega_0$):
    \begin{align}
-   P=&\frac{4\Delta\omega_{ext}P_{in}/T_{RT}}{\Delta\omega_{tot}^2}\\
+   P=&\frac{4\Delta\omega_{ext}P_{in}/T_{RT}}{\Delta\omega^2}\\
    =&\frac{2 }{\pi}P_{in}\eta\mathcal{F},
    \end{align}
-   where $\mathcal{F}=2\pi\tau_{ph}/T_{RT}=f_{FSR}/\Delta\nu$ is the resonator finesse, $\eta=\Delta\omega_{ext}/\Delta\omega_{tot}$ is the coupling ratio, typically of order $\sim\frac{1}{2}$, and $P_{in}=\hbar\omega_p S$ is the power in the waveguide. Thus, the circulating power is approximately a factor $\mathcal{F}$ greater than the input power. The combination of this resonant enhancement and a small cavity mode volume enables very large circulating optical intensities in high finesse resonators, which is important for the application of microresonators in nonlinear optics. 
-   
-%   
-%   
-%   Two commonly used practical quantities are linked to the photon lifetime: the resonator finesse $\mathcal{F}=2\pi\tau_{ph}/T_{RT}$, which for a ring resonator can be interpreted literally as the azimuthal resonator angle traced out by a typical photon over its lifetime; and the resonator quality factor $Q=\omega_c \tau_{ph}$, the phase over which the optical field evolves during the photon lifetime. Using the relationship $\tau_{ph}=1/\Delta\omega_{tot}$, the finesse and quality factor can be rewritten as simple ratios of the relevant frequencies: $\mathcal{F}=f_{FSR}/\Delta\nu$; $Q=\nu_c/\Delta\nu$, where $\Delta\nu=\Delta\omega_{tot}/2\pi$.
-   
-   
-  
- 
- 
-% 
-% 
-% Energy conservation ensures that the rate at which photons propagate away from the resonator in the coupling waveguide is $|s|^2=S=-dN/d t=\frac{N_0}{\tau_{ext}}\exp(-t/\tau_{ext})$. We can consider the time-reversed system in which the input increases in magnitude as $S=\frac{N_0}{\tau_{ext}}\exp(t/\tau_{ext})$ and is resonant with the cavity mode. In this case, the frequency of the drive $s$ is $\omega_s=\omega_0-i/2\tau_{ext}$. Inserting this frequency into Eq. \ref{eq:coupledsoln} for the case of $\Delta\omega_{int}=0$ yields:
-% However, for the system without time reversal we have $N=N_0\exp(-t/\tau_{ext})$, $S=\frac{N_0}{\tau_{ext}}\exp(-t/\tau_{ext})$, so that $N=\tau_{ext} S$. By inserting this into the previous equation, we obtain . 
-% This is quantified by the basic relation for the number of circulating photons $N(t)=N_oe^{-t/\tau_{ph}}$ in the presence of solely linear loss, which defines the photon lifetime $\tau_{ph}$. 
-%
-%\begin{equation}
-%\mathcal{F}\{E\}(\omega)\propto\int_0^\infty dt\, e^{-\left(\frac{1}{2\tau_{ph}}+i(\omega_c-\omega)\right)t},
-%\end{equation}
-%which immediately yields the Lorentzian lineshape
-%\begin{equation}
-%|\mathcal{F}\{E\}|^2\propto\frac{1}{(\omega-\omega_c)^2+\frac{1}{4\tau_{ph}^2}}, \label{eq:lorentzian}
-%\end{equation}
-%with FWHM linewidth $\Delta\omega=1/\tau_{ph}$. With this relationship, 
-%
-%The utility of a resonator with long photon lifetime is illustrated by calculating the steady-state number of circulating photons $N$ in a system including a driving term $S$ denoting the rate at which photons are added\cite{Haus1984}. Working in the field quantities $a$ ($|a|^2=N$) and $s$ ($|s|^2=S$), the equation of motion for such a system is: 
-%
-%The terms in this equation represent the rotation of the field at the mode's frequency $\omega_0$, the strength $\kappa$ of coupling from the input waveguide to the resonator, and the intrinsic and extrinsic (power) loss timescales $\tau_{int}=1/\Delta\omega_{int}$ and $\tau_{ext}=1/\Delta\omega_{ext}$ due to loss and outcoupling. If the drive has frequency $\omega_s$, 
-%
-%The rates $\Delta\omega_{ext}$ and $\kappa$ are not \textit{a priori} related, but we can derive the relationship between them by exploiting the time-reversal symmetry of systems without dissipation. For the case of no pumping ($s=0$) and no losses ($\Delta\omega_{int}=0$), we have 
-%\begin{align}
-%\frac{d a}{dt}&=i\omega_0 a-\frac{a}{2\tau_{ext}},\\
-%\Rightarrow &a=a_0\exp(i\omega_0 t-t/2\tau_{ext}), \\
-%&N=N_0\exp(-t/\tau_{ext}).
-%\end{align}
+   where $\mathcal{F}=2\pi\tau_{ph}/T_{RT}=f_{FSR}/\Delta\nu$ is the resonator finesse, $\eta=\Delta\omega_{ext}/\Delta\omega$ is the coupling ratio, typically of order $\sim\frac{1}{2}$, and $P_{in}=\hbar\omega_p S$ is the power in the waveguide. Thus, the circulating power is approximately a factor $\mathcal{F}$ greater than the input power. The combination of this resonant enhancement and a small cavity mode volume enables very large circulating optical intensities in high finesse resonators, which is important for the application of microresonators in nonlinear optics. 
 
-
-
-
-
-%For the case without dissipation, then, we know that $N=S\tau_ext$, which is the solution of the rate equation
-%\begin{equation}
-%\frac{dN}{dt}=-N
-%\end{equation}
-%
-%We can now derive a rate equation describing $N(t)$ from Eq. \ref{eq:coupledmotion}:
-%\begin{align}
-%\frac{dN}{dt}=\frac{d|a|^2}{dt}=a^*\frac{da}{dt}+a\frac{da^*}{dt}
-%\end{align}
-
-
-
-
-
-%Thus the steady-state number of circulating photons and therefore the intensity is larger than the input rate by a factor of the photon lifetime. Of course a more complete calculation including effects such as outcoupling at the coupler (with a rate related to the driving term $A$) could be performed, but this simple calculation captures the essence of the importance of photon lifetime $\tau_{ph}$. \todo{I am not sure whether this captures the scaling that I want to indicate}
 
 \subsection{Thermal effects in microresonators} \label{sec:thermaleffects}
 
@@ -194,26 +141,26 @@ where $n_2=\frac{3\chi^{(3)}}{4n_0^2\epsilon_0 c}$ is called the Kerr index \cit
 
 %Measurements indicated that the frequency spacing was uniform to a precision of $7.3 \times 10^{-18}$, thereby establishing that the output of the system was a frequency comb.
 
-In 2007, a remarkable result brought about a new era for frequency comb research. Del'Haye et al. reported \textit{cascaded four-wave mixing} (CFWM, shown in Fig. \ref{fig:MRfwm}c) in anomalously-dispersive ($\beta_{prop,2}=\frac{\partial^2\beta_{prop}(\omega)}{\partial\omega^2}<0$) toroidal silica microcavities on silicon chips, the result of which was a set of many co-circulating optical fields that were uniformly spaced by $f_{rep}$ ranging from 375 GHz to $\sim$750 GHz (depending on the platform) \cite{DelHaye2007}. This result built on previous demonstrations of few-mode parametric oscillation in microresonators \cite{Kippenberg2004, Savchenkov2004,Agha2007}, and showed that the non-uniform distribution of cavity resonance frequencies due to dispersion could be overcome to generate an output with equidistant frequency modes. A second important development occurred in 2012, when Herr et al. reported the generation of frequency combs corresponding in the time domain to single circulating optical `soliton' pulses \cite{Herr2012a,Herr2014}. This observation followed the observation of solitons in formally-equivalent passive fiber-ring resonators in 2010 \cite{Leo2010a}. Due to unique properties that make them particularly well-suited for applications, as discussed in Sec. \ref{sec:LLEsolitons}, the generation and manipulation of soliton combs has become a significant priority in microcomb research. 
+In 2007, a remarkable result brought about a new era for frequency comb research. Del'Haye et al. reported \textit{cascaded four-wave mixing} (CFWM, shown in Fig. \ref{fig:MRfwm}c) in anomalously-dispersive ($k''=\frac{\partial^2}{\partial\omega^2}\frac{n_{eff}(\omega)\omega}{c}<0$) toroidal silica microcavities on silicon chips, the result of which was a set of many co-circulating optical fields that were uniformly spaced by $f_{rep}$ ranging from 375 GHz to $\sim$750 GHz (depending on the platform) \cite{DelHaye2007}. This result built on previous demonstrations of few-mode parametric oscillation in microresonators \cite{Kippenberg2004, Savchenkov2004,Agha2007}, and showed that the non-uniform distribution of cavity resonance frequencies due to dispersion could be overcome to generate an output with equidistant frequency modes. A second important development occurred in 2012, when Herr et al. reported the generation of frequency combs corresponding in the time domain to single circulating optical `soliton' pulses \cite{Herr2012a,Herr2014}. This observation followed the observation of solitons in formally-equivalent passive fiber-ring resonators in 2010 \cite{Leo2010a}. Due to unique properties that make them particularly well-suited for applications, as discussed in Sec. \ref{sec:LLEsolitons}, the generation and manipulation of soliton combs has become a significant priority in microcomb research. 
 
-\subsection{A model for Kerr-comb nonlinear optics: The Lugiato-Lefever equation}
+\subsection{A model for Kerr-comb nonlinear optics: The Lugiato-Lefever equation}\label{sec:LLE}
 
-Kerr-comb generation can be motivated and partially understood through the CFWM picture \cite{Herr2012}, but the phase and amplitude degrees of freedom for each comb line mean that CFWM gives rise to a rich space of comb phenomena---it is now known that Kerr combs can exhibit several fundamentally distinct outputs.  A useful model for understanding this rich space is the Lugiato-Lefever equation (LLE), which was shown to describe microcomb dynamics by Chembo and Menyuk \cite{Chembo2013} through Fourier-transformation of a set of coupled-mode equations describing CFWM and by Coen, Randle, Sylvestre, and Erkintalo \cite{Coen2013a} through time-averaging of a more formally-accurate model for a low-loss resonator (as first performed by Haelterman, Trillo, and Wabnitz \cite{Haelterman1992a}).  The LLE is a nonlinear partial-differential equation that describes evolution of the normalized cavity field envelope $\psi$ over a slow time $\tau=t/2\tau_{ph}$ in a frame parametrized by the ring's azimuthal angle $\theta$ (running from $-\pi$ to $\pi$) co-moving at the group velocity.\footnote{The co-moving azimuthal angle $\theta$ is analogous to the `fast time' variable that appears in, for example, the nonlinear Schrodinger equation for fiber-optic pulse propagation \cite{Agrawal2007}, and it can be transformed explicitly to a fast time $t$ via $t=T_{RT}\times\frac{\theta}{2\pi}$.} The equation formulated by Chembo and Menyuk, as it will be used throughout this thesis, reads:
+Kerr-comb generation can be motivated and partially understood through the CFWM picture \cite{Herr2012}, but the phase and amplitude degrees of freedom for each comb line mean that CFWM gives rise to a rich space of comb phenomena---it is now known that Kerr combs can exhibit several fundamentally distinct outputs.  A useful model for understanding this rich space is the Lugiato-Lefever equation (LLE), which was shown to describe microcomb dynamics by Chembo and Menyuk \cite{Chembo2013} through Fourier-transformation of a set of coupled-mode equations describing CFWM and by Coen, Randle, Sylvestre, and Erkintalo \cite{Coen2013a} through time-averaging of a more formally-accurate model for a low-loss resonator (as first performed by Haelterman, Trillo, and Wabnitz \cite{Haelterman1992a}).  The LLE is a nonlinear partial-differential equation that describes evolution of the normalized cavity field envelope $\psi$ over a slow time $\tau=t/2\tau_{ph}$ in a frame parametrized by the ring's azimuthal angle $\theta$ (running from $-\pi$ to $\pi$) co-moving at the group velocity.\footnote{The co-moving azimuthal angle $\theta$ is analogous to the `fast time' variable that appears in, for example, the nonlinear Schrodinger equation for fiber-optic pulse propagation \cite{Agrawal2007}, and it can be transformed explicitly to a fast time $t$ via $t=T_{RT}\times\frac{\theta}{2\pi}$.} I provide a derivation of the LLE in Appendix \ref{app:LLEfromIkeda}. The equation in the notation of Chembo and Menyuk, as it will be used throughout this thesis, reads:
 \begin{equation}
 \frac{\partial \psi}{\partial \tau}=-(1+i \alpha) \psi + i|\psi|^2 \psi -i \frac{\beta_2}{2} \frac{\partial^2 \psi}{\partial \theta^2} +F. \label{eq:LLE}
 \end{equation}
 
-This equation describes $\psi$ over the domain $-\pi\leq\theta\leq+\pi$ with periodic boundary conditions $\psi(-\pi,\tau)=\psi(\pi,\tau)$. Here $F$ is the field strength of the pump laser, with $F$ and $\psi$ both normalized so that they  take the value 1 at the absolute threshold for parametric oscillation: $F=\sqrt{\frac{8 g_0\Delta\omega_{ext}}{\Delta\omega_{tot}^3}\frac{P_{in}}{\hbar \wpl}}$, $|\psi|^2=\frac{2g_0T_{RT}}{\hbar\wpl\Delta\omega_{tot}}P_{circ}(\theta,\tau)$, so that $|\psi(\theta,\tau)|^2$ is the instantaneous normalized power at the co-moving azimuthal angle $\theta$. Here $g_0=n_2 c \hbar \wpl^2/n_g^2 V_0$ is a parameter describing the four-wave mixing gain, $\Delta\omega_{ext}$ is the rate of coupling at the input/output port, $\Delta\omega_{tot}=1/\tau_{ph}$ is the FWHM resonance linewidth, $P_{in}$ is the pump-laser power, $P_{circ}(\theta,\tau)$ is the local circulating power in the cavity, $\hbar$ is Planck's constant, and $\wpl$ is the pump-laser frequency. The parameters $n_2$, $n_g$, and $V_0$ describe the nonlinear (Kerr) index (see Eqn. \ref{eq:KerrIndex}), the group index of the mode, and the effective nonlinear mode volume at the pump frequency; $L$ is the physical round-trip length of the ring cavity. 
+This equation describes $\psi$ over the domain $-\pi\leq\theta\leq+\pi$ with periodic boundary conditions $\psi(-\pi,\tau)=\psi(\pi,\tau)$. Here $F$ is the field strength of the pump laser, with $F$ and $\psi$ both normalized so that they  take the value 1 at the absolute threshold for parametric oscillation: $F=\sqrt{\frac{8 g_0\Delta\omega_{ext}}{\Delta\omega^3}\frac{P_{in}}{\hbar \wpl}}$, $|\psi|^2=\frac{2g_0T_{RT}}{\hbar\wpl\Delta\omega}P_{circ}(\theta,\tau)$, so that $|\psi(\theta,\tau)|^2$ is the instantaneous normalized power at the co-moving azimuthal angle $\theta$. Here $g_0=n_2 c \hbar \wpl^2/n_g^2 V_0$ is a parameter describing the four-wave mixing gain, $\Delta\omega_{ext}$ is the rate of coupling at the input/output port, $\Delta\omega=1/\tau_{ph}$ is the FWHM resonance linewidth, $P_{in}$ is the pump-laser power, $P_{circ}(\theta,\tau)$ is the local circulating power in the cavity, $\hbar$ is Planck's constant, and $\wpl$ is the pump-laser frequency. The parameters $n_2$, $n_g$, and $V_0$ describe the nonlinear (Kerr) index (see Eqn. \ref{eq:KerrIndex}), the group index of the mode, and the effective nonlinear mode volume at the pump frequency; $L$ is the physical round-trip length of the ring cavity. 
 
 The parameters $\alpha$ and $\beta_2$ describe the frequency detuning of the pump laser and second-order dispersion of the resonator mode family into which the pump laser is coupled, both normalized to half the cavity linewidth: 
 \begin{align}
-\alpha&=-\frac{2(\wpl-\omega_0)}{\Delta\omega_{tot}},\\
-\beta_2&=-\frac{2 D_2}{\Delta\omega_{tot}};
-\end{align} here $D_2=\left.\frac{\partial^2\omega_\mu}{\partial \mu^2}\right|_{\mu=0}$ is the second-order modal dispersion parameter, where $\mu$ is the pump-referenced mode number of Eq. \ref{eq:combfreqsnew}. The parameters $D_1=\left.\frac{\partial\omega_\mu}{\partial\mu}\right|_{\mu=0}=2\pi f_{FSR}$ and $D_2$ are related to the derivatives of the propagation constant $\beta_{prop}=n_{eff}(\omega)\omega/c$ via $D_1=2\pi/L\beta_1$ and $D_2=-D_1^2\frac{\beta_{prop,2}}{\beta_{prop,1}}$, where $\beta_{prop,n}=\partial^n\beta_{prop}/\partial\omega^n$. The subscript $prop$ is used here to distinguish the propagation constant from the LLE dispersion coefficients $\beta_n=-2D_n/\Delta\omega_{tot}$, as unfortunately the use of the symbol $\beta$ for both of these quantities is standard. Expressions for higher-order modal dispersion parameters $D_n$ in terms of the expansion of the propagation constant can be obtained by evaluating the equation $D_{n>1}=(D_1\frac{\partial}{\partial \omega})^{n-1} D_1$, and may be incorporated into the LLE up to desired order $N$ through the replacement:
+\alpha&=-\frac{2(\wpl-\omega_0)}{\Delta\omega},\\
+\beta_2&=-\frac{2 D_2}{\Delta\omega};
+\end{align} here $D_2=\left.\frac{\partial^2\omega_\mu}{\partial \mu^2}\right|_{\mu=0}$ is the second-order modal dispersion parameter, where $\mu$ is the pump-referenced mode number of Eq. \ref{eq:combfreqsnew}. The parameters $D_1=\left.\frac{\partial\omega_\mu}{\partial\mu}\right|_{\mu=0}=2\pi f_{FSR}$ and $D_2$ are related to the derivatives of the propagation constant $k(\omega)=\frac{n_{eff}(\omega)\omega}{c}$ via $D_1=2\pi/Lk'$ and $D_2=-D_1^2\frac{k''}{k'}$. It is useful to note that $k'=1/v_g$, where $v_g$ is the group velocity in the medium, and $k''$ is often referred to as the GVD parameter and denoted by $\beta_2$, which here is reserved for the dispersion parameter in the LLE. Expressions for higher-order modal dispersion parameters $D_n$ in terms of the expansion of the propagation constant can be obtained by evaluating the equation $D_{n>1}=(D_1\frac{\partial}{\partial \omega})^{n-1} D_1$, and may be incorporated into the LLE up to desired order $N$ through the replacement:
 \begin{equation}
--i\frac{\beta_2}{2}\frac{\partial^2\psi}{\partial\theta^2}\rightarrow +\sum_{n=1}^N i^{n+1} \frac{\beta_n}{n!}\frac{\partial^n\psi}{\partial\theta^n}.
+-i\frac{\beta_2}{2}\frac{\partial^2\psi}{\partial\theta^2}\rightarrow +\sum_{n=1}^N i^{n+1} \frac{\beta_n}{n!}\frac{\partial^n\psi}{\partial\theta^n},
 \end{equation}
-This thesis describes frequency-comb generation in anomalously-dispersive resonators, and so $\beta_2<0$ throughout.
+where $\beta_n=-2D_n/\Delta\omega$. This thesis describes frequency-comb generation in anomalously-dispersive resonators, and so $\beta_2<0$ throughout.
 
 The formulation of the LLE in terms of dimensionless normalized parameters helps to elucidate the fundamental properties of the system and facilitates comparison of results obtained in platforms with widely different experimental conditions. The LLE relates the time-evolution of the intracavity field (normalized to its threshold value for cascaded four-wave mixing) to the power of the pump laser (normalized to its value at the threshold for cascaded four-wave mixing), the pump-laser detuning (normalized to half the cavity linewidth), and the cavity second-order disperison quantified by the change in the FSR per mode (normalized to half the cavity linewidth). One example of the utility of this formulation is that it makes apparent the significance of the cavity linewidth in determining the output comb, and underscores the fact that optimization of the dispersion, for example, without paying heed to the effect of this optimization on the cavity linewidth, may not yield the desired results. This adds an additional layer of complexity to dispersion engineering relative to straight waveguides.
 
@@ -339,6 +286,7 @@ An important property of these extended patterns is that they fill the resonator
 The term `soliton' generally refers to a localized excitation that can propagate without changing its shape due to a delicate balance between dispersion (or diffraction) and nonlinearity; sometimes known as `solitary waves,' solitons entered the scientific consciousness in the nineteenth century with their observation by John Scott Russell \cite{Russell1844}. They are fundamental solutions to nonlinear partial-differential equations that describe a host of physical phenomena, and are found in several contexts within the field of nonlinear optics: spatial\cite{Lugiato1987,Brambilla1997} and spatiotemporal solitons (light bullets) \cite{Minardi2010} have been studied, and soliton modelocking \cite{Kartner1996,Grelu2012} is an important method of femtosecond pulse generation. Temporal Kerr-soliton pulses in optical fibers are particularly well known \cite{Agrawal2007,Mollenauer2006}, and have been considered as a candidate for fiber-optic communications protocols \cite{Hasegawa1995,Haus1996}. Microresonators support so-called dissipative cavity solitons, which are localized pulses circulating the resonator that are out-coupled once per round trip. In the case of a single circulating soliton, this leads to a train of pulses propagating away from the resonator with repetition rate $1/T_{RT}$. Thus the mode spacing of the comb matches the FSR of the resonator, in contrast with widely-spaced primary comb spectra, and the soliton can, in principle, remain stable and propagate indefinitely as a stationary solution to the LLE. This makes Kerr combs based on solitons particularly attractive for applications.
 
 \subsubsection{Mathematical description of solitons}
+\label{sec:solitonmath}
 
 Solitons in optical fibers are solutions of the nonlinear Schrodinger equation (NLSE) that describes pulse-propagation in optical fiber \cite{Agrawal2007}:
 \begin{equation}
