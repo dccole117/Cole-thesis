@@ -2,24 +2,24 @@
  \label{app:LLEfromIkeda}
 
 
-Here we show how the Lugiato-Lefever equation can be obtained by modeling propagation in a high-finesse ring cavity with the nonlinear Schrodinger equation. To my knowledge, the derivation given here was first performed by Haelterman, Trillo, and Wabnitz \cite{Haelterman1992a}. Our starting point is the NLSE for a pulse of restricted bandwidth such that higher-order nonlinearities are unimportant:
+Here we show how the Lugiato-Lefever equation can be obtained by modeling propagation in a high-finesse ring cavity with the nonlinear Schrodinger equation and periodically applying an operator that implements in-coupling and out-coupling, including the effects of the round-trip phase shift associated with the detuning of the pump laser from a cavity mode. To my knowledge, the derivation given here was first performed by Haelterman, Trillo, and Wabnitz \cite{Haelterman1992a}. We use the NLSE for a pulse of restricted bandwidth such that higher-order nonlinearities are unimportant, but this derivation may also be carried out using a generalized nonlinear Schrodinger equation to include higher-order effects (e.g. Raman and self-steepening) in the LLE. Our equation is:
 
 
 \begin{equation}
 \frac{\partial A}{\partial z}= -\frac{\alpha_\ell}{2} A+i\gamma|A|^2 A -i \frac{k''}{2} \frac{\partial^2 A}{\partial T^2}. \label{eq:NLSEloss}
 \end{equation}
 
-This equation is ubiquitous in the study of pulse propagation in Kerr-nonlinear media, and a derivation of it is provided, for example, in Ref. \cite{Agrawal2007}. As discussed in Sec. \ref{sec:solitonmath}, it describes the evolution of a pulse envelope $A$ in a `fast-time' reference frame parametrized by $T$ as it propagates in a Kerr-nonlinear medium, where the propagation distance is parametrized by the variable $z$. Here $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ is the nonlinear coefficient of the medium, where $n_2$ is the Kerr index, $A_{eff}$ is the effective nonlinear mode area and $\lambda$ is the carrier wavelength, and $k''=\frac{\partial}{\partial\omega}\frac{n_{eff}(\omega)\omega}{c}$ is the GVD parameter. Propagation loss described by the coefficient $\alpha_\ell$ has been included in Eq. \ref{eq:NLSEloss}.
+This equation is ubiquitous in the study of pulse propagation in Kerr-nonlinear media, and a derivation of it is provided, for example, in Ref. \cite{Agrawal2007}. As discussed in Sec. \ref{sec:solitonmath}, it describes the evolution of a pulse envelope $A$ in a `fast-time' reference frame parametrized by $T$ as it propagates in a Kerr-nonlinear medium, where the propagation distance is parametrized by the variable $z$. ere $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ is the nonlinear coefficient of the medium, where $n_2$ is the Kerr index, $A_{eff}$ is the effective nonlinear mode area, $\lambda$ the wavelength of the carrier wave, and $k''=\frac{\partial^2}{\partial\omega^2}\frac{n_{eff}(\omega)\omega}{c}$ is the GVD parameter. Propagation loss described by the coefficient $\alpha_\ell$  has been included in Eq. \ref{eq:NLSEloss}, with $\alpha_\ell$ the loss coefficient in power (i.e. $\partial P/\partial z=-\alpha_\ell P$, where $P=|A|^2$).
 
-The dynamics in a ring resonator constructed of a Kerr medium can be described by evolving the field envelope $A$ over a round trip and then applying an operator that accounts for out-coupling of the circulating field $A$ and in-coupling of a pump field $A_{in}$, as well as a round-trip phase shift $\phi_{RT}$ associated with the detuning of the carrier frequency from a cavity mode. This allows us to advance the field at the end of the $n$\textsuperscript{th} round trip $A_n(L,T)$ to the field $A_{n+1}(0,T)$ at the beginning of the $n+1$\textsuperscript{th} as:
+The dynamics in a ring resonator constructed of a Kerr medium can be described by evolving the field envelope $A$ over a round trip of length $L$ and then applying an operator that accounts for out-coupling of the circulating field $A$ and in-coupling of a pump field $A_{in}$, as well as a round-trip phase shift $\phi_{RT}$ associated with the detuning of the carrier frequency from a cavity mode. This allows us to advance the field at the end of the $n$\textsuperscript{th} round trip $A_n(L,T)$ to the field $A_{n+1}(0,T)$ at the beginning of the $n+1$\textsuperscript{th} as:
 \begin{equation}
 A_{n+1}(0,T)=e^{i\phi_{RT}}\left(1-\frac{T_{RT}}{2\tau_{ext}}\right)A_n(L,T)+\sqrt{\frac{T_{RT}}{\tau_{ext}}}A_{in},
 \end{equation}
-where $\tau_{ext}$ describes in- and out-coupling as explained in Sec. \ref{sec:resenhancement} and $T_{RT}=L_{RT}/v_g$ is the round-trip time. If we define an operator $G_L(A)$ that advances the field over a distance $L$ according to Eq. \ref{eq:NLSEloss} as $A(z+L,T)=G_L(A)A(z,T)$, then we have:
+where $\tau_{ext}$ describes in- and out-coupling as explained in Sec. \ref{sec:resenhancement} and $T_{RT}=L/v_g$ is the round-trip time. If we define an operator $G_L(A)$ that advances the field over a distance $L$ according to Eq. \ref{eq:NLSEloss} as $A(z+L,T)=G_L(A)A(z,T)$, then we have:
 \begin{equation}
 A_{n+1}(0,T)=e^{i\phi_{RT}}\left(1-\frac{T_{RT}}{2\tau_{ext}}\right)G_L\left[A_n(0,T)\right]A_n(0,T)+\sqrt{\frac{T_{RT}}{\tau_{ext}}}A_{in}. \label{eq:ikeda}
 \end{equation}
-The description of the field envelope in a Kerr-nonlinear ring cavity according to Eq. \ref{eq:ikeda} through iterated evolution according to the NLSE and then application of the in- and out-coupling operator is referred to as an Ikeda map \cite{Ikeda1979}. We obtain the LLE by assuming that the operator $G_L(A)\approx1$, that is, that the field does not evolve much over the round-trip length. This is equivalent to the assumption that the cavity length $L_{RT}$ is much less than the loss, nonlinear, and dispersion length scales $L_\ell=1/\alpha_\ell$, $L_{NL}=1/\gamma P_0$, and $L_D=T_0^2/k''$ over which the terms on the right-hand side of Eq. \ref{eq:NLSEloss} lead to appreciable evolution of the pulse envelope. Here $P_0$ and $T_0$ are the pulse peak power and width, respectively \cite{Agrawal2007}.
+The description of the field envelope in a Kerr-nonlinear ring cavity according to Eq. \ref{eq:ikeda} through iterated evolution according to the NLSE and then application of the in- and out-coupling operator is referred to as an Ikeda map \cite{Ikeda1979}. We obtain the LLE by assuming that the operator $G_L(A)\approx1$, that is, that the field does not evolve much over the round-trip length. This is equivalent to the assumption that the cavity length $L$ is much less than the loss, nonlinear, and dispersion length scales $L_\ell=1/\alpha_\ell$, $L_{NL}=1/\gamma P_0$, and $L_D=T_0^2/|k''|$ over which the terms on the right-hand side of Eq. \ref{eq:NLSEloss} lead to appreciable evolution of the pulse envelope \cite{Agrawal2007}. Here $P_0$ and $T_0$ are the peak power and temporal width, respectively, of a localized excitation in the pulse envelope $A$.
 
 We can write the operator $G_L$ explicitly as:
 \begin{equation}
@@ -33,39 +33,39 @@ By replacing $n$ with the slow time $t=n T_{RT}$ and allowing $t$ to vary contin
 \begin{equation}
 T_{RT}\frac{\partial A}{\partial t}=\left(-T_{RT}/2\tau_{ext}+i\phi_{RT}-L\alpha_\ell/2+iL\gamma|A|^2-iL\frac{k''}{2} \frac{\partial^2 }{\partial T^2}\right)A+\sqrt{\frac{T_{RT}}{\tau_{ext}}}A_{in}.
 \end{equation}
-To recast this equation in the form used in the body of the thesis, we first pass to the normalized temporal and spatial variables $\tau$ and $\theta$ and the parameters $\alpha$ and $\beta_2$. We note that $L\alpha_\ell/2=T_{RT}/2\tau_{int}$ and define $\theta=2\pi T/T_{RT}$, so that $\frac{\partial^2}{\partial T^2}=\left(\frac{2\pi}{T_{RT}}\right)^2\frac{\partial^2}{\partial\theta^2}$, and after dividing by $T_{RT}$ we have:
+To recast this equation in the standard form used in the body of this thesis, we first pass to the normalized temporal and spatial variables $\tau$ and $\theta$ and the parameters $\alpha$ and $\beta_2$. We note that $L\alpha_\ell/2=T_{RT}/2\tau_{int}$ (as each describes the intrinsic loss over one round trip), and we define $\theta=2\pi T/T_{RT}$, so that $\frac{\partial^2}{\partial T^2}=\left(\frac{2\pi}{T_{RT}}\right)^2\frac{\partial^2}{\partial\theta^2}$. We divide by $T_{RT}$ and obtain:
 \begin{equation}
-\frac{\partial A}{\partial t}=-\frac{\Delta\omega}{2}A+\frac{1}{T_{RT}}\left(i\phi_{RT}+i\gamma|A|^2\right)A-i\frac{1}{T_{RT}}\left(\frac{2\pi}{T_{RT}}\right)^2\frac{k''}{2} \frac{\partial^2 A }{\partial \theta^2}+A_{in}/\sqrt{T_{RT}\tau_{ext}}
+\frac{\partial A}{\partial t}=-\frac{\Delta\omega}{2}A+\frac{1}{T_{RT}}\left(i\phi_{RT}+iL\gamma|A|^2\right)A-i\frac{L}{T_{RT}}\left(\frac{2\pi}{T_{RT}}\right)^2\frac{k''}{2} \frac{\partial^2 A }{\partial \theta^2}+A_{in}/\sqrt{T_{RT}\tau_{ext}}
 \end{equation}
-Dividing by $\Delta\omega/2$ brings us to the normalized temporal variable $\tau=t/2\tau_{ph}=\Delta\omega t/2$. The quantity $\phi_{RT}/T_{RT}$ is exactly the frequency detuning $\sigma=\omega_p-\omega_0$ between the pump laser and the cavity resonance frequency, so that the quantity $2\phi_{RT}/T_{RT}\Delta\omega$ that results from division by $\Delta\omega/2$ is simply equal the normalized detuning term $-\alpha=2\sigma/\Delta\omega$. Further, recalling from Sec. \ref{sec:LLE} that $D_1=2\pi/T_{RT}=2\pi v_g/L$ and $D_2=-D_1^2v_gk''$, we have:
+Dividing this by $\Delta\omega/2$ brings us to the normalized temporal variable $\tau=t/2\tau_{ph}=\Delta\omega t/2$. The quantity $\phi_{RT}/T_{RT}$ is exactly the frequency detuning $\sigma=\omega_p-\omega_0$ between the pump laser and the cavity resonance frequency, so that the quantity $2\phi_{RT}/T_{RT}\Delta\omega$ that results from division by $\Delta\omega/2$ is simply equal to the normalized detuning term $-\alpha=2\sigma/\Delta\omega$. Further, recalling from Sec. \ref{sec:LLE} that $D_1=2\pi/T_{RT}=2\pi v_g/L$ and $D_2=-D_1^2v_gk''$, we have:
 \begin{equation}
-\frac{1}{2}\left(\frac{2\pi}{T_{RT}}\right)^2\frac{k''}{T_{RT}}=-D_2/2.
+\frac{L}{T_{RT}}\left(\frac{2\pi}{T_{RT}}\right)^2\frac{k''}{2}=-D_2/2.
 \end{equation}
 Using the definition of the normalized dispersion for the LLE $\beta_2=-2D_2/\Delta\omega$ and combining these relations, we have:
 \begin{equation}
 \frac{\partial A}{\partial\tau}=-(1+i\alpha)A+i\frac{2L\gamma}{T_{RT}\Delta\omega}|A|^2A-i\frac{\beta_2}{2}\frac{\partial^2 A}{\partial\theta^2} +\sqrt{\frac{4\Delta\omega_{ext}}{T_{RT}\Delta\omega^2}}A_{in},
 \end{equation}
-where we recall the definition $\Delta\omega_{ext}=1/\tau_{ext}$. By defining $\psi=\sqrt{\frac{2L\gamma}{T_{RT}\Delta\omega}}A$, we can arrive at the LLE as presented in Eq. \ref{eq:LLE}:
+where we recall the definition $\Delta\omega_{ext}=1/\tau_{ext}$. By defining $\psi=\sqrt{\frac{2L\gamma}{T_{RT}\Delta\omega}}A$, we arrive at the LLE as presented in Eq. \ref{eq:LLE}:
 \begin{equation}
 \frac{\partial \psi}{\partial \tau}=-(1+i \alpha) \psi + i|\psi|^2 \psi -i \frac{\beta_2}{2} \frac{\partial^2 \psi}{\partial \theta^2} +F.
 \end{equation}
 Here the pump term has been normalized as:
 \begin{align}
-F=&A_{in}\sqrt{\frac{8 L \gamma \Delta\omega_{ext}}{T_{RT}^2\Delta\omega^3}}\\
+F&=A_{in}\sqrt{\frac{8 L \gamma \Delta\omega_{ext}}{T_{RT}^2\Delta\omega^3}}\\
 &=A_{in}\sqrt{\frac{8g_0\Delta\omega_{ext}}{\Delta\omega^3}\frac{1}{\hbar\omega_p}},
 \end{align}
 with
 \begin{equation}
-g_0=n_2 c \hbar \wpl^2/n_g^2 V_0,
+g_0=n_2 c \hbar \wpl^2/n_g^2 V_0
 \end{equation}
-as defined in Sec. \ref{sec:LLE}, where $V_0=L A_{eff}$. Assuming that $A_{in}$ is real simply fixes the phase of $\psi$, which is otherwise arbitrary. With this assumption we have $A_{in}=\sqrt{P_{in}}$, and we recover the relationship from Sec. \ref{sec:LLE}:
+as defined in Sec. \ref{sec:LLE}, where $V_0=L A_{eff}$. Assuming that $A_{in}$ is real simply fixes the phase of $\psi$, which is otherwise arbitrary. With this assumption we have $A_{in}=\sqrt{P_{in}}$, and we recover the normalization from Sec. \ref{sec:LLE}:
 \begin{equation}
 F=\sqrt{\frac{8 g_0\Delta\omega_{ext}}{\Delta\omega^3}\frac{P_{in}}{\hbar \wpl}}.
 \end{equation}
 
 \section{\textit{A posteriori} confirmation that $L_D\gg L$ and $L_{NL}\gg L$ for LLE solitons}
 
-The analytical approximation to the soliton solution of the LLE has $\theta$-width $\sqrt{\frac{-\beta}{2\alpha}}$ and approximate peak power $2\alpha$. Using the expressions presented above, one can calculate that for an LLE soliton the nonlinear length $L_{NL}$ and the dispersion length $L_L$ are the same, and depend on the detuning $\alpha$:
+The analytical approximation to the soliton solution of the LLE presented in Eq. \ref{eq:LLEsoliton} has $\theta$-width $\sqrt{\frac{-\beta}{2\alpha}}$, and therefore temporal width $T_0=\frac{T_{RT}}{2\pi} \sqrt{\frac{-\beta}{2\alpha}}$, and has approximate peak power $2\alpha$. Using the expressions presented above, one can calculate that for an LLE soliton the nonlinear length $L_{NL}=1/\gamma P_0$ and the dispersion length $L_D=T_0/|k''|$ are the same, and depend on the detuning $\alpha$:
 \begin{equation}
 L_{NL}=L_D=\frac{v_g\tau_{ph}}{\alpha}.
 \end{equation}
@@ -77,19 +77,19 @@ and therefore that the assumption $G_L\approx 1$ clearly holds for LLE solitons,
 
 \section{Normalization of the Ikeda map}
 
-For direct comparison of numerical results between the Ikeda map and the LLE, and also possibly for future work involving simulations of Kerr-combs outside of the high-finesse limit, it is useful to normalize the Ikeda map given in Eq. \ref{eq:ikeda} in the same way that the LLE is normalized. To conduct an Ikeda map calculation that corresponds to the LLE with parameters $\alpha$, $\beta_2$, and $F$, one must specify two additional parameters: the resonator finesse $\mathcal{F}$ and the coupling ratio $\eta=\Delta\omega_{ext}/\Delta\omega$. Then the following representations of the operators in Eq. \ref{eq:ikeda} can be used:
+For direct comparison of numerical results between the Ikeda map and the LLE, and also possibly for future work involving simulations of Kerr-combs outside of the high-finesse limit, it is useful to normalize the Ikeda map given in Eq. \ref{eq:ikeda} in the same way that the LLE is normalized. To conduct an Ikeda map calculation that corresponds to the LLE with parameters $\alpha$, $\beta_2$, and $F$, it is natural to describe the Ikeda-map system by specifying two additional parameters: the resonator finesse $\mathcal{F}$ and the coupling ratio $\eta=\Delta\omega_{ext}/\Delta\omega$. Then the following representations of the operators in Eq. \ref{eq:ikeda} can be used:
 \begin{align}
 1-\frac{T_{RT}}{2\tau_{ext}}&=1-\frac{\pi\eta}{\mathcal{F}},\\
 \sqrt{\frac{T_{RT}}{\tau_{ext}}}&=\sqrt{\frac{2\pi\eta}{\mathcal{F}}},\\
 e^{i\phi_{RT}}&=e^{-i\frac{\pi}{\mathcal{F}}\alpha},\\
-\frac{L\alpha_\ell}{2}=\frac{T_{RT}}{2\tau_{int}}&=\frac{\pi(\eta-1)}{\mathcal{F}}.
+\frac{L\alpha_\ell}{2}=\frac{T_{RT}}{2\tau_{int}}&=\frac{\pi(1-\eta)}{\mathcal{F}}.
 %T_{RT}\Delta\omega&=\frac{2\pi}{\mathcal{F}}.
 \end{align}
 Using a normalized distance $s=z/L$ we define the operator $G_1$ that advances the field $\psi(s,\theta)$ a distance $\Delta s=1$ according to a nonlinear Schrodinger equation of the form:
 \begin{equation}
-\frac{\partial \psi}{\partial s}= -\frac{\pi(\eta-1)}{\mathcal{F}} \psi+i\frac{\pi}{\mathcal{F}}|\psi|^2 \psi -i \frac{\pi}{\mathcal{F}} \frac{\beta_2}{2} \frac{\partial^2 \psi}{\partial \theta^2},
+\frac{\partial \psi}{\partial s}= -\frac{\pi(1-\eta)}{\mathcal{F}} \psi+i\frac{\pi}{\mathcal{F}}|\psi|^2 \psi -i \frac{\pi}{\mathcal{F}} \frac{\beta_2}{2} \frac{\partial^2 \psi}{\partial \theta^2},
 \end{equation}
-and then the Ikeda map that is equivalent to the LLE in the limit of high finesse is:
+where in general the operation is now performed continuously and not approximated as a single step as in the operator $G_L$ above. The Ikeda map that is equivalent to the LLE with parameters $\alpha$, $\beta_2$ and $F$ in the limit of high finesse is:
 \begin{equation}
 \psi_{n+1}(0,\theta)=e^{-i\frac{\pi}{\mathcal{F}}\alpha}\left(1-\frac{\pi\eta}{\mathcal{F}}\right)G_1\left[\psi_n(0,\theta)\right]\psi_n(0,\theta)+\sqrt{\frac{\pi}{2\mathcal{F}\eta}}F.
 \end{equation}
