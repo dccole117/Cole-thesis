@@ -290,15 +290,15 @@ The term `soliton' generally refers to a localized excitation that can propagate
 
 Solitons in optical fibers are solutions of the nonlinear Schrodinger equation (NLSE) that describes pulse-propagation in optical fiber \cite{Agrawal2007}:
 \begin{equation}
-\frac{\partial A}{\partial z}= i\gamma|A|^2 A -i \frac{\beta}{2} \frac{\partial^2 A}{\partial T^2}. \label{NLSE}
+\frac{\partial A}{\partial z}= i\gamma|A|^2 A -i \frac{k''}{2} \frac{\partial^2 A}{\partial T^2}. \label{NLSE}
 \end{equation}
-This equation describes the evolution of the pulse envelope $A$ in the `fast-time' reference frame parametrized by $T$ as it propagates down the length of the fiber, parametrized by the distance variable $z$. Here $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ is the nonlinear coefficient of the fiber, where $n_2$ is the Kerr index, $A_{eff}$ is the effective nonlinear mode area and $\lambda$ is the carrier wavelength, and $\beta\equiv\beta_{prop,2}$ is the GVD parameter. The LLE can be viewed as an NLSE with additional loss and detuning terms $-(1+i\alpha)\psi$ and a driving term $F$.
+This equation describes the evolution of the pulse envelope $A$ in the `fast-time' reference frame parametrized by $T$ as it propagates down the length of the fiber, parametrized by the distance variable $z$. Here $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ is the nonlinear coefficient of the fiber, where $n_2$ is the Kerr index, $A_{eff}$ is the effective nonlinear mode area and $\lambda$ is the carrier wavelength, and $k''<0$ is the GVD parameter. The LLE can be viewed as an NLSE with additional loss and detuning terms $-(1+i\alpha)\psi$ and a driving term $F$.
 
 The fundamental soliton solution to the NLSE is:
 \begin{equation}
 A_{sol}=\sqrt{P_0}\, \mathrm{sech}\left(T/\tau\right)\,e^{i\gamma P_0 z/2+i\phi_0},
 \end{equation}
-where $P_0$ is the peak power of the pulse and is related to the duration of the pulse $\tau$ via $\tau=\sqrt{-\beta/\gamma P_0}$, and $\phi_0$ is an arbitrary phase. Thus, this equation admits a \textit{continuum} of pulsed fundamental `soliton' solutions, with one existing for each value of the peak power. Each of these solutions propagates down the fiber without changing shape; only the phase evolves with distance as $\phi(z)=\gamma P_0 z/2+\phi_0$.
+where $P_0$ is the peak power of the pulse and is related to the duration of the pulse $\tau$ via $\tau=\sqrt{-l''/\gamma P_0}$, and $\phi_0$ is an arbitrary phase. Thus, this equation admits a \textit{continuum} of pulsed fundamental `soliton' solutions, with one existing for each value of the peak power. Each of these solutions propagates down the fiber without changing shape; only the phase evolves with distance as $\phi(z)=\gamma P_0 z/2+\phi_0$.
 
 
 The introduction of the loss, detuning, and driving terms into the NLSE to obtain the LLE has several important consequences for solitons. First, exact analytical expressions for the soliton solution to the LLE in terms of elementary functions are not known, in contrast with the situation for the NLSE. However, the soliton solutions to the LLE, Eq. \ref{eq:LLE}, can be approximated well as:
