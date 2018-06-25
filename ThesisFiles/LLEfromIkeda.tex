@@ -19,7 +19,7 @@ where $\tau_{ext}$ describes in- and out-coupling as explained in Sec. \ref{sec:
 \begin{equation}
 A_{n+1}(0,T)=e^{i\phi_{RT}}\left(1-\frac{T_{RT}}{2\tau_{ext}}\right)G_L\left[A_n(0,T)\right]A_n(0,T)+\sqrt{\frac{T_{RT}}{\tau_{ext}}}A_{in}. \label{eq:ikeda}
 \end{equation}
-The description of the field envelope in a Kerr-nonlinear ring cavity according to Eq. \ref{eq:ikeda} through iterated evolution according to the NLSE and then application of the in- and out-coupling operator is referred to as an Ikeda map \cite{Ikeda1979}. We obtain the LLE by assuming that the operator $G_L(A)\approx1$, that is, that the field does not evolve much over the round-trip length. This is equivalent to the assumption that the cavity length $L_{RT}$ is much less than the length scales $L_\ell=1/\alpha_\ell$, $L_{NL}=1/\gamma P_0$, and $L_D=T_0^2/k''$ over which the terms on the right-hand side of Eq. \ref{eq:NLSEloss} lead to appreciable evolution of the pulse envelope, where $P_0$ and $T_0$ are the pulse peak power and width, respectively.
+The description of the field envelope in a Kerr-nonlinear ring cavity according to Eq. \ref{eq:ikeda} through iterated evolution according to the NLSE and then application of the in- and out-coupling operator is referred to as an Ikeda map \cite{Ikeda1979}. We obtain the LLE by assuming that the operator $G_L(A)\approx1$, that is, that the field does not evolve much over the round-trip length. This is equivalent to the assumption that the cavity length $L_{RT}$ is much less than the loss, nonlinear, and dispersion length scales $L_\ell=1/\alpha_\ell$, $L_{NL}=1/\gamma P_0$, and $L_D=T_0^2/k''$ over which the terms on the right-hand side of Eq. \ref{eq:NLSEloss} lead to appreciable evolution of the pulse envelope. Here $P_0$ and $T_0$ are the pulse peak power and width, respectively \cite{Agrawal2007}.
 
 We can write the operator $G_L$ explicitly as:
 \begin{equation}
@@ -37,7 +37,7 @@ To recast this equation in the form used in the body of the thesis, we first pas
 \begin{equation}
 \frac{\partial A}{\partial t}=-\frac{\Delta\omega}{2}A+\frac{1}{T_{RT}}\left(i\phi_{RT}+i\gamma|A|^2\right)A-i\frac{1}{T_{RT}}\left(\frac{2\pi}{T_{RT}}\right)^2\frac{k''}{2} \frac{\partial^2 A }{\partial \theta^2}+A_{in}/\sqrt{T_{RT}\tau_{ext}}
 \end{equation}
-Dividing by $\Delta\omega/2$ brings us to the normalized temporal variable $\tau=t/2\tau_{ph}=\Delta\omega t/2$. The quantity $\phi_{RT}/T_{RT}$ is exactly the frequency detuning $\sigma=\omega_p-\omega_0$ between the pump laser and the cavity resonance frequency, so that the quantity $2\phi_{RT}/T_{RT}\Delta\omega$ that results from division by $\Delta\omega/2$ is simply equal to the normalized detuning $\alpha=-2\sigma/\Delta\omega$. Further, recalling from Sec. \ref{sec:LLE} that $D_1=2\pi/T_{RT}=2\pi v_g/L$ and $D_2=-D_1^2v_gk''$, we have:
+Dividing by $\Delta\omega/2$ brings us to the normalized temporal variable $\tau=t/2\tau_{ph}=\Delta\omega t/2$. The quantity $\phi_{RT}/T_{RT}$ is exactly the frequency detuning $\sigma=\omega_p-\omega_0$ between the pump laser and the cavity resonance frequency, so that the quantity $2\phi_{RT}/T_{RT}\Delta\omega$ that results from division by $\Delta\omega/2$ is simply equal the normalized detuning term $-\alpha=2\sigma/\Delta\omega$. Further, recalling from Sec. \ref{sec:LLE} that $D_1=2\pi/T_{RT}=2\pi v_g/L$ and $D_2=-D_1^2v_gk''$, we have:
 \begin{equation}
 \frac{1}{2}\left(\frac{2\pi}{T_{RT}}\right)^2\frac{k''}{T_{RT}}=-D_2/2.
 \end{equation}
@@ -63,7 +63,36 @@ as defined in Sec. \ref{sec:LLE}, where $V_0=L A_{eff}$. Assuming that $A_{in}$ 
 F=\sqrt{\frac{8 g_0\Delta\omega_{ext}}{\Delta\omega^3}\frac{P_{in}}{\hbar \wpl}}.
 \end{equation}
 
-\section{A posteriori confirmation of the assumptions used to derive the LLE}
+\section{\textit{A posteriori} confirmation that $L_D\gg L$ and $L_{NL}\gg L$ for LLE solitons}
+
+The analytical approximation to the soliton solution of the LLE has $\theta$-width $\sqrt{\frac{-\beta}{2\alpha}}$ and approximate peak power $2\alpha$. Using the expressions presented above, one can calculate that for an LLE soliton the nonlinear length $L_{NL}$ and the dispersion length $L_L$ are the same, and depend on the detuning $\alpha$:
+\begin{equation}
+L_{NL}=L_D=\frac{v_g\tau_{ph}}{\alpha}.
+\end{equation}
+Using the definition of the cavity finesse $\mathcal{F}=2\pi\tau_{ph}/T_{RT}$, we find that the ratio of these characteristic lengths to the cavity length is:
+\begin{equation}
+\frac{L_{NL}}{L}=\frac{L_D}{L}=\frac{\mathcal{F}}{2\pi\alpha},
+\end{equation}
+and therefore that the assumption $G_L\approx 1$ clearly holds for LLE solitons, since $\mathcal{F}\gg1$ for a high-finesse cavity and $\alpha$ is of order 1 or 10.
+
+\section{Normalization of the Ikeda map}
+
+For direct comparison of numerical results between the Ikeda map and the LLE, and also possibly for future work involving simulations of Kerr-combs outside of the high-finesse limit, it is useful to normalize the Ikeda map given in Eq. \ref{eq:ikeda} in the same way that the LLE is normalized. To conduct an Ikeda map calculation that corresponds to the LLE with parameters $\alpha$, $\beta_2$, and $F$, one must specify two additional parameters: the resonator finesse $\mathcal{F}$ and the coupling ratio $\eta=\Delta\omega_{ext}/\Delta\omega$. Then the following representations of the operators in Eq. \ref{eq:ikeda} can be used:
+\begin{align}
+1-\frac{T_{RT}}{2\tau_{ext}}&=1-\frac{\pi\eta}{\mathcal{F}},\\
+\sqrt{\frac{T_{RT}}{\tau_{ext}}}&=\sqrt{\frac{2\pi\eta}{\mathcal{F}}},\\
+e^{i\phi_{RT}}&=e^{-i\frac{\pi}{\mathcal{F}}\alpha},\\
+\frac{L\alpha_\ell}{2}=\frac{T_{RT}}{2\tau_{int}}&=\frac{\pi(\eta-1)}{\mathcal{F}}.
+%T_{RT}\Delta\omega&=\frac{2\pi}{\mathcal{F}}.
+\end{align}
+Using a normalized distance $s=z/L$ we define the operator $G_1$ that advances the field $\psi(s,\theta)$ a distance $\Delta s=1$ according to a nonlinear Schrodinger equation of the form:
+\begin{equation}
+\frac{\partial \psi}{\partial s}= -\frac{\pi(\eta-1)}{\mathcal{F}} \psi+i\frac{\pi}{\mathcal{F}}|\psi|^2 \psi -i \frac{\pi}{\mathcal{F}} \frac{\beta_2}{2} \frac{\partial^2 \psi}{\partial \theta^2},
+\end{equation}
+and then the Ikeda map that is equivalent to the LLE in the limit of high finesse is:
+\begin{equation}
+\psi_{n+1}(0,\theta)=e^{-i\frac{\pi}{\mathcal{F}}\alpha}\left(1-\frac{\pi\eta}{\mathcal{F}}\right)G_1\left[\psi_n(0,\theta)\right]\psi_n(0,\theta)+\sqrt{\frac{\pi}{2\mathcal{F}\eta}}F.
+\end{equation}
 
 
 %
