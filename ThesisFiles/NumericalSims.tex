@@ -117,10 +117,10 @@ The subscript $\mu$ indicates the pump-referenced mode number upon which the ope
 
 In addition to self-phase modulation, the GNLSE used in the simulations conducted for Chapter \ref{chap:PulsePicking} contains nonlinear terms that describe the medium's Raman response and self-steepening. The equation employed can be written as \cite{Hult2007,Agrawal2007}:
 \begin{align}
-\frac{\partial A}{\partial z}=-\left(\sum_n \beta_n \frac{i^{n-1}}{n!} \frac{\partial^n}{\partial T^n}\right)A&+i\gamma\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right) \nonumber \\
+\frac{\partial A}{\partial z}=-\left(\sum_n k^{(n)} \frac{i^{n-1}}{n!} \frac{\partial^n}{\partial T^n}\right)A&+i\gamma\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right) \nonumber \\
 &\times\left((1-f_R)A|A|^2+f_R A\int_0^\infty h_R(\tau)|A(z,T-\tau)|^2 d\tau\right).
 \end{align}
-For Chapter \ref{chap:PulsePicking}, second- and third-order dispersion is used with $\beta_2=$-7.7 ps\textsuperscript{2}/km and $\beta_3=$0.055 ps\textsuperscript{3}/km, where $\beta_n$ is the $n^{th}$ frequency-derivative of the propagation constant. The nonlinear coefficient $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ used is 11 W/km \cite{Hirano2009}, coming from an effective mode-field diameter of $\sim$3.5 $\mu$m for the HNLF used in the experiment and the nonlinear index $n_2=2.7\times10^{-16}$ cm\textsuperscript{2}/W of silica. The quantity $\omega_0=2\pi c/\lambda_0$ is the (angular) carrier frequency of the pulse, and the parameter $f_R=0.18$ and function
+For Chapter \ref{chap:PulsePicking}, second- and third-order dispersion is used with $k^{(2)}=$-7.7 ps\textsuperscript{2}/km and $k^{(3)}=$0.055 ps\textsuperscript{3}/km, where $k^{(n)}$ is the $n^{th}$ frequency-derivative of the propagation constant. The nonlinear coefficient $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ used is 11 W/km \cite{Hirano2009}, coming from an effective mode-field diameter of $\sim$3.5 $\mu$m for the HNLF used in the experiment and the nonlinear index $n_2=2.7\times10^{-16}$ cm\textsuperscript{2}/W of silica. The quantity $\omega_0=2\pi c/\lambda_0$ is the (angular) carrier frequency of the pulse, and the parameter $f_R=0.18$ and function
 \begin{equation}
 h_R(\tau>0)=(\tau_1^2+\tau_2^2)/(\tau_1 \tau_2^2)\times e^{-\tau/\tau_2}\sin{\tau/\tau_1}
 \end{equation} 
@@ -128,7 +128,7 @@ describe the medium's Raman response, with $\tau_1=12.2$ fs and $\tau_2=32$ fs u
 
 The linear frequency-domain operator applied in the RK4IP algorithm is
 \begin{equation}
-\hat{L}=i\frac{\beta_2}{2}(\omega_\mu-\omega_0)^2-\frac{\beta_3}{6}(\omega_\mu-\omega_0)^3
+\hat{L}=i\frac{k^{(2)}}{2}(\omega_\mu-\omega_0)^2-\frac{k^{(3)}}{6}(\omega_\mu-\omega_0)^3
 \end{equation}
 Here $\omega_\mu$ is defined by the discretization of the frequency domain due to Fourier-transformation of a finite temporal window of length $T_{comp}$ via $\omega_\mu=\omega_0+2\pi\mu/T_{comp}$; where $T_{comp}$ is the size of the domain for the fast time variable $T$.
 

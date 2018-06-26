@@ -58,21 +58,23 @@
 
 % % % % %For quotes at the start of chapters
 %see: http://tex.stackexchange.com/questions/13756/quote-environment-with-reference-at-the-end-right
-\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
-		\hbox{}\nobreak\hfil --#1%
-		\parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
-
-\newsavebox\mybox
-\newenvironment{aquote}[1]
-{\savebox\mybox{#1}\begin{quote}}
-	{\signed{\usebox\mybox}\end{quote}}
+%\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+%		\hbox{}\nobreak\hfil --#1%
+%		\parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+%
+%\newsavebox\mybox
+%\newenvironment{aquote}[1]
+%{\savebox\mybox{#1}\begin{quote}}
+%	{\signed{\usebox\mybox}\end{quote}}
 
 % % % % % % % % % % % % % % %
 
 % % % % % % % % % % % Now for some serious citation antics  
 %\usepackage[backend=bibtex,backref=true,natbib=false,style=numeric-comp,firstinits=true,url=false,doi=false,date=year,isbn=false,maxcitenames=20,maxbibnames=40,minbibnames=30,sorting=none]{biblatex}  this was dan H's original thing
 
-\usepackage[backend=bibtex,backref=true,natbib=false,style=numeric-comp,url=false,doi=false,date=year,isbn=false,maxcitenames=20,maxbibnames=40,minbibnames=30,sorting=none]{biblatex}  
+%\usepackage[backend=bibtex,backref=true,natbib=false,style=numeric-comp,url=false,doi=false,date=year,isbn=false,maxcitenames=20,maxbibnames=40,minbibnames=30,sorting=none]{biblatex}  
+
+\usepackage[backend=bibtex,backref=true,natbib=false,style=numeric-comp,eprint=false,url=false,doi=false,date=year,isbn=false,maxcitenames=20,maxbibnames=40,minbibnames=30,sorting=none]{biblatex}  
 
 \DefineBibliographyStrings{english}{%
 	backrefpage = {cited on page},
@@ -84,31 +86,33 @@
 %get rid of the "in"			
 \renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
 \DeclareFieldFormat[article]{pages}{#1}%Remove "pp." before pages
-\DeclareFieldFormat{journaltitle}{\textit{#1},} %italic journal
+\DeclareFieldFormat{journaltitle}{\textit{#1}} %italic journal
 \DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1} %remove quoted from title
-\DeclareFieldFormat[article]{date}{\textbf{#1}} %bold date
+%\DeclareFieldFormat[article]{date}{\textbf{#1}} %bold date
+\DeclareFieldFormat[article]{volume}{\textbf{#1}} %bold volume
+
 
 %Add parentheses to the issue number
 \renewbibmacro*{volume+number+eid}{%
 	\printfield{volume}%
 	%  \setunit*{\adddot}% DELETED
 	\setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
-	\printfield{number}%
+%	\printfield{number}%
 	\setunit{\addcomma\space}%
 	\printfield{eid}}
 \DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
 
-%remove parentheses from the date
-\renewbibmacro*{issue+date}{%
-	\setunit{\addcomma\space}% NEW
-	%  \printtext[parens]{% DELETED
-	\iffieldundef{issue}
-	{\usebibmacro{date}}
-	{\printfield{issue}%
-		\setunit*{\addspace}%
-		%       \usebibmacro{date}}}% DELETED
-		\usebibmacro{date}}% NEW
-	\newunit}
+%%remove parentheses from the date
+%\renewbibmacro*{issue+date}{%
+%	\setunit{\addcomma\space}% NEW
+%	%  \printtext[parens]{% DELETED
+%	\iffieldundef{issue}
+%	{\usebibmacro{date}}
+%	{\printfield{issue}%
+%		\setunit*{\addspace}%
+%		%       \usebibmacro{date}}}% DELETED
+%		\usebibmacro{date}}% NEW
+%	\newunit}
 
 %Make a command to cite with no square brackets:
 \DeclareCiteCommand{\citeNoBrackets}%[\mkbibbrackets]
@@ -149,13 +153,13 @@
 % % % % % % % % % % % % Okay, done with citations. Phew. That got crazy.
 
 %Add a way to put quotes at the start of chapters:
-\newenvironment{chapquote}[2][2em]
-{\setlength{\@tempdima}{#1}%
-	\def\chapquote@author{#2}%
-	\parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
-	\itshape}
-{\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
-\makeatother
+%\newenvironment{chapquote}[2][2em]
+%{\setlength{\@tempdima}{#1}%
+%	\def\chapquote@author{#2}%
+%	\parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
+%	\itshape}
+%{\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+%\makeatother
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %IMPORTANT: The Colorado thesis class file does not place figures (floats) well.
@@ -273,27 +277,25 @@ Optical frequency combs based on modelocked lasers have revolutionized precision
 % % % % % % % % % % % % % % % % % % % % % % % % %
 % this is the amateur bibliography. Use biblatex above
 %\bibliographystyle{amsplain}
-\begin{spacing}{1}
+%\begin{spacing}{1}
 \pagenumbering{roman}
-%\include{Abbreviations}
-%\include{Outline}
 \pagenumbering{arabic}
-%\include{Introduction} 
+\include{Introduction} 
 \include{Microresonators}
-%\include{PMPumping}
-%\include{SolitonCrystals}
+\include{PMPumping}
+\include{SolitonCrystals}
 \include{FPLLE}
 \include{Conclusion} 
 \include{EOMCombs}
-%\include{PulsePicking}
+\include{PulsePicking}
 
 
 \appendix
-%\include{LLEfromIkeda}
-%\include{NumericalSims}
+\include{LLEfromIkeda}
+\include{NumericalSims}
 %\end{spacing}
 
-%\begin{spacing}{1.3}
+\begin{spacing}{1.3}
 
 	\printbibliography[heading=bibintoc,title={References}]
 	
