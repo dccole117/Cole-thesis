@@ -90,6 +90,7 @@
 \DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1} %remove quoted from title
 %\DeclareFieldFormat[article]{date}{\textbf{#1}} %bold date
 \DeclareFieldFormat[article]{volume}{\textbf{#1}} %bold volume
+%\DeclareFieldFormat[article]{author}{#1,}
 
 
 %Add parentheses to the issue number
@@ -277,25 +278,25 @@ Optical frequency combs based on modelocked lasers have revolutionized precision
 % % % % % % % % % % % % % % % % % % % % % % % % %
 % this is the amateur bibliography. Use biblatex above
 %\bibliographystyle{amsplain}
-%\begin{spacing}{1}
+\begin{spacing}{1.3}
 \pagenumbering{roman}
 \pagenumbering{arabic}
 \include{Introduction} 
-\include{Microresonators}
-\include{PMPumping}
-\include{SolitonCrystals}
-\include{FPLLE}
-\include{Conclusion} 
-\include{EOMCombs}
-\include{PulsePicking}
+%\include{Microresonators}
+%\include{PMPumping}
+%\include{SolitonCrystals}
+%\include{FPLLE}
+%\include{Conclusion} 
+%\include{EOMCombs}
+%\include{PulsePicking}
 
 
 \appendix
-\include{LLEfromIkeda}
-\include{NumericalSims}
+%\include{LLEfromIkeda}
+%\include{NumericalSims}
 %\end{spacing}
 
-\begin{spacing}{1.3}
+%\begin{spacing}{1.3}
 
 	\printbibliography[heading=bibintoc,title={References}]
 	
