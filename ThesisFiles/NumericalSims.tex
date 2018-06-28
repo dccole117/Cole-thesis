@@ -5,7 +5,7 @@
 
 This appendix describes the algorithm used for numerical simulation of the generalized nonlinear Schrodinger equation (GNLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}. The RK4IP method is a particular algorithm in the broader class of split-step Fourier algorithms, in which nonlinearity is implemented in the time domain and dispersion is implemented in the frequency domain. An illustrative example of this split-step Fourier approach is a far simpler algorithm carried out with a single line of Matlab code to simulate the LLE: \\
 {\fontfamily{pcr}\selectfont psi=ifft(exp(delta*L).*fft(exp(delta*(1i*abs(psi).\string^2+F./psi)).*psi));}\\
-where {\fontfamily{pcr}\selectfont delta} is the step size and  {\fontfamily{pcr}\selectfont L} is a linear frequency-domain dispersion operator ($\hat{L}$, see below) that has been defined in the preceding code. The RK4IP algorithm with adaptive step size is advantageous over this simple algorithm in calculation time and in the scaling of error with the step size.
+where {\fontfamily{pcr}\selectfont delta} is the size of the time step and {\fontfamily{pcr}\selectfont L} is a linear frequency-domain dispersion operator ($\hat{L}$, see below) that has been defined in the preceding code. The RK4IP algorithm with adaptive step size is advantageous over this simple algorithm in calculation time and in the scaling of error with the step size.
 
 \section{RK4IP algorithm}
 
@@ -15,10 +15,10 @@ The LLE (NLSE) describes the evolution of the field $\psi$ ($A$), a function of 
 \end{equation}
 which can be implemented with the split-step Fourier approach.
 
-The RK4IP algorithm specifies a recipe for advancing the field a single step $\delta$ in the slow variable $\tau$ to obtain $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$. This specific algorithm has the attractive feature that it reduces the number of Fourier transformations that must be performed to achieve a given calculation accuracy relative to other common algorithms. The RK4IP algorithm is\cite{Hult2007}:
+The RK4IP algorithm specifies a recipe for advancing the field a single step $\delta$ in the slow variable $\tau$ to obtain $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$. This specific algorithm has the attractive feature that it reduces the number of Fourier transformations that must be performed to achieve a given calculation accuracy relative to other common algorithms. The RK4IP algorithm is \cite{Hult2007}:
 \begin{align}
 \psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi(\theta,\tau) \\
-k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi(\theta,\tau))\right]\psi(\theta,\tau) \\
+k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\hat{N}(\psi(\theta,\tau))\right]\psi(\theta,\tau) \\
 k_2=&\delta\hat{N}(\psi_I+k_1/2)\left[\psi_I+k_1/2\right] \\
 k_3=&\delta\hat{N}(\psi_I+k_2/2)\left[\psi_I+k_2/2\right] \\
 k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\right) \\
@@ -26,7 +26,7 @@ k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\rig
 \psi(\theta,\tau+\delta)=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.
 \end{align}
 
-In the above it is understood that $\hat{L}$ is applied in the frequency domain and $\hat{N}$ is applied in the time domain. Calculation of $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$ therefore requires eight Fourier transformations.
+In the above it is understood that $\hat{L}$ is applied in the frequency domain and $\hat{N}$ is applied in the time domain. Calculation of $\psi(\theta,\tau+\delta)$ from $\psi(\theta,\tau)$ therefore requires eight Fourier transformations, but this is made up for by the fact that this algorithm permits larger step sizes than can be taken by the simple code presented above.
 
 \section{Adaptive step-size algorithm}
 
@@ -53,7 +53,7 @@ The pseudocode shown in Algorithm \ref{alg:LLEsim} shows how the RK4IP algorithm
 Two notes:
 \begin{itemize}
 	\item The current field $\psi(\theta,\tau)$ is stored until the approximation to the new field $\psi(\theta,\tau+\delta)$ is found to be acceptable. 
-	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current attempt.
+	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current attempt. This is useful in simulations of, e.g., spatiotemporal chaos, where the step size may change rapidly.
 \end{itemize}
 
 {\fontfamily{pcr}\selectfont 
@@ -137,6 +137,8 @@ The nonlinear operator $\hat{N}$ for the GNLSE implements the convolution as a p
 \hat{N}=i\gamma\frac{1}{A}\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right)\times\left[\vphantom{\frac{\partial}{\partial T}}(1-f_R)A|A|^2+f_R A\, \mathcal{F}^{-1}\left\{\chi_R\cdot\mathcal{F}(|A|^2)\right\}\right],
 \end{equation}
 where $\chi_R=\mathcal{F}\{h_R(\tau)\}$ and $\mathcal{F}$ denotes Fourier transformation. Procedurally, the quantity in the square brackets is calculated first, and then the fast-time derivative is implemented and the sum in the curved brackets is calculated.
+
+The reason for the additional complexity of the operators for the GNLSE relative to the LLE is that the GNLSE has been used in this thesis to simulate supercontinuum generation, in which higher-order nonlinear effects are important. In contrast, the LLE has been used to simulate only relatively narrow-band combs, and inclusion of higher-order nonlinear effects is unnecessary.
 
 
 

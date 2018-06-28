@@ -36,20 +36,6 @@
 
 \def \FigPath {../} % DEFINE PATH TO FIGURES %
 
-% use these to include only one chapter, for quick compiles
-%\includeonly{Abbreviations}
-%\includeonly{Outline}
-%\includeonly{Introduction}
-%\includeonly{Microresonators}
-%\includeonly{ATI}
-%\includeonly{PEI}
-%\includeonly{Shock}
-%\includeonly{Conclusion}
-%\includeonly{Appendix}
-%\includeonly{AppendixATI}
-%\includeonly{AppendixPEI}
-%\includeonly{AppendixShock}
-
 
 
 
@@ -87,21 +73,28 @@
 \renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
 \DeclareFieldFormat[article]{pages}{#1}%Remove "pp." before pages
 \DeclareFieldFormat{journaltitle}{\textit{#1}} %italic journal
-\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1} %remove quoted from title
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{``#1.''}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{author}{#1,}
 %\DeclareFieldFormat[article]{date}{\textbf{#1}} %bold date
 \DeclareFieldFormat[article]{volume}{\textbf{#1}} %bold volume
 %\DeclareFieldFormat[article]{author}{#1,}
 
+\renewbibmacro{author}{
+	\printnames{author}
+	\addcomma}
+
+\renewbibmacro*{volume+number+eid}{
+	\printfield{volume}}
 
 %Add parentheses to the issue number
-\renewbibmacro*{volume+number+eid}{%
-	\printfield{volume}%
-	%  \setunit*{\adddot}% DELETED
-	\setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
+
+%	\printfield{volume}%
+%	  \setunit*{\adddot}% DELETED
+%	\setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
 %	\printfield{number}%
-	\setunit{\addcomma\space}%
-	\printfield{eid}}
-\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+%	\setunit{\addcomma\space}%
+%	\printfield{eid}}
+%\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
 
 %%remove parentheses from the date
 %\renewbibmacro*{issue+date}{%
@@ -148,7 +141,7 @@
 %\renewcommand{\mkbibnameaffix}[1]{\textsc{#1}}
 
 %\addbibresource{/Users/dcc2/Desktop/BIBFiles/111ColeThesisBIB.bib}
-\addbibresource{1111ColeThesisBIB.bib}
+\addbibresource{Cole_Thesis_bib.bib}
 %\addbibresource{/Users/dcc2/Desktop/BIBFiles/fakefile.bib}
 
 % % % % % % % % % % % % Okay, done with citations. Phew. That got crazy.
@@ -212,20 +205,23 @@ M.S., University of Colorado, 2015}
 Optical frequency combs based on modelocked lasers have revolutionized precision metrology by facilitating measurements of optical frequencies, with implications both for fundamental scientific questions and for applications such as fast, broadband spectroscopy. In this thesis, I describe advances in the generation of frequency combs without modelocking in platforms with smaller footprints and higher repetition rates, with the ultimate goal of bringing frequency combs to new applications in a chip-integrated package. I discuss two approaches for comb generation: parametric frequency conversion in Kerr microresonators and active electro-optic modulation of a continuous-wave laser. After introducing microresonator-based frequency combs (microcombs), I discuss two specific developments in microcomb technology: First, I describe a new, extremely reliable method for generation of soliton pulses through the use of a phase-modulated pump laser. This technique eliminates the dependence on initial conditions that was formerly a universal feature of these experiments, presenting a solution to a significant technical barrier to the practical application of microcombs. Second, I present observations of \textit{soliton crystal} states with highly structured `fingerprint' optical spectra that correspond to ordered pulse trains exhibiting crystallographic defects. These pulse trains arise through interaction of solitons with avoided mode-crossings in the resonator spectrum. I also discuss generation of Kerr soliton combs in the Fabry-Perot (FP) geometry, with a focus on the differences between the FP geometry and the ring geometry that has been the choice of most experimenters to date. Next, I discuss combs based on electro-optic modulation. I introduce the operational principle, and then describe the first self-referencing of a frequency comb of this kind and a proof-of-principle application experiment.  Finally, I discuss a technique for reducing the repetition rate of a high repetition-rate frequency comb, which will be a necessary post-processing step for some applications.
 	}
 
-%including the chip-integration of Fabry-Perot Kerr resonators and the use of band-engineered photonic crystal cavities to further simplify soliton generation.
 
 
 %\dedication[Dedication]{This thesis is dedicated to my parents, who fostered my drive for learning, and my siblings, who were right there with me.\todo{revise}}
 
 
-%\acknowledgements{ %\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
+%\acknowledgements{ \OnePageChapter	% *MUST* BE ONLY ONE PAGE!
 %There are many people who have contributed to the success of the research described herein:
 %\begin{itemize}[leftmargin=*]
-%\item First, I owe a debt of gratitude to my research advisors Scott Diddams and Scott Papp. They are both fervent advocates for their students, and have consistently gone above and beyond in providing resources and encouraging me to pursue opportunities. Moreover, they have been very capable mentors---I feel that for me they struck the right balance between granting autonomy and giving direction. Most importantly, without their scientific guidance, the work described in this thesis would simply not be half the quality it is.
+%\item I owe my gratitude to my research advisors Scott Diddams and Scott Papp. They are both diligent advocates for their students, and have consistently gone above and beyond in providing resources and encouraging me to pursue opportunities. Moreover, they have been very capable mentors---for me they struck the right balance between granting autonomy and giving direction. Most importantly, without their scientific guidance, the work described in this thesis would simply not be half the quality it is.
+%
+%\item I have worked with a great number of talented scientists at NIST, some of whom have been excellent research partners, and some of whom have been more like mentors. A necessarily incomplete list of the people I've collaborated with and learned from includes Pascal Del'Haye, Katja Beha, Aurelien Coillet, Tara Fortier, Frank Quinlan, William Loh, Erin Lamb, Jordan Stone, Travis Briles, David Carlson, Wei Zhang, Liron Stern, and Dan Hickstein.
 %
 %\item My undergraduate research advisors at Washington University in St. Louis, Professors Zohar Nussinov and Li Yang, helped me begin to learn about scientific research, and along with my academic advisor Dr. Jason Woods encouraged me to pursue a PhD in physics.
 %
-%\item I have worked with a great number of talented scientists at NIST, some of whom have been excellent research partners, and some of whom have been more like mentors. A necessarily incomplete list of the people I've collaborated with and learned from includes, in no particular order, Katja Beha, Pascal Del'Haye, Aurelien Coillet, William Loh, Erin Lamb, Jordan Stone, Travis Briles, David Carlson, Wei Zhang, Liron Stern, and Dan Hickstein.
+%\item Our collaborators Ki Youl Yang, Xu Yi, and Kerry Vahala at CalTech have enabled many of the experiments described here by sharing with us their high quality, and high $Q$, silica resonators.
+%
+%\item Miro Erkintalo's collaboration-at-a-distance greatly benefited Chapter \ref{chap:PMpumping}.
 %
 %\item Professor Luigi Lugiato of the University of Insubria had the patience to conduct an entire manuscript's worth of theoretical research with me over email, and I'm grateful for how much I learned through these discussions.
 %
@@ -282,13 +278,13 @@ Optical frequency combs based on modelocked lasers have revolutionized precision
 \pagenumbering{roman}
 \pagenumbering{arabic}
 \include{Introduction} 
-%\include{Microresonators}
+\include{Microresonators}
 %\include{PMPumping}  %read 6-27
 %\include{SolitonCrystals}
 %\include{FPLLE}
 %\include{Conclusion}  %read 6-27
 %\include{EOMCombs}
-%\include{PulsePicking}
+%\include{PulsePicking} % fine
 
 
 \appendix
