@@ -5,7 +5,7 @@
 
 This appendix describes the algorithm used for numerical simulation of the generalized nonlinear Schrodinger equation (GNLSE) and Lugiato-Lefever equation (LLE) to obtain the results presented in the preceding chapters in this thesis. These equations are simulated with Matlab using a fourth-order Runge-Kutta interaction picture (RK4IP) method \cite{Hult2007} with adaptive step size \cite{Heidt2009}. The RK4IP method is a particular algorithm in the broader class of split-step Fourier algorithms, in which nonlinearity is implemented in the time domain and dispersion is implemented in the frequency domain. An illustrative example of this split-step Fourier approach is a far simpler algorithm carried out with a single line of Matlab code to simulate the LLE: \\
 {\fontfamily{pcr}\selectfont psi=ifft(exp(delta*L).*fft(exp(delta*(1i*abs(psi).\string^2+F./psi)).*psi));}\\
-where {\fontfamily{pcr}\selectfont delta} is the size of the time step and {\fontfamily{pcr}\selectfont L} is a linear frequency-domain dispersion operator ($\hat{L}$, see below) that has been defined in the preceding code. The RK4IP algorithm with adaptive step size is advantageous over this simple algorithm in calculation time and in the scaling of error with the step size.
+where {\fontfamily{pcr}\selectfont delta} is the size of the time step and {\fontfamily{pcr}\selectfont L} is a linear frequency-domain dispersion operator ($\hat{L}$, see below) that has been defined in the preceding code. The RK4IP algorithm with adaptive step size is advantageous over this simple algorithm in calculation time and in the scaling of error with the step size \cite{Hult2007}.
 
 \section{RK4IP algorithm}
 
@@ -53,7 +53,7 @@ The pseudocode shown in Algorithm \ref{alg:LLEsim} shows how the RK4IP algorithm
 Two notes:
 \begin{itemize}
 	\item The current field $\psi(\theta,\tau)$ is stored until the approximation to the new field $\psi(\theta,\tau+\delta)$ is found to be acceptable. 
-	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current attempt. This is useful in simulations of, e.g., spatiotemporal chaos, where the step size may change rapidly.
+	\item This implementation makes use of an extra efficiency that is possible when the solution is discarded and the step size is halved: the first step of the fine solution $\psi_{fine,1}$ for the previous attempt becomes the coarse solution $\psi_{coarse}$ for the current attempt. This is useful in simulations of, e.g., spatiotemporal chaos, where the step size may change frequently and rapidly.
 \end{itemize}
 
 {\fontfamily{pcr}\selectfont 
@@ -120,7 +120,7 @@ In addition to self-phase modulation, the GNLSE used in the simulations conducte
 \frac{\partial A}{\partial z}=-\left(\sum_n k^{(n)} \frac{i^{n-1}}{n!} \frac{\partial^n}{\partial T^n}\right)A&+i\gamma\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right) \nonumber \\
 &\times\left((1-f_R)A|A|^2+f_R A\int_0^\infty h_R(\tau)|A(z,T-\tau)|^2 d\tau\right).
 \end{align}
-For Chapter \ref{chap:PulsePicking}, second- and third-order dispersion is used with $k^{(2)}=$-7.7 ps\textsuperscript{2}/km and $k^{(3)}=$0.055 ps\textsuperscript{3}/km, where $k^{(n)}$ is the $n^{th}$ frequency-derivative of the propagation constant. The nonlinear coefficient $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ used is 11 W/km \cite{Hirano2009}, coming from an effective mode-field diameter of $\sim$3.5 $\mu$m for the HNLF used in the experiment and the nonlinear index $n_2=2.7\times10^{-16}$ cm\textsuperscript{2}/W of silica. The quantity $\omega_0=2\pi c/\lambda_0$ is the (angular) carrier frequency of the pulse, and the parameter $f_R=0.18$ and function
+For Chapter \ref{chap:PulsePicking}, second- and third-order dispersion is used with $k^{(2)}=$-7.7 ps\textsuperscript{2}/km and $k^{(3)}=$0.055 ps\textsuperscript{3}/km, where $k^{(n)}$ is the $n^{th}$ frequency-derivative of the propagation constant. The nonlinear coefficient $\gamma=\frac{2\pi}{\lambda}\frac{n_2}{A_{eff}}$ used is 11/W$\cdot$km \cite{Hirano2009}, coming from an effective mode-field diameter of $\sim$3.5 $\mu$m for the HNLF used in the experiment and the nonlinear index $n_2=2.7\times10^{-16}$ cm\textsuperscript{2}/W of silica. The quantity $\omega_0=2\pi c/\lambda_0$ is the (angular) carrier frequency of the pulse, and the parameter $f_R=0.18$ and function
 \begin{equation}
 h_R(\tau>0)=(\tau_1^2+\tau_2^2)/(\tau_1 \tau_2^2)\times e^{-\tau/\tau_2}\sin{\tau/\tau_1}
 \end{equation} 
@@ -128,64 +128,15 @@ describe the medium's Raman response, with $\tau_1=12.2$ fs and $\tau_2=32$ fs u
 
 The linear frequency-domain operator applied in the RK4IP algorithm is
 \begin{equation}
-\hat{L}=i\frac{k^{(2)}}{2}(\omega_\mu-\omega_0)^2-\frac{k^{(3)}}{6}(\omega_\mu-\omega_0)^3
+\hat{L}=i\frac{k^{(2)}}{2}(\omega_\mu-\omega_0)^2-i\frac{k^{(3)}}{6}(\omega_\mu-\omega_0)^3
 \end{equation}
-Here $\omega_\mu$ is defined by the discretization of the frequency domain due to Fourier-transformation of a finite temporal window of length $T_{comp}$ via $\omega_\mu=\omega_0+2\pi\mu/T_{comp}$; where $T_{comp}$ is the size of the domain for the fast time variable $T$.
+Here $\omega_\mu$ is defined by the discretization of the frequency domain due to Fourier-transformation of a finite temporal window of length $T_{comp}$ via $\omega_\mu=\omega_0+2\pi\mu/T_{comp}$, where $T_{comp}$ is the size of the domain for the fast time variable $T$ and should be large enough that $A$ remains localized away from the edges of the window during the simulation.
 
 The nonlinear operator $\hat{N}$ for the GNLSE implements the convolution as a product in the frequency domain. That is, 
 \begin{equation}
 \hat{N}=i\gamma\frac{1}{A}\left(1+\frac{1}{\omega_0}\frac{\partial}{\partial T}\right)\times\left[\vphantom{\frac{\partial}{\partial T}}(1-f_R)A|A|^2+f_R A\, \mathcal{F}^{-1}\left\{\chi_R\cdot\mathcal{F}(|A|^2)\right\}\right],
 \end{equation}
-where $\chi_R=\mathcal{F}\{h_R(\tau)\}$ and $\mathcal{F}$ denotes Fourier transformation. Procedurally, the quantity in the square brackets is calculated first, and then the fast-time derivative is implemented and the sum in the curved brackets is calculated.
+where $\chi_R=\mathcal{F}\{h_R(\tau)\}$ and $\mathcal{F}$ denotes Fourier transformation. Procedurally, the quantity in the square brackets is calculated first, and then the fast-time derivative is implemented and the sum in the parentheses is calculated.
 
 The reason for the additional complexity of the operators for the GNLSE relative to the LLE is that the GNLSE has been used in this thesis to simulate supercontinuum generation, in which higher-order nonlinear effects are important. In contrast, the LLE has been used to simulate only relatively narrow-band combs, and inclusion of higher-order nonlinear effects is unnecessary.
 
-
-
-
-%		\begin{align}
-%		\psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi\\
-%		k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi)\right]\psi \\
-%		k_2=&\delta\hat{N}(\psi_I+k_1/2)\left[\psi_I+k_1/2\right] \\
-%		k_3=&\delta\hat{N}(\psi_I+k_2/2)\left[\psi_I+k_2/2\right] \\
-%		k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\right) \\
-%		&\times\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\\
-%		\psi_{coarse}=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.
-%		\end{align}
-
-
-	
-%		\begin{align}
-%		\psi_I=&\exp\left(\frac{\delta}{2}\hat{L}\right)\psi_{step}\\
-%		k_1=&\exp\left(\frac{\delta}{2}\hat{L}\right)\left[\delta\tau\hat{N}(\psi_{step})\right]\psi \\
-%		k_2=&\delta\hat{N}(\psi_I+k_1/2)\left[\psi_I+k_1/2\right] \\
-%		k_3=&\delta\hat{N}(\psi_I+k_2/2)\left[\psi_I+k_2/2\right] \\
-%		k_4=&\delta\hat{N}\left(\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\right) \\
-%		&\times\exp\left(\frac{\delta}{2}\hat{L}\right)(\psi_I+k_3)\\
-%		\psi_{fine}=&\exp\left(\frac{\delta}{2}\hat{L}\right)[\psi_I+k_1/6+k_2/3+k_3/3]+k_4/6.\\
-%		\end{align}
-
-
-
-%		\Procedure{Initialize}{}\\
-%		$e=10^{-6}$\\
-%		$\delta=10^{-3}$\\
-%		\\
-%		$F^2=5$, $F=\sqrt{F^2}$\\
-%		$\alpha=0.95\times\pi^2F^2/8$\\
-%		$\beta_2=-0.02$\\
-%		\\
-%		$\tau=0$\\
-%		$\tau_{end}=2000$\\
-%		\\
-%		$N_{pnts}=2^{12}$\\
-%		$d\theta=2\pi/N_{pnts}$\\
-%		$\theta=[-\pi:d\theta:\pi-d\theta]$
-%		\\
-%		$k=[0, 1, ...,N_{pnts}/2-1, -N_{pnts}/2, -N_{pnts}/2+1, ..., -1]$\\
-%		$\alpha_k=\alpha-\beta_2 k^2/2$\\
-%		\\
-%		$\hat{L}=-(1+i\alpha_k)$\\
-%		$\hat{N}(\psi)\psi\equiv i|\psi|^2\psi+F$, defining a function for the nonlinear operator and incorporating the pump\\
-%		\\
-%		$\psi=\psi_{s,min}+\sqrt{2\alpha}e^{i\phi_0}\mathrm{sech}\left(\sqrt{\frac{2\alpha}{-\beta_2}}\theta\right)$, to initialize at an approximate soliton solution
